@@ -14,9 +14,15 @@ grammar sophia;
 
     memberDeclaration : methodDeclaration | constructorDeclaration | fieldDeclaration ;
 
-    methodDeclaration : DEF methodType IDENTIFIER LPAREN ......... RPAREN (block | SEMI) ;
+    methodDeclaration : DEF methodType IDENTIFIER LPAREN methodArguements RPAREN methodBody ;
+
+    methodArguements : variableDeclarator (COMMA variableDeclarator)* ;
 
     methodType : type | VOID ;
+
+    //methodBody : fieldDeclaration
+
+    constructorDeclaration : DEF IDENTIFIER LPAREN methodArguements RPAREN ;
 
     fieldDeclaration : variableDeclarator | variableInitializer ;
 
@@ -24,11 +30,17 @@ grammar sophia;
 
     funcPointerDeclaration : IDENTIFIER COLON funcPointerDeclarationBody;
 
-    funcPointerDeclarationBody : FUNC '<' ((VOID | (type (COMMA type)*) ARROW type));
+    funcPointerDeclarationBody : FUNC '<' (VOID | (type (COMMA type)*)) ARROW type '>';
 
-    listDeclaration : LIST LPAREN ( ([1-9][0-9]* '#' (type | listDeclaration)) | listBody (COMMA listBody)*);
+    listDeclaration : LIST LPAREN (([1-9][0-9]* '#' (type | listDeclaration)) | listBody (COMMA listBody)*) RPAREN ;
 
     listBody : variableDeclarator | funcPointerDeclaration | listDeclaration | type ;
+
+    block : LBRACE blockStatement* RBRACE ;
+
+    if_stat : IF condition_block (ELSE IF condition_block)* (ELSE stat_block)? ;
+
+    condition_block : expr stat_block ;
 
 
 
