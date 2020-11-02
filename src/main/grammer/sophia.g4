@@ -1,5 +1,41 @@
 grammar sophia;
 
+
+
+
+    type : INT | STRING | BOOL;
+
+
+    classDeclaration : CLASS IDENTIFIER (EXTENDS IDENTIFIER)?  classBody ;
+
+    classBody : LBRACE classBodyDeclaration RBRACE ;
+
+    classBodyDeclaration : SEMI | block | memberDeclaration ;
+
+    memberDeclaration : methodDeclaration | constructorDeclaration | fieldDeclaration ;
+
+    methodDeclaration : DEF methodType IDENTIFIER LPAREN ......... RPAREN (block | SEMI) ;
+
+    methodType : type | VOID ;
+
+    fieldDeclaration : variableDeclarator | variableInitializer ;
+
+    variableDeclarator : IDENTIFIER COLON (listDeclaration | type) ;
+
+    funcPointerDeclaration : IDENTIFIER COLON funcPointerDeclarationBody;
+
+    funcPointerDeclarationBody : FUNC '<' ((VOID | (type (COMMA type)*) ARROW type));
+
+    listDeclaration : LIST LPAREN ( ([1-9][0-9]* '#' (type | listDeclaration)) | listBody (COMMA listBody)*);
+
+    listBody : variableDeclarator | funcPointerDeclaration | listDeclaration | type ;
+
+
+
+
+
+
+
     IDENTIFIER
         : ('_' | [A-Z] | [a-z])+ ('_' | [a-z] | [A-Z] | [0-9])*
         ;
@@ -18,7 +54,8 @@ grammar sophia;
     RBRACK:             ']';
     SEMI:               ';';
     COMMA:              ',';
-    DOT:                '.';
+    DOT:                '.'
+    ARROW:              '->';
 
 
     // operators
