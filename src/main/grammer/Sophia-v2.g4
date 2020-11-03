@@ -1,5 +1,6 @@
-grammar sophia;
+grammar Sophia;
 
+    sophia : blockStatements* EOF;
 
     type : INT | STRING | BOOL ;
 
@@ -17,9 +18,9 @@ grammar sophia;
 
     methodType : type | VOID ;
 
-    //methodBody : fieldDeclaration
+    methodBody : block;
 
-    //methodCall : //
+    methodCall : IDENTIFIER DOT IDENTIFIER '(' expr? ')' | THIS DOT IDENTIFIER '(' expr? ')' ;
 
     constructorDeclaration : DEF IDENTIFIER LPAREN methodArguements RPAREN ;
 
@@ -74,7 +75,7 @@ grammar sophia;
 
     returnStatement : RETURN expr? SEMI ;
 
-    assignment : (THIS DOT IDENTIFIER | IDENTIFIER) ASSIGN (expr | listInitializer) SEMI ;
+    assignment : (THIS DOT IDENTIFIER | IDENTIFIER) ASSIGN (expr | listInitializer | methodCall) SEMI ;
 
     listInitializer : LBRACK (expr (COMMA expr) | listInitializer (COMMA listInitializer)) RBRACK ;
 
@@ -107,39 +108,19 @@ grammar sophia;
 
     print_body : expr;
 
-
-
-
-
-
-
-
+    comment : COMMENT ;
 
 /* -----------------------------------------------------------
-
     condition_block : expr stat_block ;
-
     expr : LPAREN value compare_operator value ((AND | OR) value compare_operator value) RPAREN;
-
     value : INT_LITERAL | STRING_LITERAL | IDENTIFIER | IDENTIFIER LBRACK (value|sentence) RBRACK | sentence | (THIS | IDENTIFIER) DOT IDENTIFIER;
-
     sentence : value ( calc_operator value )+;
-
-
-
     calc_operator : ADD | SUB | MUL | DIV | BITAND | BITOR | CARET | MOD ;
-
 // -------------------------------------------------------------------------------
-
-
     initial_stat : IDENTIFIER ASSIGN value | '';
-
     condition_stat : value compare_operator value | IDENTIFIER | '';
-
     update_stat : IDENTIFIER  one_var_operation | IDENTIFIER ASSIGN value;
-
     one_var_operation : INC | DEC;
-
     foreach_stat : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER | IDENTIFIER DOT IDENTIFIER) RPAREN block;
 */
 
@@ -217,12 +198,6 @@ grammar sophia;
     PRINT : 'print' ;
 
 
-
-
-    comment
-        :
-         COMMENT
-        ;
 
     COMMENT
         : '//' .*? '\n' -> skip
