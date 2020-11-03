@@ -1,61 +1,166 @@
 grammar sophia;
 
-
-
-
-    type : INT | STRING | BOOL;
-
+    sophia : classDeclaration* EOF ;
+    type : INT | STRING | BOOL ;
 
     classDeclaration : CLASS IDENTIFIER (EXTENDS IDENTIFIER)?  classBody ;
 
     classBody : LBRACE classBodyDeclaration RBRACE ;
 
-    classBodyDeclaration : SEMI | block | memberDeclaration ;
+    classBodyDeclaration : SEMI | block* | memberDeclaration* ;
 
     memberDeclaration : methodDeclaration | constructorDeclaration | fieldDeclaration ;
 
-    methodDeclaration : DEF methodType IDENTIFIER LPAREN methodArguements RPAREN methodBody ;
+    methodDeclaration : DEF methodType IDENTIFIER LPAREN methodArguements? RPAREN methodBody ;
 
-    methodArguements : variableDeclarator (COMMA variableDeclarator)* ;
+    methodArguements : variableDeclaration (COMMA variableDeclaration)* ;
 
     methodType : type | VOID ;
 
-    //methodBody : fieldDeclaration
+    methodBody : LBRACE (variableDeclaration SEMI)* blockStatements RBRACE;
 
-    constructorDeclaration : DEF IDENTIFIER LPAREN methodArguements RPAREN ;
+    methodCall : (IDENTIFIER | THIS) DOT IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
 
-    fieldDeclaration : variableDeclarator | variableInitializer ;
+    constructorDeclaration : DEF IDENTIFIER LPAREN methodArguements? RPAREN methodBody ;
 
-    variableDeclarator : IDENTIFIER COLON (listDeclaration | type) ;
+    fieldDeclaration : variableDeclaration SEMI | variableInitializer SEMI;
 
-    funcPointerDeclaration : IDENTIFIER COLON funcPointerDeclarationBody;
+    variableDeclaration : IDENTIFIER COLON (listDeclaration | type | IDENTIFIER);
+
+    variableInitializer : assignment ;
+
+    funcPointerDeclaration : IDENTIFIER COLON funcPointerDeclarationBody SEMI;
 
     funcPointerDeclarationBody : FUNC '<' (VOID | (type (COMMA type)*)) ARROW type '>';
 
-    listDeclaration : LIST LPAREN (([1-9][0-9]* '#' (type | listDeclaration)) | listBody (COMMA listBody)*) RPAREN ;
+    listDeclaration : LIST LPAREN (( POS_INT '#' (type | listDeclaration)) | (listBody (COMMA listBody)* )) RPAREN;
 
-    listBody : variableDeclarator | funcPointerDeclaration | listDeclaration | type ;
+    listBody : variableDeclaration | funcPointerDeclaration | listDeclaration | type ;
 
-    block : LBRACE blockStatement* RBRACE ;
+    block : LBRACE blockStatements? RBRACE ;
 
-    if_stat : IF condition_block (ELSE IF condition_block)* (ELSE stat_block)? ;
+    blockStatements : blockStatement+ ;
 
+    blockStatement : statement ;
+
+    statement : ifStatement | forStatement | foreachStatement | statementWithoutTrailingSubstatement ;
+
+    ifStatement : IF condition_block (ELSE IF condition_block)* (ELSE statBlock)?;
+
+    condition_block : expr statBlock ;
+
+    statBlock : statement | LBRACE block RBRACE ;
+
+    statementWithoutTrailingSubstatement : block | emptyStatement | expStatement
+                                            | breakStatement | continueStatement | returnStatement | printStatement;
+
+    statementExp : assignment | preExp | postExp | methodCall ;
+
+    expStatement : statementExp SEMI ;
+
+    forStatement : FOR LPAREN initialStatement? SEMI expr? SEMI updateStatement? RPAREN block;
+
+    initialStatement : assignment (COMMA assignment)* ;
+
+    updateStatement :  assignment (COMMA assignment)* ;
+
+    foreachStatement : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER | THIS DOT IDENTIFIER) RPAREN block ;
+
+    emptyStatement : SEMI ;
+
+    breakStatement : BREAK SEMI ;
+
+    continueStatement : CONTINUE SEMI ;
+
+    returnStatement : RETURN expr? SEMI ;
+
+    assignment : (THIS DOT IDENTIFIER | IDENTIFIER | expr) (LBRACK expr RBRACK)? (ASSIGN (expr | listInitializer | methodCall | classAssignment))+ ;
+
+    classAssignment : NEW IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN;
+
+    listInitializer : LBRACK ((listInitializer | expr) (COMMA (listInitializer | expr))*) RBRACK ;
+
+    preExp : (DEC | INC) IDENTIFIER ;
+
+    postExp : IDENTIFIER (DEC | INC) ;
+
+    expr :
+         NOT expr
+        | expr op=(MUL | DIV | MOD) expr
+        | expr op=(ADD | SUB) expr
+        | expr op=(LE | GE | LT | GT) expr
+        | expr op=(EQUAL | NOTEQUAL) expr
+        | expr AND expr
+        | expr OR expr
+        | preExp
+        | postExp
+        | literal (LBRACK expr RBRACK)?
+        ;
+
+    literal :
+         LPAREN expr RPAREN
+         | IDENTIFIER LBRACK (expr) RBRACK
+         | (THIS | IDENTIFIER) DOT IDENTIFIER
+         | intLiteral
+         | BOOL_LITERAL
+         | IDENTIFIER
+         | STRING_LITERAL
+         ;
+
+    printStatement : PRINT LPAREN printBody RPAREN SEMI;
+
+    printBody : expr;
+
+    comment : COMMENT ;
+
+/* -----------------------------------------------------------
     condition_block : expr stat_block ;
+    expr : LPAREN value compare_operator value ((AND | OR) value compare_operator value) RPAREN;
+    value : INT_LITERAL | STRING_LITERAL | IDENTIFIER | IDENTIFIER LBRACK (value|sentence) RBRACK | sentence | (THIS | IDENTIFIER) DOT IDENTIFIER;
+    sentence : value ( calc_operator value )+;
+    calc_operator : ADD | SUB | MUL | DIV | BITAND | BITOR | CARET | MOD ;
+// -------------------------------------------------------------------------------
 
-
-
-
-
-
+AmirAli Raygan, [03.11.20 22:13]
+initial_stat : IDENTIFIER ASSIGN value | '';
+    condition_stat : value compare_operator value | IDENTIFIER | '';
+    update_stat : IDENTIFIER  one_var_operation | IDENTIFIER ASSIGN value;
+    one_var_operation : INC | DEC;
+    foreach_stat : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER | IDENTIFIER DOT IDENTIFIER) RPAREN block;
+*/
+    CLASS : 'class' ;
+    EXTENDS : 'extends' ;
+    THIS : 'this' ;
+    DEF : 'def' ;
+    FUNC : 'func' ;
+    RETURN : 'return' ;
+    IF : 'if' ;
+    ELSE : 'else' ;
+    FOR : 'for' ;
+    FOREACH : 'foreach' ;
+    CONTINUE : 'continue' ;
+    BREAK : 'break' ;
+    FALSE : 'false' ;
+    TRUE : 'true' ;
+    INT : 'int' ;
+    STRING : 'string' ;
+    BOOL : 'bool' ;
+    VOID : 'void' ;
+    LIST : 'list' ;
+    IN : 'in' ;
+    NULL : 'null' ;
+    NEW : 'new' ;
+    PRINT : 'print' ;
 
     IDENTIFIER
         : ('_' | [A-Z] | [a-z])+ ('_' | [a-z] | [A-Z] | [0-9])*
         ;
 
-
-    INT_LITERAL : '0' | [1-9][0-9]* ;
+    intLiteral : ZERO | POS_INT | SUB POS_INT ;
+    POS_INT : [1-9][0-9]* ;
+    ZERO : '0' ;
     STRING_LITERAL : '"' ~('"')+ '"';
-    BOOL_LITERAL : 'false' | 'true';
+    BOOL_LITERAL : FALSE | TRUE;
 
     // separators
     LPAREN:             '(';
@@ -66,7 +171,7 @@ grammar sophia;
     RBRACK:             ']';
     SEMI:               ';';
     COMMA:              ',';
-    DOT:                '.'
+    DOT:                '.';
     ARROW:              '->';
 
 
@@ -97,37 +202,8 @@ grammar sophia;
 
 
     // keywords
-    CLASS : 'class' ;
-    EXTENDS : 'extends' ;
-    THIS : 'this' ;
-    DEF : 'def' ;
-    FUNC : 'func' ;
-    RETURN : 'return' ;
-    IF : 'if' ;
-    ELSE : 'else' ;
-    FOR : 'for' ;
-    FOREACH : 'foreach' ;
-    CONTINUE : 'continue' ;
-    BREAK : 'break' ;
-    FALSE : 'false' ;
-    TRUE : 'true' ;
-    INT : 'int' ;
-    STRING : 'string' ;
-    BOOL : 'bool' ;
-    VOID : 'void' ;
-    LIST : 'list' ;
-    IN : 'in' ;
-    NULL : 'null' ;
-    NEW : 'new' ;
-    PRINT : 'print' ;
 
 
-
-
-    comment
-        :
-         COMMENT
-        ;
 
     COMMENT
         : '//' .*? '\n' -> skip
