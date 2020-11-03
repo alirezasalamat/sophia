@@ -13,17 +13,21 @@ grammar sophia;
 
     methodDeclaration : DEF methodType IDENTIFIER LPAREN methodArguements RPAREN methodBody ;
 
-    methodArguements : variableDeclarator (COMMA variableDeclarator)* ;
+    methodArguements : variableDeclaration (COMMA variableDeclaration   )* ;
 
     methodType : type | VOID ;
 
     //methodBody : fieldDeclaration
 
+    //methodCall : //
+
     constructorDeclaration : DEF IDENTIFIER LPAREN methodArguements RPAREN ;
 
-    fieldDeclaration : variableDeclarator | variableInitializer ;
+    fieldDeclaration : variableDeclaration | variableInitializer ;
 
-    variableDeclarator : IDENTIFIER COLON (listDeclaration | type) SEMI;
+    variableDeclaration : IDENTIFIER COLON (listDeclaration | type | IDENTIFIER) SEMI;
+
+    variableInitializer : assignment ;
 
     funcPointerDeclaration : IDENTIFIER COLON funcPointerDeclarationBody SEMI;
 
@@ -31,29 +35,102 @@ grammar sophia;
 
     listDeclaration : LIST LPAREN (( POS_INT '#' (type | listDeclaration)) | (listBody (COMMA listBody)* )) RPAREN SEMI;
 
-    listBody : variableDeclarator | funcPointerDeclaration | listDeclaration | type ;
+    listBody : variableDeclaration | funcPointerDeclaration | listDeclaration | type ;
 
-    block : LBRACE blockStatement* RBRACE ;
+    block : LBRACE blockStatements? RBRACE ;
 
-    if_stat : IF condition_block (ELSE IF condition_block)* (ELSE block)? ;
+    blockStatements : blockStatement+ ;
 
-// -----------------------------------------------------------
+    blockStatement : VariableDeclaration | classDeclaration | statement ;
 
-    condition_block : expr block ;
+    statement : ifStatement | forStatement | foreachStatement | statementWithoutTrailingSubstatement ;
 
-    expr : LPAREN value compare_operator value RPAREN;
+    ifStatement : IF condition_block (ELSE IF condition_block)* (ELSE statBlock)?;
 
-    value : INT_LITERAL | IDENTIFIER | IDENTIFIER LBRACK (value|sentence) RBRACK | sentence | IDENTIFIER DOT IDENTIFIER;
+    condition_block : expr statBlock ;
+
+    statBlock : statement | LBRACE block RBRACE ;
+
+    statementWithoutTrailingSubstatement : block | emptyStatement | expStatement
+                                            | breakStatement | continueStatement | returnStatement ;
+
+    statementExp : assignment | preExp | postExp | methodCall ;
+
+    expStatement : statementExp SEMI ;
+
+    forStatement : FOR LPAREN initialStatement? SEMI expr? SEMI updateStatement? RPAREN block;
+
+    initialStatement : statementExp (COMMA statementExp)* ;
+
+    updateStatement : statementExp (COMMA statementExp)* ;
+
+    foreachStatement : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER | THIS DOT IDENTIFIER) RPAREN block ;
+
+    emptyStatement : SEMI ;
+
+    breakStatement : BREAK SEMI ;
+
+    continueStatement : CONTINUE SEMI ;
+
+    returnStatement : RETURN expr? SEMI ;
+
+    assignment : (THIS DOT IDENTIFIER | IDENTIFIER) ASSIGN (expr | listInitializer) SEMI ;
+
+    listInitializer : LBRACK (expr (COMMA expr) | listInitializer (COMMA listInitializer)) RBRACK ;
+
+    preExp : (DEC | INC) IDENTIFIER SEMI ;
+
+    postExp : IDENTIFIER (DEC | INC) SEMI ;
+
+    expr :
+         NOT expr
+        | expr op=(MUL | DIV | MOD) expr
+        | expr op=(ADD | SUB) expr
+        | expr op=(LE | GE | LT | GT) expr
+        | expr op=(EQUAL | NOTEQUAL) expr
+        | expr AND expr
+        | expr OR expr
+        | literal
+        ;
+
+    literal :
+         LPAREN expr RPAREN
+         | IDENTIFIER LBRACK (expr) RBRACK
+         | (THIS | IDENTIFIER) DOT IDENTIFIER
+         | INT_LITERAL
+         | BOOL_LITERAL
+         | IDENTIFIER
+         | STRING_LITERAL
+         ;
+
+    print_stat : PRINT LPAREN print_body RPAREN SEMI;
+
+    print_body : expr;
+
+
+
+
+
+
+
+
+
+/* -----------------------------------------------------------
+
+    condition_block : expr stat_block ;
+
+    expr : LPAREN value compare_operator value ((AND | OR) value compare_operator value) RPAREN;
+
+    value : INT_LITERAL | STRING_LITERAL | IDENTIFIER | IDENTIFIER LBRACK (value|sentence) RBRACK | sentence | (THIS | IDENTIFIER) DOT IDENTIFIER;
 
     sentence : value ( calc_operator value )+;
 
-    compare_operator : GT | LT | EQUAL | NOTEQUAL | GE | LE | AND | OR;
+
 
     calc_operator : ADD | SUB | MUL | DIV | BITAND | BITOR | CARET | MOD ;
 
 // -------------------------------------------------------------------------------
 
-    for_stat : FOR LPAREN initial_stat SEMI condition_stat SEMI update_stat RPAREN block;
 
     initial_stat : IDENTIFIER ASSIGN value | '';
 
@@ -64,10 +141,7 @@ grammar sophia;
     one_var_operation : INC | DEC;
 
     foreach_stat : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER | IDENTIFIER DOT IDENTIFIER) RPAREN block;
-
-    print_stat : PRINT LPAREN print_body RPAREN SEMI;
-
-    print_body : value | STRING_LITERAL | BOOL_LITERAL ;
+*/
 
     IDENTIFIER
         : ('_' | [A-Z] | [a-z])+ ('_' | [a-z] | [A-Z] | [0-9])*
