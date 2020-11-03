@@ -17,9 +17,11 @@ grammar sophia;
 
     methodType : type | VOID ;
 
-    methodBody : LBRACE (variableDeclaration SEMI)* blockStatements RBRACE;
+    methodBody : LBRACE ((variableDeclaration SEMI)* blockStatements)? RBRACE;
 
-    methodCall : (IDENTIFIER | THIS) DOT IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
+    methodCall : (IDENTIFIER | THIS | methodCallBody) DOT methodCallBody ;
+
+    methodCallBody : IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
 
     constructorDeclaration : DEF IDENTIFIER LPAREN methodArguements? RPAREN methodBody ;
 
@@ -54,9 +56,9 @@ grammar sophia;
     statementWithoutTrailingSubstatement : block | emptyStatement | expStatement
                                             | breakStatement | continueStatement | returnStatement | printStatement;
 
-    statementExp : assignment | preExp | postExp | methodCall ;
-
     expStatement : statementExp SEMI ;
+
+    statementExp : assignment | preExp | postExp | methodCall ;
 
     forStatement : FOR LPAREN initialStatement? SEMI expr? SEMI updateStatement? RPAREN block;
 
@@ -64,9 +66,8 @@ grammar sophia;
 
     updateStatement :  assignment (COMMA assignment)* ;
 
-    foreachStatement : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER | THIS DOT IDENTIFIER) RPAREN block ;
+    foreachStatement : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER(DOT IDENTIFIER)? | THIS DOT IDENTIFIER) RPAREN block ;
 
-    emptyStatement : SEMI ;
 
     breakStatement : BREAK SEMI ;
 
@@ -74,22 +75,23 @@ grammar sophia;
 
     returnStatement : RETURN expr? SEMI ;
 
-    assignment : (THIS DOT IDENTIFIER | IDENTIFIER | expr) (LBRACK expr RBRACK)? (ASSIGN (expr | listInitializer | methodCall | classAssignment))+ ;
+    assignment : (THIS DOT IDENTIFIER | IDENTIFIER(DOT IDENTIFIER)? | expr) (LBRACK expr RBRACK)? (ASSIGN (expr | listInitializer | methodCall | classAssignment))+ ;
 
-    classAssignment : NEW IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN;
+    classAssignment : NEW IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
 
     listInitializer : LBRACK ((listInitializer | expr) (COMMA (listInitializer | expr))*) RBRACK ;
 
-    preExp : (DEC | INC) IDENTIFIER ;
+    preExp : (DEC | INC) literal ;
 
-    postExp : IDENTIFIER (DEC | INC) ;
+    postExp : literal (DEC | INC) ;
+
 
     expr :
          NOT expr
         | expr op=(MUL | DIV | MOD) expr
         | expr op=(ADD | SUB) expr
         | expr op=(LE | GE | LT | GT) expr
-        | expr op=(EQUAL | NOTEQUAL) expr
+        | expr op=(EQUAL | NOTEQUAL | ASSIGN) expr
         | expr AND expr
         | expr OR expr
         | preExp
@@ -98,7 +100,7 @@ grammar sophia;
         ;
 
     literal :
-         LPAREN expr RPAREN
+         LPAREN expr? RPAREN
          | IDENTIFIER LBRACK (expr) RBRACK
          | (THIS | IDENTIFIER) DOT IDENTIFIER
          | intLiteral
@@ -110,6 +112,8 @@ grammar sophia;
     printStatement : PRINT LPAREN printBody RPAREN SEMI;
 
     printBody : expr;
+
+    emptyStatement : SEMI ;
 
     comment : COMMENT ;
 
