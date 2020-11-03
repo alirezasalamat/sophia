@@ -1,6 +1,6 @@
 grammar Sophia;
 
-    sophia : blockStatements* EOF;
+    blockStatements : blockStatement+ ;
 
     type : INT | STRING | BOOL ;
 
@@ -20,7 +20,7 @@ grammar Sophia;
 
     methodBody : block;
 
-    methodCall : IDENTIFIER DOT IDENTIFIER '(' expr? ')' | THIS DOT IDENTIFIER '(' expr? ')' ;
+    methodCall : IDENTIFIER DOT IDENTIFIER '(' expr? | expr (COMMA expr)* ')' | THIS DOT IDENTIFIER '(' expr? | expr (COMMA expr)*')' ;
 
     constructorDeclaration : DEF IDENTIFIER LPAREN methodArguements RPAREN ;
 
@@ -40,7 +40,6 @@ grammar Sophia;
 
     block : LBRACE blockStatements? RBRACE ;
 
-    blockStatements : blockStatement+ ;
 
     blockStatement : VariableDeclaration | classDeclaration | statement ;
 
@@ -75,7 +74,9 @@ grammar Sophia;
 
     returnStatement : RETURN expr? SEMI ;
 
-    assignment : (THIS DOT IDENTIFIER | IDENTIFIER) ASSIGN (expr | listInitializer | methodCall) SEMI ;
+    assignment : (THIS DOT IDENTIFIER | IDENTIFIER) ASSIGN (expr | listInitializer | methodCall | classAssignment) SEMI ;
+
+    classAssignment : NEW IDENTIFIER LPAREN expr (COMMA expr)* RPAREN;
 
     listInitializer : LBRACK (expr (COMMA expr) | listInitializer (COMMA listInitializer)) RBRACK ;
 
