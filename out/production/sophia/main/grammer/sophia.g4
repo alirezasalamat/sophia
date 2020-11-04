@@ -1,43 +1,61 @@
 grammar sophia;
 
-    sophia :{System.out.println("hello");} classDeclaration*  EOF ;
-    type : INT | STRING | BOOL ;
+    sophia :classDeclaration*  EOF ;
+    type : INT | STRING | BOOL | funcPointerDeclarationBody;
 
-    classDeclaration : CLASS id = IDENTIFIER (EXTENDS IDENTIFIER)? {System.out.println("kir"+ $id.text);} classBody ;
+    classDeclaration : CLASS aa=IDENTIFIER (EXTENDS bb=IDENTIFIER)?
+    {
+           if ($bb.text == null){
+               System.out.println("ClassDec:"+$aa.text);
+           } else {
+               System.out.println("ClassDec:"+$aa.text+", "+$bb.text);
+           }
+       }
+    classBody;
 
     classBody : LBRACE classBodyDeclaration RBRACE ;
 
-    classBodyDeclaration : SEMI | block* | memberDeclaration*  ;
+    classBodyDeclaration : SEMI | block* | memberDeclaration* ;
 
-    memberDeclaration : methodDeclaration | constructorDeclaration | fieldDeclaration ;
+    memberDeclaration : statement | methodDeclaration | constructorDeclaration | fieldDeclaration ;
 
-    methodDeclaration : DEF methodType IDENTIFIER LPAREN methodArguements? RPAREN methodBody ;
+    methodDeclaration : DEF methodType aa=IDENTIFIER LPAREN
+        {
+                System.out.println("MethodDec:"+$aa.text);
+        }
+        methodArguements? RPAREN methodBody;
 
-    methodArguements : variableDeclaration (COMMA variableDeclaration)* ;
+    methodArguements : listvariableDeclaration (COMMA listvariableDeclaration)* ;
 
     methodType : type | VOID ;
 
-    methodBody : LBRACE ((variableDeclaration SEMI)* blockStatements)? RBRACE;
+    methodBody : LBRACE ((variableDeclaration SEMI)* blockStatements?)? RBRACE;
 
-    methodCall : (IDENTIFIER | THIS | methodCallBody) DOT methodCallBody ;
 
-    methodCallBody : IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
-
-    constructorDeclaration : DEF IDENTIFIER LPAREN methodArguements? RPAREN methodBody ;
+    constructorDeclaration : DEF aa=IDENTIFIER LPAREN
+            {
+                    System.out.println("ConstructorDec:"+$aa.text);
+            }
+            methodArguements? RPAREN methodBody;
 
     fieldDeclaration : variableDeclaration SEMI | variableInitializer SEMI;
 
-    variableDeclaration : IDENTIFIER COLON (listDeclaration | type | IDENTIFIER);
+    variableDeclaration : aa=IDENTIFIER COLON
+            {
+                    System.out.println("VarDec:"+$aa.text);
+            }
+            (listDeclaration | type | IDENTIFIER);
+
+    listvariableDeclaration : IDENTIFIER COLON (listDeclaration | type | IDENTIFIER);
 
     variableInitializer : assignment ;
 
-    funcPointerDeclaration : IDENTIFIER COLON funcPointerDeclarationBody SEMI;
 
     funcPointerDeclarationBody : FUNC '<' (VOID | (type (COMMA type)*)) ARROW type '>';
 
     listDeclaration : LIST LPAREN (( POS_INT '#' (type | listDeclaration)) | (listBody (COMMA listBody)* )) RPAREN;
 
-    listBody : variableDeclaration | funcPointerDeclaration | listDeclaration | type ;
+    listBody : listvariableDeclaration | listDeclaration | type ;
 
     block : LBRACE blockStatements? RBRACE ;
 
@@ -45,9 +63,20 @@ grammar sophia;
 
     blockStatement : statement ;
 
-    statement : ifStatement | forStatement | foreachStatement | statementWithoutTrailingSubstatement ;
+    statement : statementWithoutTrailingSubstatement | ifStatement | forStatement | foreachStatement ;
 
-    ifStatement : IF condition_block (ELSE IF condition_block)* (ELSE statBlock)?;
+    ifStatement : IF
+            {
+                System.out.println("Conditional:if");
+            }
+            (ELSE IF bb=condition_block {
+                System.out.println("Conditional:if");
+                System.out.println("Conditional:else");
+            })* (ELSE cc=statBlock
+            {
+                System.out.println("Conditional:else");
+            })?
+            condition_block;
 
     condition_block : expr statBlock ;
 
@@ -58,32 +87,196 @@ grammar sophia;
 
     expStatement : statementExp SEMI ;
 
-    statementExp : assignment | preExp | postExp | methodCall ;
+    statementExp :  assignment | methodCall | preExp | postExp  ;
 
-    forStatement : FOR LPAREN initialStatement? SEMI expr? SEMI updateStatement? RPAREN statBlock;
+    forStatement : FOR
+                {
+                        System.out.println("Loop:for");
+                }
+                LPAREN initialStatement? SEMI expr? SEMI updateStatement? RPAREN statBlock;
 
     initialStatement : assignment (COMMA assignment)* ;
 
     updateStatement :  assignment (COMMA assignment)* ;
 
-    foreachStatement : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER(DOT IDENTIFIER)? | THIS DOT IDENTIFIER | expr) RPAREN statBlock ;
+    foreachStatement : FOREACH LPAREN IDENTIFIER IN
+                    {
+                            System.out.println("Loop:foreach");
+                    }
+                    (IDENTIFIER(DOT IDENTIFIER)? | THIS DOT IDENTIFIER | expr) RPAREN statBlock;
 
 
-    breakStatement : BREAK SEMI ;
+    breakStatement : BREAK SEMI
+                {
+                        System.out.println("Control:break");
+                }
+                ;
 
-    continueStatement : CONTINUE SEMI ;
+    continueStatement : CONTINUE SEMI
+                    {
+                            System.out.println("Control:continue");
+                    }
+                    ;
 
-    returnStatement : RETURN expr? SEMI ;
+    returnStatement : RETURN
+        {
+                System.out.println("Return");
+        }
+        expr? SEMI;
 
-    assignment : leftHand (ASSIGN (expr | listInitializer | classAssignment)+)+ ;
+    expressionName
+        	:
+        	    IDENTIFIER
+        	|	expressionName DOT IDENTIFIER
+        	;
 
-    leftHand : ((THIS | expr) (DOT expr)* | expr) ;
+    primary
+    	:	(	primaryNoNewArray_lfno_primary
+    		|	classAssignment
+    		)
+    		(	primaryNoNewArray_lf_primary
+    		)*
+    	;
 
-    index : (LBRACK expr RBRACK)* ;
+    primaryNoNewArray
+    	:	literal
+    	|	'this'
+    	|	'(' expression ')'
+    	|	classAssignment
+    	|	fieldAccess
+    	|	arrayAccess
+    	|	methodCall
+    	;
 
-    //afterDot : (methodCallBody | (IDENTIFIER | THIS)) index? ;
+    primaryNoNewArray_lf_arrayAccess
+    	:
+    	;
 
-    //dot : DOT afterDot;
+    primaryNoNewArray_lfno_arrayAccess
+    	:	literal
+    	|	'this'
+    	|	'(' expression ')'
+    	|	classAssignment
+    	|	fieldAccess
+    	|	methodCall
+    	;
+
+    primaryNoNewArray_lf_primary
+    	:
+    		fieldAccess_lf_primary
+    	|	arrayAccess_lf_primary
+    	|	methodCall2
+
+    	;
+
+    primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary
+    	:
+    	;
+
+    primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary
+    	:
+    		fieldAccess_lf_primary
+    	|	methodCall2
+
+    	;
+
+    primaryNoNewArray_lfno_primary
+    	:	literal
+    	|	'this'
+    	|	'(' expression ')'
+    	|	classAssignment
+    	|	arrayAccess_lfno_primary
+    	|	methodCall2
+
+    	;
+
+    primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary
+    	:
+    	;
+
+    primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary
+    	:	literal
+
+
+    	|	'this'
+
+    	|	'(' expression ')'
+    	|	classAssignment
+    	|	methodCall2
+    	;
+
+    fieldAccess
+    	:	primary '.' IDENTIFIER
+
+    	;
+
+    fieldAccess_lf_primary
+    	:	'.' IDENTIFIER
+    	;
+
+
+
+    arrayAccess
+    	:	(	expressionName '[' expression ']'
+    		|	primaryNoNewArray_lfno_arrayAccess '[' expression ']'
+    		)
+    		(	primaryNoNewArray_lf_arrayAccess '[' expression ']'
+    		)*
+    	;
+
+    arrayAccess_lf_primary
+    	:	(	primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary '[' expression ']'
+    		)
+    		(	primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary '[' expression ']'
+    		)*
+    	;
+
+    arrayAccess_lfno_primary
+    	:	(	expressionName '[' expression ']'
+    		|	primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary '[' expression ']'
+    		)
+    		(	primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary '[' expression ']'
+    		)*
+    	;
+    methodCall : ((IDENTIFIER | primary | expressionName) DOT)? methodCallBody
+                {
+                        System.out.println("MethodCall");
+                }
+                ;
+
+   methodCall2 : ((IDENTIFIER | expressionName) DOT)? methodCallBody
+                   {
+                           System.out.println("MethodCall");
+                   }
+                   ;
+
+    methodCallBody : IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
+
+    expression
+    	:	expr
+    	| assignment
+    	;
+
+
+
+
+
+     assignment : leftHandSide ASSIGN expr ;
+
+
+
+    leftHandSide
+     	:
+        expressionName
+     	|	fieldAccess
+     	|	arrayAccess
+     	;
+
+
+
+
+
+   // afterDot : (methodCallBody | (IDENTIFIER | THIS)) index ;
 
     classAssignment : NEW IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
 
@@ -93,32 +286,166 @@ grammar sophia;
 
     postExp : literal (DEC | INC) ;
 
+expr
+	:	conditionalOrExpression | listInitializer
+	;
 
-    expr :
-        | expr DOT expr
-        | NOT expr
-        | expr op=(MUL | DIV | MOD) expr
-        | expr op=(ADD | SUB) expr
-        | expr op=(LE | GE | LT | GT) expr
-        | expr op=(EQUAL | NOTEQUAL | ASSIGN) expr
-        | expr AND expr
-        | expr OR expr
-        | preExp
-        | postExp
-        | literal index?
-       //| afterDot
-        ;
+conditionalOrExpression
+	:	conditionalAndExpression
+	|	conditionalOrExpression '||' conditionalAndExpression
+	;
+
+conditionalAndExpression
+	:	inclusiveOrExpression
+	|	conditionalAndExpression '&&' inclusiveOrExpression
+	;
+
+inclusiveOrExpression
+	:	exclusiveOrExpression
+	|	inclusiveOrExpression '|' exclusiveOrExpression
+	;
+
+exclusiveOrExpression
+	:	andExpression
+	|	exclusiveOrExpression '^' andExpression
+	;
+
+andExpression
+	:	equalityExpression
+	|	andExpression '&' equalityExpression
+	;
+
+equalityExpression
+	:	relationalExpression
+	|	equalityExpression '==' relationalExpression
+	|	equalityExpression '!=' relationalExpression
+	;
+
+relationalExpression
+	:	shiftExpression
+	|	relationalExpression '<' shiftExpression
+	|	relationalExpression '>' shiftExpression
+	|	relationalExpression '<=' shiftExpression
+	|	relationalExpression '>=' shiftExpression
+	;
+
+shiftExpression
+	:	additiveExpression
+	|	shiftExpression '<' '<' additiveExpression
+	|	shiftExpression '>' '>' additiveExpression
+	|	shiftExpression '>' '>' '>' additiveExpression
+	;
+
+additiveExpression
+	:	multiplicativeExpression
+	|	additiveExpression '+' multiplicativeExpression
+	|	additiveExpression '-' multiplicativeExpression
+	;
+
+multiplicativeExpression
+	:	unaryExpression
+	|	multiplicativeExpression '*' unaryExpression
+	|	multiplicativeExpression '/' unaryExpression
+	|	multiplicativeExpression '%' unaryExpression
+	;
+
+	unaryExpression
+    	:	preIncrementExpression
+    	|	preDecrementExpression
+    	|	'+' unaryExpression
+    	|	'-' unaryExpression
+    	|	unaryExpressionNotPlusMinus
+    	;
+
+    preIncrementExpression
+    	:	'++' unaryExpression
+    	;
+
+    preDecrementExpression
+    	:	'--' unaryExpression
+    	;
+
+    unaryExpressionNotPlusMinus
+    	:	postfixExpression
+    	|	'~' unaryExpression
+    	|	'!' unaryExpression
+    	;
+
+    postfixExpression
+    	:	(	primary
+    		|	expressionName
+    		)
+    		(	postIncrementExpression_lf_postfixExpression
+    		|	postDecrementExpression_lf_postfixExpression
+    		)*
+    	;
+
+    postIncrementExpression
+    	:	postfixExpression '++'
+    	;
+
+    postIncrementExpression_lf_postfixExpression
+    	:	'++'
+    	;
+
+    postDecrementExpression
+    	:	postfixExpression '--'
+    	;
+
+    postDecrementExpression_lf_postfixExpression
+    	:	'--'
+    	;
+   /* expr :
+            // methodCallBody
+            //| expr DOT expr
+             postExp
+            | preExp
+            | NOT expr
+            | expr op=(MUL | DIV | MOD) expr
+                    {
+                        if ($op.text != null){
+                            System.out.println("Operator:"+$op.text);
+                        }
+                    }
+            | expr op=(ADD | SUB) expr
+                    {
+                        if ($op.text != null){
+                            System.out.println("Operator:"+$op.text);
+                        }
+                    }
+            | expr op=(LE | GE | LT | GT) expr
+                    {
+                        if ($op.text != null){
+                            System.out.println("Operator:"+$op.text);
+                        }
+                    }
+            | expr op=(EQUAL | NOTEQUAL) expr
+                    {
+                        if ($op.text != null){
+                            System.out.println("Operator:"+$op.text);
+                        }
+                    }
+            | expr AND expr
+            | expr OR expr
+            | IDENTIFIER
+
+
+           // | afterDot
+            ;*/
+
 
     literal :
-         LPAREN expr? RPAREN
-         | methodCallBody
-         | IDENTIFIER
-         | intLiteral
+
+          intLiteral
          | BOOL_LITERAL
          | STRING_LITERAL
          ;
 
-    printStatement : PRINT LPAREN printBody RPAREN SEMI;
+    printStatement : PRINT LPAREN printBody RPAREN SEMI
+                    {
+                            System.out.println("Built-in:print");
+                    }
+                    ;
 
     printBody : expr;
 
@@ -126,21 +453,6 @@ grammar sophia;
 
     comment : COMMENT ;
 
-/* -----------------------------------------------------------
-    condition_block : expr stat_block ;
-    expr : LPAREN value compare_operator value ((AND | OR) value compare_operator value) RPAREN;
-    value : INT_LITERAL | STRING_LITERAL | IDENTIFIER | IDENTIFIER LBRACK (value|sentence) RBRACK | sentence | (THIS | IDENTIFIER) DOT IDENTIFIER;
-    sentence : value ( calc_operator value )+;
-    calc_operator : ADD | SUB | MUL | DIV | BITAND | BITOR | CARET | MOD ;
-// -------------------------------------------------------------------------------
-
-AmirAli Raygan, [03.11.20 22:13]
-initial_stat : IDENTIFIER ASSIGN value | '';
-    condition_stat : value compare_operator value | IDENTIFIER | '';
-    update_stat : IDENTIFIER  one_var_operation | IDENTIFIER ASSIGN value;
-    one_var_operation : INC | DEC;
-    foreach_stat : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER | IDENTIFIER DOT IDENTIFIER) RPAREN block;
-*/
     CLASS : 'class' ;
     EXTENDS : 'extends' ;
     THIS : 'this' ;

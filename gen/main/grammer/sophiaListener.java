@@ -108,26 +108,6 @@ public interface sophiaListener extends ParseTreeListener {
 	 */
 	void exitMethodBody(sophiaParser.MethodBodyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link sophiaParser#methodCall}.
-	 * @param ctx the parse tree
-	 */
-	void enterMethodCall(sophiaParser.MethodCallContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link sophiaParser#methodCall}.
-	 * @param ctx the parse tree
-	 */
-	void exitMethodCall(sophiaParser.MethodCallContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link sophiaParser#methodCallBody}.
-	 * @param ctx the parse tree
-	 */
-	void enterMethodCallBody(sophiaParser.MethodCallBodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link sophiaParser#methodCallBody}.
-	 * @param ctx the parse tree
-	 */
-	void exitMethodCallBody(sophiaParser.MethodCallBodyContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link sophiaParser#constructorDeclaration}.
 	 * @param ctx the parse tree
 	 */
@@ -158,6 +138,16 @@ public interface sophiaListener extends ParseTreeListener {
 	 */
 	void exitVariableDeclaration(sophiaParser.VariableDeclarationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link sophiaParser#listvariableDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterListvariableDeclaration(sophiaParser.ListvariableDeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#listvariableDeclaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitListvariableDeclaration(sophiaParser.ListvariableDeclarationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link sophiaParser#variableInitializer}.
 	 * @param ctx the parse tree
 	 */
@@ -167,16 +157,6 @@ public interface sophiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVariableInitializer(sophiaParser.VariableInitializerContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link sophiaParser#funcPointerDeclaration}.
-	 * @param ctx the parse tree
-	 */
-	void enterFuncPointerDeclaration(sophiaParser.FuncPointerDeclarationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link sophiaParser#funcPointerDeclaration}.
-	 * @param ctx the parse tree
-	 */
-	void exitFuncPointerDeclaration(sophiaParser.FuncPointerDeclarationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link sophiaParser#funcPointerDeclarationBody}.
 	 * @param ctx the parse tree
@@ -378,6 +358,206 @@ public interface sophiaListener extends ParseTreeListener {
 	 */
 	void exitReturnStatement(sophiaParser.ReturnStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link sophiaParser#expressionName}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpressionName(sophiaParser.ExpressionNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#expressionName}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpressionName(sophiaParser.ExpressionNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimary(sophiaParser.PrimaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimary(sophiaParser.PrimaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#primaryNoNewArray}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryNoNewArray(sophiaParser.PrimaryNoNewArrayContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#primaryNoNewArray}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryNoNewArray(sophiaParser.PrimaryNoNewArrayContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#primaryNoNewArray_lf_arrayAccess}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryNoNewArray_lf_arrayAccess(sophiaParser.PrimaryNoNewArray_lf_arrayAccessContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#primaryNoNewArray_lf_arrayAccess}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryNoNewArray_lf_arrayAccess(sophiaParser.PrimaryNoNewArray_lf_arrayAccessContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#primaryNoNewArray_lfno_arrayAccess}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryNoNewArray_lfno_arrayAccess(sophiaParser.PrimaryNoNewArray_lfno_arrayAccessContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#primaryNoNewArray_lfno_arrayAccess}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryNoNewArray_lfno_arrayAccess(sophiaParser.PrimaryNoNewArray_lfno_arrayAccessContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#primaryNoNewArray_lf_primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryNoNewArray_lf_primary(sophiaParser.PrimaryNoNewArray_lf_primaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#primaryNoNewArray_lf_primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryNoNewArray_lf_primary(sophiaParser.PrimaryNoNewArray_lf_primaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary(sophiaParser.PrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary(sophiaParser.PrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary(sophiaParser.PrimaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary(sophiaParser.PrimaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#primaryNoNewArray_lfno_primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryNoNewArray_lfno_primary(sophiaParser.PrimaryNoNewArray_lfno_primaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#primaryNoNewArray_lfno_primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryNoNewArray_lfno_primary(sophiaParser.PrimaryNoNewArray_lfno_primaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary(sophiaParser.PrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary(sophiaParser.PrimaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrimaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary(sophiaParser.PrimaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrimaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary(sophiaParser.PrimaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#fieldAccess}.
+	 * @param ctx the parse tree
+	 */
+	void enterFieldAccess(sophiaParser.FieldAccessContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#fieldAccess}.
+	 * @param ctx the parse tree
+	 */
+	void exitFieldAccess(sophiaParser.FieldAccessContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#fieldAccess_lf_primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterFieldAccess_lf_primary(sophiaParser.FieldAccess_lf_primaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#fieldAccess_lf_primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitFieldAccess_lf_primary(sophiaParser.FieldAccess_lf_primaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#arrayAccess}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayAccess(sophiaParser.ArrayAccessContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#arrayAccess}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayAccess(sophiaParser.ArrayAccessContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#arrayAccess_lf_primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayAccess_lf_primary(sophiaParser.ArrayAccess_lf_primaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#arrayAccess_lf_primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayAccess_lf_primary(sophiaParser.ArrayAccess_lf_primaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#arrayAccess_lfno_primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayAccess_lfno_primary(sophiaParser.ArrayAccess_lfno_primaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#arrayAccess_lfno_primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayAccess_lfno_primary(sophiaParser.ArrayAccess_lfno_primaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#methodCall}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodCall(sophiaParser.MethodCallContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#methodCall}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodCall(sophiaParser.MethodCallContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#methodCall2}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodCall2(sophiaParser.MethodCall2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#methodCall2}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodCall2(sophiaParser.MethodCall2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#methodCallBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodCallBody(sophiaParser.MethodCallBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#methodCallBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodCallBody(sophiaParser.MethodCallBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExpression(sophiaParser.ExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#expression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExpression(sophiaParser.ExpressionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link sophiaParser#assignment}.
 	 * @param ctx the parse tree
 	 */
@@ -387,6 +567,16 @@ public interface sophiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAssignment(sophiaParser.AssignmentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#leftHandSide}.
+	 * @param ctx the parse tree
+	 */
+	void enterLeftHandSide(sophiaParser.LeftHandSideContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#leftHandSide}.
+	 * @param ctx the parse tree
+	 */
+	void exitLeftHandSide(sophiaParser.LeftHandSideContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link sophiaParser#classAssignment}.
 	 * @param ctx the parse tree
@@ -437,6 +627,196 @@ public interface sophiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpr(sophiaParser.ExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#conditionalOrExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionalOrExpression(sophiaParser.ConditionalOrExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#conditionalOrExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionalOrExpression(sophiaParser.ConditionalOrExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#conditionalAndExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionalAndExpression(sophiaParser.ConditionalAndExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#conditionalAndExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionalAndExpression(sophiaParser.ConditionalAndExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#inclusiveOrExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterInclusiveOrExpression(sophiaParser.InclusiveOrExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#inclusiveOrExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitInclusiveOrExpression(sophiaParser.InclusiveOrExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#exclusiveOrExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterExclusiveOrExpression(sophiaParser.ExclusiveOrExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#exclusiveOrExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitExclusiveOrExpression(sophiaParser.ExclusiveOrExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#andExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAndExpression(sophiaParser.AndExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#andExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAndExpression(sophiaParser.AndExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#equalityExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterEqualityExpression(sophiaParser.EqualityExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#equalityExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitEqualityExpression(sophiaParser.EqualityExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#relationalExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterRelationalExpression(sophiaParser.RelationalExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#relationalExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitRelationalExpression(sophiaParser.RelationalExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#shiftExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterShiftExpression(sophiaParser.ShiftExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#shiftExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitShiftExpression(sophiaParser.ShiftExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#additiveExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAdditiveExpression(sophiaParser.AdditiveExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#additiveExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAdditiveExpression(sophiaParser.AdditiveExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#multiplicativeExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultiplicativeExpression(sophiaParser.MultiplicativeExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#multiplicativeExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultiplicativeExpression(sophiaParser.MultiplicativeExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#unaryExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryExpression(sophiaParser.UnaryExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#unaryExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryExpression(sophiaParser.UnaryExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#preIncrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPreIncrementExpression(sophiaParser.PreIncrementExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#preIncrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPreIncrementExpression(sophiaParser.PreIncrementExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#preDecrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPreDecrementExpression(sophiaParser.PreDecrementExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#preDecrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPreDecrementExpression(sophiaParser.PreDecrementExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#unaryExpressionNotPlusMinus}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryExpressionNotPlusMinus(sophiaParser.UnaryExpressionNotPlusMinusContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#unaryExpressionNotPlusMinus}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryExpressionNotPlusMinus(sophiaParser.UnaryExpressionNotPlusMinusContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#postfixExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostfixExpression(sophiaParser.PostfixExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#postfixExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostfixExpression(sophiaParser.PostfixExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#postIncrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostIncrementExpression(sophiaParser.PostIncrementExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#postIncrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostIncrementExpression(sophiaParser.PostIncrementExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#postIncrementExpression_lf_postfixExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostIncrementExpression_lf_postfixExpression(sophiaParser.PostIncrementExpression_lf_postfixExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#postIncrementExpression_lf_postfixExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostIncrementExpression_lf_postfixExpression(sophiaParser.PostIncrementExpression_lf_postfixExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#postDecrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostDecrementExpression(sophiaParser.PostDecrementExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#postDecrementExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostDecrementExpression(sophiaParser.PostDecrementExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#postDecrementExpression_lf_postfixExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterPostDecrementExpression_lf_postfixExpression(sophiaParser.PostDecrementExpression_lf_postfixExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#postDecrementExpression_lf_postfixExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitPostDecrementExpression_lf_postfixExpression(sophiaParser.PostDecrementExpression_lf_postfixExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link sophiaParser#literal}.
 	 * @param ctx the parse tree
