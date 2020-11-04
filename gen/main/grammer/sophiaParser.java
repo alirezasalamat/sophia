@@ -17,70 +17,72 @@ public class sophiaParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__0=1, IDENTIFIER=2, POS_INT=3, INT_LITERAL=4, STRING_LITERAL=5, BOOL_LITERAL=6, 
-		LPAREN=7, RPAREN=8, LBRACE=9, RBRACE=10, LBRACK=11, RBRACK=12, SEMI=13, 
-		COMMA=14, DOT=15, ARROW=16, ASSIGN=17, GT=18, LT=19, NOT=20, TILDE=21, 
-		QUESTION=22, COLON=23, EQUAL=24, LE=25, GE=26, NOTEQUAL=27, AND=28, OR=29, 
-		INC=30, DEC=31, ADD=32, SUB=33, MUL=34, DIV=35, BITAND=36, BITOR=37, CARET=38, 
-		MOD=39, CLASS=40, EXTENDS=41, THIS=42, DEF=43, FUNC=44, RETURN=45, IF=46, 
-		ELSE=47, FOR=48, FOREACH=49, CONTINUE=50, BREAK=51, FALSE=52, TRUE=53, 
-		INT=54, STRING=55, BOOL=56, VOID=57, LIST=58, IN=59, NULL=60, NEW=61, 
-		PRINT=62, COMMENT=63, WS=64;
+		T__0=1, CLASS=2, EXTENDS=3, THIS=4, DEF=5, FUNC=6, RETURN=7, IF=8, ELSE=9, 
+		FOR=10, FOREACH=11, CONTINUE=12, BREAK=13, FALSE=14, TRUE=15, INT=16, 
+		STRING=17, BOOL=18, VOID=19, LIST=20, IN=21, NULL=22, NEW=23, PRINT=24, 
+		IDENTIFIER=25, POS_INT=26, ZERO=27, STRING_LITERAL=28, BOOL_LITERAL=29, 
+		LPAREN=30, RPAREN=31, LBRACE=32, RBRACE=33, LBRACK=34, RBRACK=35, SEMI=36, 
+		COMMA=37, DOT=38, ARROW=39, ASSIGN=40, GT=41, LT=42, NOT=43, TILDE=44, 
+		QUESTION=45, COLON=46, EQUAL=47, LE=48, GE=49, NOTEQUAL=50, AND=51, OR=52, 
+		INC=53, DEC=54, ADD=55, SUB=56, MUL=57, DIV=58, BITAND=59, BITOR=60, CARET=61, 
+		MOD=62, COMMENT=63, WS=64;
 	public static final int
 		RULE_sophia = 0, RULE_type = 1, RULE_classDeclaration = 2, RULE_classBody = 3, 
 		RULE_classBodyDeclaration = 4, RULE_memberDeclaration = 5, RULE_methodDeclaration = 6, 
 		RULE_methodArguements = 7, RULE_methodType = 8, RULE_methodBody = 9, RULE_methodCall = 10, 
-		RULE_constructorDeclaration = 11, RULE_fieldDeclaration = 12, RULE_variableDeclaration = 13, 
-		RULE_variableInitializer = 14, RULE_funcPointerDeclaration = 15, RULE_funcPointerDeclarationBody = 16, 
-		RULE_listDeclaration = 17, RULE_listBody = 18, RULE_block = 19, RULE_blockStatements = 20, 
-		RULE_blockStatement = 21, RULE_statement = 22, RULE_ifStatement = 23, 
-		RULE_condition_block = 24, RULE_statBlock = 25, RULE_statementWithoutTrailingSubstatement = 26, 
-		RULE_statementExp = 27, RULE_expStatement = 28, RULE_forStatement = 29, 
-		RULE_initialStatement = 30, RULE_updateStatement = 31, RULE_foreachStatement = 32, 
-		RULE_emptyStatement = 33, RULE_breakStatement = 34, RULE_continueStatement = 35, 
-		RULE_returnStatement = 36, RULE_assignment = 37, RULE_classAssignment = 38, 
-		RULE_listInitializer = 39, RULE_preExp = 40, RULE_postExp = 41, RULE_expr = 42, 
-		RULE_literal = 43, RULE_print_stat = 44, RULE_print_body = 45, RULE_comment = 46;
+		RULE_methodCallBody = 11, RULE_constructorDeclaration = 12, RULE_fieldDeclaration = 13, 
+		RULE_variableDeclaration = 14, RULE_variableInitializer = 15, RULE_funcPointerDeclaration = 16, 
+		RULE_funcPointerDeclarationBody = 17, RULE_listDeclaration = 18, RULE_listBody = 19, 
+		RULE_block = 20, RULE_blockStatements = 21, RULE_blockStatement = 22, 
+		RULE_statement = 23, RULE_ifStatement = 24, RULE_condition_block = 25, 
+		RULE_statBlock = 26, RULE_statementWithoutTrailingSubstatement = 27, RULE_expStatement = 28, 
+		RULE_statementExp = 29, RULE_forStatement = 30, RULE_initialStatement = 31, 
+		RULE_updateStatement = 32, RULE_foreachStatement = 33, RULE_breakStatement = 34, 
+		RULE_continueStatement = 35, RULE_returnStatement = 36, RULE_assignment = 37, 
+		RULE_classAssignment = 38, RULE_listInitializer = 39, RULE_preExp = 40, 
+		RULE_postExp = 41, RULE_expr = 42, RULE_literal = 43, RULE_printStatement = 44, 
+		RULE_printBody = 45, RULE_emptyStatement = 46, RULE_comment = 47, RULE_intLiteral = 48;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"sophia", "type", "classDeclaration", "classBody", "classBodyDeclaration", 
 			"memberDeclaration", "methodDeclaration", "methodArguements", "methodType", 
-			"methodBody", "methodCall", "constructorDeclaration", "fieldDeclaration", 
-			"variableDeclaration", "variableInitializer", "funcPointerDeclaration", 
+			"methodBody", "methodCall", "methodCallBody", "constructorDeclaration", 
+			"fieldDeclaration", "variableDeclaration", "variableInitializer", "funcPointerDeclaration", 
 			"funcPointerDeclarationBody", "listDeclaration", "listBody", "block", 
 			"blockStatements", "blockStatement", "statement", "ifStatement", "condition_block", 
-			"statBlock", "statementWithoutTrailingSubstatement", "statementExp", 
-			"expStatement", "forStatement", "initialStatement", "updateStatement", 
-			"foreachStatement", "emptyStatement", "breakStatement", "continueStatement", 
-			"returnStatement", "assignment", "classAssignment", "listInitializer", 
-			"preExp", "postExp", "expr", "literal", "print_stat", "print_body", "comment"
+			"statBlock", "statementWithoutTrailingSubstatement", "expStatement", 
+			"statementExp", "forStatement", "initialStatement", "updateStatement", 
+			"foreachStatement", "breakStatement", "continueStatement", "returnStatement", 
+			"assignment", "classAssignment", "listInitializer", "preExp", "postExp", 
+			"expr", "literal", "printStatement", "printBody", "emptyStatement", "comment", 
+			"intLiteral"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'#'", null, null, null, null, null, "'('", "')'", "'{'", "'}'", 
-			"'['", "']'", "';'", "','", "'.'", "'->'", "'='", "'>'", "'<'", "'!'", 
-			"'~'", "'?'", "':'", "'=='", "'<='", "'>='", "'!='", "'&&'", "'||'", 
-			"'++'", "'--'", "'+'", "'-'", "'*'", "'/'", "'&'", "'|'", "'^'", "'%'", 
-			"'class'", "'extends'", "'this'", "'def'", "'func'", "'return'", "'if'", 
-			"'else'", "'for'", "'foreach'", "'continue'", "'break'", "'false'", "'true'", 
-			"'int'", "'string'", "'bool'", "'void'", "'list'", "'in'", "'null'", 
-			"'new'", "'print'"
+			null, "'#'", "'class'", "'extends'", "'this'", "'def'", "'func'", "'return'", 
+			"'if'", "'else'", "'for'", "'foreach'", "'continue'", "'break'", "'false'", 
+			"'true'", "'int'", "'string'", "'bool'", "'void'", "'list'", "'in'", 
+			"'null'", "'new'", "'print'", null, null, "'0'", null, null, "'('", "')'", 
+			"'{'", "'}'", "'['", "']'", "';'", "','", "'.'", "'->'", "'='", "'>'", 
+			"'<'", "'!'", "'~'", "'?'", "':'", "'=='", "'<='", "'>='", "'!='", "'&&'", 
+			"'||'", "'++'", "'--'", "'+'", "'-'", "'*'", "'/'", "'&'", "'|'", "'^'", 
+			"'%'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
-			null, null, "IDENTIFIER", "POS_INT", "INT_LITERAL", "STRING_LITERAL", 
-			"BOOL_LITERAL", "LPAREN", "RPAREN", "LBRACE", "RBRACE", "LBRACK", "RBRACK", 
-			"SEMI", "COMMA", "DOT", "ARROW", "ASSIGN", "GT", "LT", "NOT", "TILDE", 
-			"QUESTION", "COLON", "EQUAL", "LE", "GE", "NOTEQUAL", "AND", "OR", "INC", 
-			"DEC", "ADD", "SUB", "MUL", "DIV", "BITAND", "BITOR", "CARET", "MOD", 
-			"CLASS", "EXTENDS", "THIS", "DEF", "FUNC", "RETURN", "IF", "ELSE", "FOR", 
-			"FOREACH", "CONTINUE", "BREAK", "FALSE", "TRUE", "INT", "STRING", "BOOL", 
-			"VOID", "LIST", "IN", "NULL", "NEW", "PRINT", "COMMENT", "WS"
+			null, null, "CLASS", "EXTENDS", "THIS", "DEF", "FUNC", "RETURN", "IF", 
+			"ELSE", "FOR", "FOREACH", "CONTINUE", "BREAK", "FALSE", "TRUE", "INT", 
+			"STRING", "BOOL", "VOID", "LIST", "IN", "NULL", "NEW", "PRINT", "IDENTIFIER", 
+			"POS_INT", "ZERO", "STRING_LITERAL", "BOOL_LITERAL", "LPAREN", "RPAREN", 
+			"LBRACE", "RBRACE", "LBRACK", "RBRACK", "SEMI", "COMMA", "DOT", "ARROW", 
+			"ASSIGN", "GT", "LT", "NOT", "TILDE", "QUESTION", "COLON", "EQUAL", "LE", 
+			"GE", "NOTEQUAL", "AND", "OR", "INC", "DEC", "ADD", "SUB", "MUL", "DIV", 
+			"BITAND", "BITOR", "CARET", "MOD", "COMMENT", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -168,21 +170,22 @@ public class sophiaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(97);
+			System.out.println("hello");
+			setState(102);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==CLASS) {
 				{
 				{
-				setState(94);
+				setState(99);
 				classDeclaration();
 				}
 				}
-				setState(99);
+				setState(104);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(100);
+			setState(105);
 			match(EOF);
 			}
 		}
@@ -227,7 +230,7 @@ public class sophiaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(102);
+			setState(107);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << STRING) | (1L << BOOL))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -251,13 +254,14 @@ public class sophiaParser extends Parser {
 	}
 
 	public static class ClassDeclarationContext extends ParserRuleContext {
+		public Token id;
 		public TerminalNode CLASS() { return getToken(sophiaParser.CLASS, 0); }
+		public ClassBodyContext classBody() {
+			return getRuleContext(ClassBodyContext.class,0);
+		}
 		public List<TerminalNode> IDENTIFIER() { return getTokens(sophiaParser.IDENTIFIER); }
 		public TerminalNode IDENTIFIER(int i) {
 			return getToken(sophiaParser.IDENTIFIER, i);
-		}
-		public ClassBodyContext classBody() {
-			return getRuleContext(ClassBodyContext.class,0);
 		}
 		public TerminalNode EXTENDS() { return getToken(sophiaParser.EXTENDS, 0); }
 		public ClassDeclarationContext(ParserRuleContext parent, int invokingState) {
@@ -286,23 +290,24 @@ public class sophiaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(104);
+			setState(109);
 			match(CLASS);
-			setState(105);
-			match(IDENTIFIER);
-			setState(108);
+			setState(110);
+			((ClassDeclarationContext)_localctx).id = match(IDENTIFIER);
+			setState(113);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==EXTENDS) {
 				{
-				setState(106);
+				setState(111);
 				match(EXTENDS);
-				setState(107);
+				setState(112);
 				match(IDENTIFIER);
 				}
 			}
 
-			setState(110);
+			System.out.println("kir"+ (((ClassDeclarationContext)_localctx).id!=null?((ClassDeclarationContext)_localctx).id.getText():null));
+			setState(116);
 			classBody();
 			}
 		}
@@ -348,11 +353,11 @@ public class sophiaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(112);
+			setState(118);
 			match(LBRACE);
-			setState(113);
+			setState(119);
 			classBodyDeclaration();
-			setState(114);
+			setState(120);
 			match(RBRACE);
 			}
 		}
@@ -369,11 +374,17 @@ public class sophiaParser extends Parser {
 
 	public static class ClassBodyDeclarationContext extends ParserRuleContext {
 		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
-		public BlockContext block() {
-			return getRuleContext(BlockContext.class,0);
+		public List<BlockContext> block() {
+			return getRuleContexts(BlockContext.class);
 		}
-		public MemberDeclarationContext memberDeclaration() {
-			return getRuleContext(MemberDeclarationContext.class,0);
+		public BlockContext block(int i) {
+			return getRuleContext(BlockContext.class,i);
+		}
+		public List<MemberDeclarationContext> memberDeclaration() {
+			return getRuleContexts(MemberDeclarationContext.class);
+		}
+		public MemberDeclarationContext memberDeclaration(int i) {
+			return getRuleContext(MemberDeclarationContext.class,i);
 		}
 		public ClassBodyDeclarationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -397,35 +408,56 @@ public class sophiaParser extends Parser {
 	public final ClassBodyDeclarationContext classBodyDeclaration() throws RecognitionException {
 		ClassBodyDeclarationContext _localctx = new ClassBodyDeclarationContext(_ctx, getState());
 		enterRule(_localctx, 8, RULE_classBodyDeclaration);
+		int _la;
 		try {
-			setState(119);
+			setState(135);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case SEMI:
+			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
+			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(116);
+				setState(122);
 				match(SEMI);
 				}
 				break;
-			case LBRACE:
+			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(117);
-				block();
+				setState(126);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				while (_la==LBRACE) {
+					{
+					{
+					setState(123);
+					block();
+					}
+					}
+					setState(128);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
 				}
 				break;
-			case IDENTIFIER:
-			case THIS:
-			case DEF:
+			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(118);
-				memberDeclaration();
+				setState(132);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << THIS) | (1L << DEF) | (1L << IDENTIFIER) | (1L << POS_INT) | (1L << ZERO) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << SUB))) != 0)) {
+					{
+					{
+					setState(129);
+					memberDeclaration();
+					}
+					}
+					setState(134);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -472,27 +504,27 @@ public class sophiaParser extends Parser {
 		MemberDeclarationContext _localctx = new MemberDeclarationContext(_ctx, getState());
 		enterRule(_localctx, 10, RULE_memberDeclaration);
 		try {
-			setState(124);
+			setState(140);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,5,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(121);
+				setState(137);
 				methodDeclaration();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(122);
+				setState(138);
 				constructorDeclaration();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(123);
+				setState(139);
 				fieldDeclaration();
 				}
 				break;
@@ -516,12 +548,12 @@ public class sophiaParser extends Parser {
 		}
 		public TerminalNode IDENTIFIER() { return getToken(sophiaParser.IDENTIFIER, 0); }
 		public TerminalNode LPAREN() { return getToken(sophiaParser.LPAREN, 0); }
-		public MethodArguementsContext methodArguements() {
-			return getRuleContext(MethodArguementsContext.class,0);
-		}
 		public TerminalNode RPAREN() { return getToken(sophiaParser.RPAREN, 0); }
 		public MethodBodyContext methodBody() {
 			return getRuleContext(MethodBodyContext.class,0);
+		}
+		public MethodArguementsContext methodArguements() {
+			return getRuleContext(MethodArguementsContext.class,0);
 		}
 		public MethodDeclarationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -545,22 +577,31 @@ public class sophiaParser extends Parser {
 	public final MethodDeclarationContext methodDeclaration() throws RecognitionException {
 		MethodDeclarationContext _localctx = new MethodDeclarationContext(_ctx, getState());
 		enterRule(_localctx, 12, RULE_methodDeclaration);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(126);
+			setState(142);
 			match(DEF);
-			setState(127);
+			setState(143);
 			methodType();
-			setState(128);
+			setState(144);
 			match(IDENTIFIER);
-			setState(129);
+			setState(145);
 			match(LPAREN);
-			setState(130);
-			methodArguements();
-			setState(131);
+			setState(147);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==IDENTIFIER) {
+				{
+				setState(146);
+				methodArguements();
+				}
+			}
+
+			setState(149);
 			match(RPAREN);
-			setState(132);
+			setState(150);
 			methodBody();
 			}
 		}
@@ -612,21 +653,21 @@ public class sophiaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(134);
+			setState(152);
 			variableDeclaration();
-			setState(139);
+			setState(157);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(135);
+				setState(153);
 				match(COMMA);
-				setState(136);
+				setState(154);
 				variableDeclaration();
 				}
 				}
-				setState(141);
+				setState(159);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -671,7 +712,7 @@ public class sophiaParser extends Parser {
 		MethodTypeContext _localctx = new MethodTypeContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_methodType);
 		try {
-			setState(144);
+			setState(162);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INT:
@@ -679,14 +720,14 @@ public class sophiaParser extends Parser {
 			case BOOL:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(142);
+				setState(160);
 				type();
 				}
 				break;
 			case VOID:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(143);
+				setState(161);
 				match(VOID);
 				}
 				break;
@@ -707,10 +748,10 @@ public class sophiaParser extends Parser {
 
 	public static class MethodBodyContext extends ParserRuleContext {
 		public TerminalNode LBRACE() { return getToken(sophiaParser.LBRACE, 0); }
+		public TerminalNode RBRACE() { return getToken(sophiaParser.RBRACE, 0); }
 		public BlockStatementsContext blockStatements() {
 			return getRuleContext(BlockStatementsContext.class,0);
 		}
-		public TerminalNode RBRACE() { return getToken(sophiaParser.RBRACE, 0); }
 		public List<VariableDeclarationContext> variableDeclaration() {
 			return getRuleContexts(VariableDeclarationContext.class);
 		}
@@ -743,33 +784,42 @@ public class sophiaParser extends Parser {
 	public final MethodBodyContext methodBody() throws RecognitionException {
 		MethodBodyContext _localctx = new MethodBodyContext(_ctx, getState());
 		enterRule(_localctx, 18, RULE_methodBody);
+		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(146);
+			setState(164);
 			match(LBRACE);
-			setState(152);
+			setState(174);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
-					{
-					{
-					setState(147);
-					variableDeclaration();
-					setState(148);
-					match(SEMI);
-					}
-					} 
-				}
-				setState(154);
+			_la = _input.LA(1);
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << THIS) | (1L << RETURN) | (1L << IF) | (1L << FOR) | (1L << FOREACH) | (1L << CONTINUE) | (1L << BREAK) | (1L << PRINT) | (1L << IDENTIFIER) | (1L << POS_INT) | (1L << ZERO) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << LBRACE) | (1L << SEMI) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << SUB))) != 0)) {
+				{
+				setState(170);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+					if ( _alt==1 ) {
+						{
+						{
+						setState(165);
+						variableDeclaration();
+						setState(166);
+						match(SEMI);
+						}
+						} 
+					}
+					setState(172);
+					_errHandler.sync(this);
+					_alt = getInterpreter().adaptivePredict(_input,9,_ctx);
+				}
+				setState(173);
+				blockStatements();
+				}
 			}
-			setState(155);
-			blockStatements();
-			setState(156);
+
+			setState(176);
 			match(RBRACE);
 			}
 		}
@@ -785,23 +835,14 @@ public class sophiaParser extends Parser {
 	}
 
 	public static class MethodCallContext extends ParserRuleContext {
-		public List<TerminalNode> IDENTIFIER() { return getTokens(sophiaParser.IDENTIFIER); }
-		public TerminalNode IDENTIFIER(int i) {
-			return getToken(sophiaParser.IDENTIFIER, i);
-		}
 		public TerminalNode DOT() { return getToken(sophiaParser.DOT, 0); }
-		public TerminalNode LPAREN() { return getToken(sophiaParser.LPAREN, 0); }
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
+		public List<MethodCallBodyContext> methodCallBody() {
+			return getRuleContexts(MethodCallBodyContext.class);
 		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
+		public MethodCallBodyContext methodCallBody(int i) {
+			return getRuleContext(MethodCallBodyContext.class,i);
 		}
-		public TerminalNode RPAREN() { return getToken(sophiaParser.RPAREN, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(sophiaParser.COMMA); }
-		public TerminalNode COMMA(int i) {
-			return getToken(sophiaParser.COMMA, i);
-		}
+		public TerminalNode IDENTIFIER() { return getToken(sophiaParser.IDENTIFIER, 0); }
 		public TerminalNode THIS() { return getToken(sophiaParser.THIS, 0); }
 		public MethodCallContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -825,107 +866,120 @@ public class sophiaParser extends Parser {
 	public final MethodCallContext methodCall() throws RecognitionException {
 		MethodCallContext _localctx = new MethodCallContext(_ctx, getState());
 		enterRule(_localctx, 20, RULE_methodCall);
-		int _la;
 		try {
-			setState(192);
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(181);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 			case 1:
-				enterOuterAlt(_localctx, 1);
 				{
-				setState(158);
+				setState(178);
 				match(IDENTIFIER);
-				setState(159);
-				match(DOT);
-				setState(160);
-				match(IDENTIFIER);
-				setState(161);
-				match(LPAREN);
-				setState(163);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IDENTIFIER) | (1L << INT_LITERAL) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << THIS))) != 0)) {
-					{
-					setState(162);
-					expr(0);
-					}
-				}
-
 				}
 				break;
 			case 2:
-				enterOuterAlt(_localctx, 2);
 				{
-				setState(165);
-				expr(0);
-				setState(170);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				while (_la==COMMA) {
-					{
-					{
-					setState(166);
-					match(COMMA);
-					setState(167);
-					expr(0);
-					}
-					}
-					setState(172);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
-				setState(173);
-				match(RPAREN);
+				setState(179);
+				match(THIS);
 				}
 				break;
 			case 3:
-				enterOuterAlt(_localctx, 3);
 				{
-				setState(175);
-				match(THIS);
-				setState(176);
-				match(DOT);
-				setState(177);
-				match(IDENTIFIER);
-				setState(178);
-				match(LPAREN);
 				setState(180);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IDENTIFIER) | (1L << INT_LITERAL) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << THIS))) != 0)) {
-					{
-					setState(179);
-					expr(0);
-					}
+				methodCallBody();
 				}
+				break;
+			}
+			setState(183);
+			match(DOT);
+			setState(184);
+			methodCallBody();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
 
-				}
-				break;
-			case 4:
-				enterOuterAlt(_localctx, 4);
+	public static class MethodCallBodyContext extends ParserRuleContext {
+		public TerminalNode IDENTIFIER() { return getToken(sophiaParser.IDENTIFIER, 0); }
+		public TerminalNode LPAREN() { return getToken(sophiaParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(sophiaParser.RPAREN, 0); }
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(sophiaParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(sophiaParser.COMMA, i);
+		}
+		public MethodCallBodyContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_methodCallBody; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).enterMethodCallBody(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).exitMethodCallBody(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof sophiaVisitor ) return ((sophiaVisitor<? extends T>)visitor).visitMethodCallBody(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final MethodCallBodyContext methodCallBody() throws RecognitionException {
+		MethodCallBodyContext _localctx = new MethodCallBodyContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_methodCallBody);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(186);
+			match(IDENTIFIER);
+			setState(187);
+			match(LPAREN);
+			setState(189);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << THIS) | (1L << IDENTIFIER) | (1L << POS_INT) | (1L << ZERO) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << SUB))) != 0)) {
 				{
-				setState(182);
+				setState(188);
 				expr(0);
-				setState(187);
+				}
+			}
+
+			setState(195);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==COMMA) {
+				{
+				{
+				setState(191);
+				match(COMMA);
+				setState(192);
+				expr(0);
+				}
+				}
+				setState(197);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				while (_la==COMMA) {
-					{
-					{
-					setState(183);
-					match(COMMA);
-					setState(184);
-					expr(0);
-					}
-					}
-					setState(189);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-				}
-				setState(190);
-				match(RPAREN);
-				}
-				break;
+			}
+			setState(198);
+			match(RPAREN);
 			}
 		}
 		catch (RecognitionException re) {
@@ -943,10 +997,13 @@ public class sophiaParser extends Parser {
 		public TerminalNode DEF() { return getToken(sophiaParser.DEF, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(sophiaParser.IDENTIFIER, 0); }
 		public TerminalNode LPAREN() { return getToken(sophiaParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(sophiaParser.RPAREN, 0); }
+		public MethodBodyContext methodBody() {
+			return getRuleContext(MethodBodyContext.class,0);
+		}
 		public MethodArguementsContext methodArguements() {
 			return getRuleContext(MethodArguementsContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(sophiaParser.RPAREN, 0); }
 		public ConstructorDeclarationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -968,20 +1025,31 @@ public class sophiaParser extends Parser {
 
 	public final ConstructorDeclarationContext constructorDeclaration() throws RecognitionException {
 		ConstructorDeclarationContext _localctx = new ConstructorDeclarationContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_constructorDeclaration);
+		enterRule(_localctx, 24, RULE_constructorDeclaration);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(194);
+			setState(200);
 			match(DEF);
-			setState(195);
+			setState(201);
 			match(IDENTIFIER);
-			setState(196);
+			setState(202);
 			match(LPAREN);
-			setState(197);
-			methodArguements();
-			setState(198);
+			setState(204);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==IDENTIFIER) {
+				{
+				setState(203);
+				methodArguements();
+				}
+			}
+
+			setState(206);
 			match(RPAREN);
+			setState(207);
+			methodBody();
 			}
 		}
 		catch (RecognitionException re) {
@@ -999,6 +1067,7 @@ public class sophiaParser extends Parser {
 		public VariableDeclarationContext variableDeclaration() {
 			return getRuleContext(VariableDeclarationContext.class,0);
 		}
+		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
 		public VariableInitializerContext variableInitializer() {
 			return getRuleContext(VariableInitializerContext.class,0);
 		}
@@ -1023,23 +1092,27 @@ public class sophiaParser extends Parser {
 
 	public final FieldDeclarationContext fieldDeclaration() throws RecognitionException {
 		FieldDeclarationContext _localctx = new FieldDeclarationContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_fieldDeclaration);
+		enterRule(_localctx, 26, RULE_fieldDeclaration);
 		try {
-			setState(202);
+			setState(215);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(200);
+				setState(209);
 				variableDeclaration();
+				setState(210);
+				match(SEMI);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(201);
+				setState(212);
 				variableInitializer();
+				setState(213);
+				match(SEMI);
 				}
 				break;
 			}
@@ -1061,7 +1134,6 @@ public class sophiaParser extends Parser {
 			return getToken(sophiaParser.IDENTIFIER, i);
 		}
 		public TerminalNode COLON() { return getToken(sophiaParser.COLON, 0); }
-		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
 		public ListDeclarationContext listDeclaration() {
 			return getRuleContext(ListDeclarationContext.class,0);
 		}
@@ -1089,20 +1161,20 @@ public class sophiaParser extends Parser {
 
 	public final VariableDeclarationContext variableDeclaration() throws RecognitionException {
 		VariableDeclarationContext _localctx = new VariableDeclarationContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_variableDeclaration);
+		enterRule(_localctx, 28, RULE_variableDeclaration);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(204);
+			setState(217);
 			match(IDENTIFIER);
-			setState(205);
+			setState(218);
 			match(COLON);
-			setState(209);
+			setState(222);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case LIST:
 				{
-				setState(206);
+				setState(219);
 				listDeclaration();
 				}
 				break;
@@ -1110,21 +1182,19 @@ public class sophiaParser extends Parser {
 			case STRING:
 			case BOOL:
 				{
-				setState(207);
+				setState(220);
 				type();
 				}
 				break;
 			case IDENTIFIER:
 				{
-				setState(208);
+				setState(221);
 				match(IDENTIFIER);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(211);
-			match(SEMI);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1163,11 +1233,11 @@ public class sophiaParser extends Parser {
 
 	public final VariableInitializerContext variableInitializer() throws RecognitionException {
 		VariableInitializerContext _localctx = new VariableInitializerContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_variableInitializer);
+		enterRule(_localctx, 30, RULE_variableInitializer);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(213);
+			setState(224);
 			assignment();
 			}
 		}
@@ -1210,17 +1280,17 @@ public class sophiaParser extends Parser {
 
 	public final FuncPointerDeclarationContext funcPointerDeclaration() throws RecognitionException {
 		FuncPointerDeclarationContext _localctx = new FuncPointerDeclarationContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_funcPointerDeclaration);
+		enterRule(_localctx, 32, RULE_funcPointerDeclaration);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(215);
+			setState(226);
 			match(IDENTIFIER);
-			setState(216);
+			setState(227);
 			match(COLON);
-			setState(217);
+			setState(228);
 			funcPointerDeclarationBody();
-			setState(218);
+			setState(229);
 			match(SEMI);
 			}
 		}
@@ -1272,21 +1342,21 @@ public class sophiaParser extends Parser {
 
 	public final FuncPointerDeclarationBodyContext funcPointerDeclarationBody() throws RecognitionException {
 		FuncPointerDeclarationBodyContext _localctx = new FuncPointerDeclarationBodyContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_funcPointerDeclarationBody);
+		enterRule(_localctx, 34, RULE_funcPointerDeclarationBody);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(220);
-			match(FUNC);
-			setState(221);
-			match(LT);
 			setState(231);
+			match(FUNC);
+			setState(232);
+			match(LT);
+			setState(242);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case VOID:
 				{
-				setState(222);
+				setState(233);
 				match(VOID);
 				}
 				break;
@@ -1295,21 +1365,21 @@ public class sophiaParser extends Parser {
 			case BOOL:
 				{
 				{
-				setState(223);
+				setState(234);
 				type();
-				setState(228);
+				setState(239);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(224);
+					setState(235);
 					match(COMMA);
-					setState(225);
+					setState(236);
 					type();
 					}
 					}
-					setState(230);
+					setState(241);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
@@ -1319,11 +1389,11 @@ public class sophiaParser extends Parser {
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(233);
+			setState(244);
 			match(ARROW);
-			setState(234);
+			setState(245);
 			type();
-			setState(235);
+			setState(246);
 			match(GT);
 			}
 		}
@@ -1342,7 +1412,6 @@ public class sophiaParser extends Parser {
 		public TerminalNode LIST() { return getToken(sophiaParser.LIST, 0); }
 		public TerminalNode LPAREN() { return getToken(sophiaParser.LPAREN, 0); }
 		public TerminalNode RPAREN() { return getToken(sophiaParser.RPAREN, 0); }
-		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
 		public TerminalNode POS_INT() { return getToken(sophiaParser.POS_INT, 0); }
 		public List<ListBodyContext> listBody() {
 			return getRuleContexts(ListBodyContext.class);
@@ -1381,39 +1450,39 @@ public class sophiaParser extends Parser {
 
 	public final ListDeclarationContext listDeclaration() throws RecognitionException {
 		ListDeclarationContext _localctx = new ListDeclarationContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_listDeclaration);
+		enterRule(_localctx, 36, RULE_listDeclaration);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(237);
+			setState(248);
 			match(LIST);
-			setState(238);
+			setState(249);
 			match(LPAREN);
-			setState(253);
+			setState(264);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case POS_INT:
 				{
 				{
-				setState(239);
+				setState(250);
 				match(POS_INT);
-				setState(240);
+				setState(251);
 				match(T__0);
-				setState(243);
+				setState(254);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case INT:
 				case STRING:
 				case BOOL:
 					{
-					setState(241);
+					setState(252);
 					type();
 					}
 					break;
 				case LIST:
 					{
-					setState(242);
+					setState(253);
 					listDeclaration();
 					}
 					break;
@@ -1423,28 +1492,28 @@ public class sophiaParser extends Parser {
 				}
 				}
 				break;
-			case IDENTIFIER:
 			case INT:
 			case STRING:
 			case BOOL:
 			case LIST:
+			case IDENTIFIER:
 				{
 				{
-				setState(245);
+				setState(256);
 				listBody();
-				setState(250);
+				setState(261);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(246);
+					setState(257);
 					match(COMMA);
-					setState(247);
+					setState(258);
 					listBody();
 					}
 					}
-					setState(252);
+					setState(263);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
@@ -1454,10 +1523,8 @@ public class sophiaParser extends Parser {
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(255);
+			setState(266);
 			match(RPAREN);
-			setState(256);
-			match(SEMI);
 			}
 		}
 		catch (RecognitionException re) {
@@ -1505,36 +1572,36 @@ public class sophiaParser extends Parser {
 
 	public final ListBodyContext listBody() throws RecognitionException {
 		ListBodyContext _localctx = new ListBodyContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_listBody);
+		enterRule(_localctx, 38, RULE_listBody);
 		try {
-			setState(262);
+			setState(272);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(258);
+				setState(268);
 				variableDeclaration();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(259);
+				setState(269);
 				funcPointerDeclaration();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(260);
+				setState(270);
 				listDeclaration();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(261);
+				setState(271);
 				type();
 				}
 				break;
@@ -1578,24 +1645,24 @@ public class sophiaParser extends Parser {
 
 	public final BlockContext block() throws RecognitionException {
 		BlockContext _localctx = new BlockContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_block);
+		enterRule(_localctx, 40, RULE_block);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(264);
+			setState(274);
 			match(LBRACE);
-			setState(266);
+			setState(276);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IDENTIFIER) | (1L << INT_LITERAL) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << LBRACE) | (1L << SEMI) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << THIS) | (1L << RETURN) | (1L << IF) | (1L << FOR) | (1L << FOREACH) | (1L << CONTINUE) | (1L << BREAK))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << THIS) | (1L << RETURN) | (1L << IF) | (1L << FOR) | (1L << FOREACH) | (1L << CONTINUE) | (1L << BREAK) | (1L << PRINT) | (1L << IDENTIFIER) | (1L << POS_INT) | (1L << ZERO) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << LBRACE) | (1L << SEMI) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << SUB))) != 0)) {
 				{
-				setState(265);
+				setState(275);
 				blockStatements();
 				}
 			}
 
-			setState(268);
+			setState(278);
 			match(RBRACE);
 			}
 		}
@@ -1638,25 +1705,25 @@ public class sophiaParser extends Parser {
 
 	public final BlockStatementsContext blockStatements() throws RecognitionException {
 		BlockStatementsContext _localctx = new BlockStatementsContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_blockStatements);
+		enterRule(_localctx, 42, RULE_blockStatements);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(271); 
+			setState(281); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(270);
+				setState(280);
 				blockStatement();
 				}
 				}
-				setState(273); 
+				setState(283); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IDENTIFIER) | (1L << INT_LITERAL) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << LBRACE) | (1L << SEMI) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << THIS) | (1L << RETURN) | (1L << IF) | (1L << FOR) | (1L << FOREACH) | (1L << CONTINUE) | (1L << BREAK))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << THIS) | (1L << RETURN) | (1L << IF) | (1L << FOR) | (1L << FOREACH) | (1L << CONTINUE) | (1L << BREAK) | (1L << PRINT) | (1L << IDENTIFIER) | (1L << POS_INT) | (1L << ZERO) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << LBRACE) | (1L << SEMI) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << SUB))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -1695,11 +1762,11 @@ public class sophiaParser extends Parser {
 
 	public final BlockStatementContext blockStatement() throws RecognitionException {
 		BlockStatementContext _localctx = new BlockStatementContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_blockStatement);
+		enterRule(_localctx, 44, RULE_blockStatement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(275);
+			setState(285);
 			statement();
 			}
 		}
@@ -1748,34 +1815,40 @@ public class sophiaParser extends Parser {
 
 	public final StatementContext statement() throws RecognitionException {
 		StatementContext _localctx = new StatementContext(_ctx, getState());
-		enterRule(_localctx, 44, RULE_statement);
+		enterRule(_localctx, 46, RULE_statement);
 		try {
-			setState(281);
+			setState(291);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IF:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(277);
+				setState(287);
 				ifStatement();
 				}
 				break;
 			case FOR:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(278);
+				setState(288);
 				forStatement();
 				}
 				break;
 			case FOREACH:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(279);
+				setState(289);
 				foreachStatement();
 				}
 				break;
+			case THIS:
+			case RETURN:
+			case CONTINUE:
+			case BREAK:
+			case PRINT:
 			case IDENTIFIER:
-			case INT_LITERAL:
+			case POS_INT:
+			case ZERO:
 			case STRING_LITERAL:
 			case BOOL_LITERAL:
 			case LPAREN:
@@ -1784,13 +1857,10 @@ public class sophiaParser extends Parser {
 			case NOT:
 			case INC:
 			case DEC:
-			case THIS:
-			case RETURN:
-			case CONTINUE:
-			case BREAK:
+			case SUB:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(280);
+				setState(290);
 				statementWithoutTrailingSubstatement();
 				}
 				break;
@@ -1848,43 +1918,43 @@ public class sophiaParser extends Parser {
 
 	public final IfStatementContext ifStatement() throws RecognitionException {
 		IfStatementContext _localctx = new IfStatementContext(_ctx, getState());
-		enterRule(_localctx, 46, RULE_ifStatement);
+		enterRule(_localctx, 48, RULE_ifStatement);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(283);
+			setState(293);
 			match(IF);
-			setState(284);
+			setState(294);
 			condition_block();
-			setState(290);
+			setState(300);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,23,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,26,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(285);
+					setState(295);
 					match(ELSE);
-					setState(286);
+					setState(296);
 					match(IF);
-					setState(287);
+					setState(297);
 					condition_block();
 					}
 					} 
 				}
-				setState(292);
+				setState(302);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,23,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,26,_ctx);
 			}
-			setState(295);
+			setState(305);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,24,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
 			case 1:
 				{
-				setState(293);
+				setState(303);
 				match(ELSE);
-				setState(294);
+				setState(304);
 				statBlock();
 				}
 				break;
@@ -1930,13 +2000,13 @@ public class sophiaParser extends Parser {
 
 	public final Condition_blockContext condition_block() throws RecognitionException {
 		Condition_blockContext _localctx = new Condition_blockContext(_ctx, getState());
-		enterRule(_localctx, 48, RULE_condition_block);
+		enterRule(_localctx, 50, RULE_condition_block);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(297);
+			setState(307);
 			expr(0);
-			setState(298);
+			setState(308);
 			statBlock();
 			}
 		}
@@ -1981,26 +2051,26 @@ public class sophiaParser extends Parser {
 
 	public final StatBlockContext statBlock() throws RecognitionException {
 		StatBlockContext _localctx = new StatBlockContext(_ctx, getState());
-		enterRule(_localctx, 50, RULE_statBlock);
+		enterRule(_localctx, 52, RULE_statBlock);
 		try {
-			setState(305);
+			setState(315);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,25,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,28,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(300);
+				setState(310);
 				statement();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(301);
+				setState(311);
 				match(LBRACE);
-				setState(302);
+				setState(312);
 				block();
-				setState(303);
+				setState(313);
 				match(RBRACE);
 				}
 				break;
@@ -2036,6 +2106,9 @@ public class sophiaParser extends Parser {
 		public ReturnStatementContext returnStatement() {
 			return getRuleContext(ReturnStatementContext.class,0);
 		}
+		public PrintStatementContext printStatement() {
+			return getRuleContext(PrintStatementContext.class,0);
+		}
 		public StatementWithoutTrailingSubstatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2057,63 +2130,119 @@ public class sophiaParser extends Parser {
 
 	public final StatementWithoutTrailingSubstatementContext statementWithoutTrailingSubstatement() throws RecognitionException {
 		StatementWithoutTrailingSubstatementContext _localctx = new StatementWithoutTrailingSubstatementContext(_ctx, getState());
-		enterRule(_localctx, 52, RULE_statementWithoutTrailingSubstatement);
+		enterRule(_localctx, 54, RULE_statementWithoutTrailingSubstatement);
 		try {
-			setState(313);
+			setState(324);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case LBRACE:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(307);
+				setState(317);
 				block();
 				}
 				break;
 			case SEMI:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(308);
+				setState(318);
 				emptyStatement();
 				}
 				break;
+			case THIS:
 			case IDENTIFIER:
-			case INT_LITERAL:
+			case POS_INT:
+			case ZERO:
 			case STRING_LITERAL:
 			case BOOL_LITERAL:
 			case LPAREN:
 			case NOT:
 			case INC:
 			case DEC:
-			case THIS:
+			case SUB:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(309);
+				setState(319);
 				expStatement();
 				}
 				break;
 			case BREAK:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(310);
+				setState(320);
 				breakStatement();
 				}
 				break;
 			case CONTINUE:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(311);
+				setState(321);
 				continueStatement();
 				}
 				break;
 			case RETURN:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(312);
+				setState(322);
 				returnStatement();
+				}
+				break;
+			case PRINT:
+				enterOuterAlt(_localctx, 7);
+				{
+				setState(323);
+				printStatement();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class ExpStatementContext extends ParserRuleContext {
+		public StatementExpContext statementExp() {
+			return getRuleContext(StatementExpContext.class,0);
+		}
+		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
+		public ExpStatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_expStatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).enterExpStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).exitExpStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof sophiaVisitor ) return ((sophiaVisitor<? extends T>)visitor).visitExpStatement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final ExpStatementContext expStatement() throws RecognitionException {
+		ExpStatementContext _localctx = new ExpStatementContext(_ctx, getState());
+		enterRule(_localctx, 56, RULE_expStatement);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(326);
+			statementExp();
+			setState(327);
+			match(SEMI);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2161,86 +2290,39 @@ public class sophiaParser extends Parser {
 
 	public final StatementExpContext statementExp() throws RecognitionException {
 		StatementExpContext _localctx = new StatementExpContext(_ctx, getState());
-		enterRule(_localctx, 54, RULE_statementExp);
+		enterRule(_localctx, 58, RULE_statementExp);
 		try {
-			setState(319);
+			setState(333);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,30,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(315);
+				setState(329);
 				assignment();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(316);
+				setState(330);
 				preExp();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(317);
+				setState(331);
 				postExp();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(318);
+				setState(332);
 				methodCall();
 				}
 				break;
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class ExpStatementContext extends ParserRuleContext {
-		public StatementExpContext statementExp() {
-			return getRuleContext(StatementExpContext.class,0);
-		}
-		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
-		public ExpStatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_expStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).enterExpStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).exitExpStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof sophiaVisitor ) return ((sophiaVisitor<? extends T>)visitor).visitExpStatement(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ExpStatementContext expStatement() throws RecognitionException {
-		ExpStatementContext _localctx = new ExpStatementContext(_ctx, getState());
-		enterRule(_localctx, 56, RULE_expStatement);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(321);
-			statementExp();
-			setState(322);
-			match(SEMI);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2262,8 +2344,8 @@ public class sophiaParser extends Parser {
 			return getToken(sophiaParser.SEMI, i);
 		}
 		public TerminalNode RPAREN() { return getToken(sophiaParser.RPAREN, 0); }
-		public BlockContext block() {
-			return getRuleContext(BlockContext.class,0);
+		public StatBlockContext statBlock() {
+			return getRuleContext(StatBlockContext.class,0);
 		}
 		public InitialStatementContext initialStatement() {
 			return getRuleContext(InitialStatementContext.class,0);
@@ -2295,53 +2377,53 @@ public class sophiaParser extends Parser {
 
 	public final ForStatementContext forStatement() throws RecognitionException {
 		ForStatementContext _localctx = new ForStatementContext(_ctx, getState());
-		enterRule(_localctx, 58, RULE_forStatement);
+		enterRule(_localctx, 60, RULE_forStatement);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(324);
+			setState(335);
 			match(FOR);
-			setState(325);
+			setState(336);
 			match(LPAREN);
-			setState(327);
+			setState(338);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==IDENTIFIER || _la==THIS) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << THIS) | (1L << IDENTIFIER) | (1L << POS_INT) | (1L << ZERO) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << SUB))) != 0)) {
 				{
-				setState(326);
+				setState(337);
 				initialStatement();
 				}
 			}
 
-			setState(329);
+			setState(340);
 			match(SEMI);
-			setState(331);
+			setState(342);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IDENTIFIER) | (1L << INT_LITERAL) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << THIS))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << THIS) | (1L << IDENTIFIER) | (1L << POS_INT) | (1L << ZERO) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << SUB))) != 0)) {
 				{
-				setState(330);
+				setState(341);
 				expr(0);
 				}
 			}
 
-			setState(333);
+			setState(344);
 			match(SEMI);
-			setState(335);
+			setState(346);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==IDENTIFIER || _la==THIS) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << THIS) | (1L << IDENTIFIER) | (1L << POS_INT) | (1L << ZERO) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << SUB))) != 0)) {
 				{
-				setState(334);
+				setState(345);
 				updateStatement();
 				}
 			}
 
-			setState(337);
+			setState(348);
 			match(RPAREN);
-			setState(338);
-			block();
+			setState(349);
+			statBlock();
 			}
 		}
 		catch (RecognitionException re) {
@@ -2387,26 +2469,26 @@ public class sophiaParser extends Parser {
 
 	public final InitialStatementContext initialStatement() throws RecognitionException {
 		InitialStatementContext _localctx = new InitialStatementContext(_ctx, getState());
-		enterRule(_localctx, 60, RULE_initialStatement);
+		enterRule(_localctx, 62, RULE_initialStatement);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(340);
+			setState(351);
 			assignment();
-			setState(345);
+			setState(356);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(341);
+				setState(352);
 				match(COMMA);
-				setState(342);
+				setState(353);
 				assignment();
 				}
 				}
-				setState(347);
+				setState(358);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -2455,26 +2537,26 @@ public class sophiaParser extends Parser {
 
 	public final UpdateStatementContext updateStatement() throws RecognitionException {
 		UpdateStatementContext _localctx = new UpdateStatementContext(_ctx, getState());
-		enterRule(_localctx, 62, RULE_updateStatement);
+		enterRule(_localctx, 64, RULE_updateStatement);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(348);
+			setState(359);
 			assignment();
-			setState(353);
+			setState(364);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(349);
+				setState(360);
 				match(COMMA);
-				setState(350);
+				setState(361);
 				assignment();
 				}
 				}
-				setState(355);
+				setState(366);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -2500,11 +2582,14 @@ public class sophiaParser extends Parser {
 		}
 		public TerminalNode IN() { return getToken(sophiaParser.IN, 0); }
 		public TerminalNode RPAREN() { return getToken(sophiaParser.RPAREN, 0); }
-		public BlockContext block() {
-			return getRuleContext(BlockContext.class,0);
+		public StatBlockContext statBlock() {
+			return getRuleContext(StatBlockContext.class,0);
 		}
 		public TerminalNode THIS() { return getToken(sophiaParser.THIS, 0); }
 		public TerminalNode DOT() { return getToken(sophiaParser.DOT, 0); }
+		public ExprContext expr() {
+			return getRuleContext(ExprContext.class,0);
+		}
 		public ForeachStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2526,86 +2611,61 @@ public class sophiaParser extends Parser {
 
 	public final ForeachStatementContext foreachStatement() throws RecognitionException {
 		ForeachStatementContext _localctx = new ForeachStatementContext(_ctx, getState());
-		enterRule(_localctx, 64, RULE_foreachStatement);
+		enterRule(_localctx, 66, RULE_foreachStatement);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(356);
-			match(FOREACH);
-			setState(357);
-			match(LPAREN);
-			setState(358);
-			match(IDENTIFIER);
-			setState(359);
-			match(IN);
-			setState(364);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case IDENTIFIER:
-				{
-				setState(360);
-				match(IDENTIFIER);
-				}
-				break;
-			case THIS:
-				{
-				setState(361);
-				match(THIS);
-				setState(362);
-				match(DOT);
-				setState(363);
-				match(IDENTIFIER);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			setState(366);
-			match(RPAREN);
 			setState(367);
-			block();
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class EmptyStatementContext extends ParserRuleContext {
-		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
-		public EmptyStatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_emptyStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).enterEmptyStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).exitEmptyStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof sophiaVisitor ) return ((sophiaVisitor<? extends T>)visitor).visitEmptyStatement(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final EmptyStatementContext emptyStatement() throws RecognitionException {
-		EmptyStatementContext _localctx = new EmptyStatementContext(_ctx, getState());
-		enterRule(_localctx, 66, RULE_emptyStatement);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
+			match(FOREACH);
+			setState(368);
+			match(LPAREN);
 			setState(369);
-			match(SEMI);
+			match(IDENTIFIER);
+			setState(370);
+			match(IN);
+			setState(380);
+			_errHandler.sync(this);
+			switch ( getInterpreter().adaptivePredict(_input,37,_ctx) ) {
+			case 1:
+				{
+				setState(371);
+				match(IDENTIFIER);
+				setState(374);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==DOT) {
+					{
+					setState(372);
+					match(DOT);
+					setState(373);
+					match(IDENTIFIER);
+					}
+				}
+
+				}
+				break;
+			case 2:
+				{
+				setState(376);
+				match(THIS);
+				setState(377);
+				match(DOT);
+				setState(378);
+				match(IDENTIFIER);
+				}
+				break;
+			case 3:
+				{
+				setState(379);
+				expr(0);
+				}
+				break;
+			}
+			setState(382);
+			match(RPAREN);
+			setState(383);
+			statBlock();
 			}
 		}
 		catch (RecognitionException re) {
@@ -2647,9 +2707,9 @@ public class sophiaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(371);
+			setState(385);
 			match(BREAK);
-			setState(372);
+			setState(386);
 			match(SEMI);
 			}
 		}
@@ -2692,9 +2752,9 @@ public class sophiaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(374);
+			setState(388);
 			match(CONTINUE);
-			setState(375);
+			setState(389);
 			match(SEMI);
 			}
 		}
@@ -2741,19 +2801,19 @@ public class sophiaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(377);
+			setState(391);
 			match(RETURN);
-			setState(379);
+			setState(393);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IDENTIFIER) | (1L << INT_LITERAL) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << THIS))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << THIS) | (1L << IDENTIFIER) | (1L << POS_INT) | (1L << ZERO) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << SUB))) != 0)) {
 				{
-				setState(378);
+				setState(392);
 				expr(0);
 				}
 			}
 
-			setState(381);
+			setState(395);
 			match(SEMI);
 			}
 		}
@@ -2769,22 +2829,47 @@ public class sophiaParser extends Parser {
 	}
 
 	public static class AssignmentContext extends ParserRuleContext {
-		public TerminalNode ASSIGN() { return getToken(sophiaParser.ASSIGN, 0); }
-		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
 		public TerminalNode THIS() { return getToken(sophiaParser.THIS, 0); }
 		public TerminalNode DOT() { return getToken(sophiaParser.DOT, 0); }
-		public TerminalNode IDENTIFIER() { return getToken(sophiaParser.IDENTIFIER, 0); }
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
+		public List<TerminalNode> IDENTIFIER() { return getTokens(sophiaParser.IDENTIFIER); }
+		public TerminalNode IDENTIFIER(int i) {
+			return getToken(sophiaParser.IDENTIFIER, i);
 		}
-		public ListInitializerContext listInitializer() {
-			return getRuleContext(ListInitializerContext.class,0);
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
 		}
-		public MethodCallContext methodCall() {
-			return getRuleContext(MethodCallContext.class,0);
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
 		}
-		public ClassAssignmentContext classAssignment() {
-			return getRuleContext(ClassAssignmentContext.class,0);
+		public List<TerminalNode> LBRACK() { return getTokens(sophiaParser.LBRACK); }
+		public TerminalNode LBRACK(int i) {
+			return getToken(sophiaParser.LBRACK, i);
+		}
+		public List<TerminalNode> RBRACK() { return getTokens(sophiaParser.RBRACK); }
+		public TerminalNode RBRACK(int i) {
+			return getToken(sophiaParser.RBRACK, i);
+		}
+		public List<TerminalNode> ASSIGN() { return getTokens(sophiaParser.ASSIGN); }
+		public TerminalNode ASSIGN(int i) {
+			return getToken(sophiaParser.ASSIGN, i);
+		}
+		public List<ListInitializerContext> listInitializer() {
+			return getRuleContexts(ListInitializerContext.class);
+		}
+		public ListInitializerContext listInitializer(int i) {
+			return getRuleContext(ListInitializerContext.class,i);
+		}
+		public List<MethodCallContext> methodCall() {
+			return getRuleContexts(MethodCallContext.class);
+		}
+		public MethodCallContext methodCall(int i) {
+			return getRuleContext(MethodCallContext.class,i);
+		}
+		public List<ClassAssignmentContext> classAssignment() {
+			return getRuleContexts(ClassAssignmentContext.class);
+		}
+		public ClassAssignmentContext classAssignment(int i) {
+			return getRuleContext(ClassAssignmentContext.class,i);
 		}
 		public AssignmentContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2808,63 +2893,108 @@ public class sophiaParser extends Parser {
 	public final AssignmentContext assignment() throws RecognitionException {
 		AssignmentContext _localctx = new AssignmentContext(_ctx, getState());
 		enterRule(_localctx, 74, RULE_assignment);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(387);
+			setState(406);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case THIS:
-				{
-				setState(383);
-				match(THIS);
-				setState(384);
-				match(DOT);
-				setState(385);
-				match(IDENTIFIER);
-				}
-				break;
-			case IDENTIFIER:
-				{
-				setState(386);
-				match(IDENTIFIER);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			setState(389);
-			match(ASSIGN);
-			setState(394);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,36,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,40,_ctx) ) {
 			case 1:
 				{
-				setState(390);
-				expr(0);
+				setState(397);
+				match(THIS);
+				setState(398);
+				match(DOT);
+				setState(399);
+				match(IDENTIFIER);
 				}
 				break;
 			case 2:
 				{
-				setState(391);
-				listInitializer();
+				setState(400);
+				match(IDENTIFIER);
+				setState(403);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==DOT) {
+					{
+					setState(401);
+					match(DOT);
+					setState(402);
+					match(IDENTIFIER);
+					}
+				}
+
 				}
 				break;
 			case 3:
 				{
-				setState(392);
-				methodCall();
-				}
-				break;
-			case 4:
-				{
-				setState(393);
-				classAssignment();
+				setState(405);
+				expr(0);
 				}
 				break;
 			}
-			setState(396);
-			match(SEMI);
+			setState(414);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==LBRACK) {
+				{
+				{
+				setState(408);
+				match(LBRACK);
+				setState(409);
+				expr(0);
+				setState(410);
+				match(RBRACK);
+				}
+				}
+				setState(416);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			setState(424); 
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			do {
+				{
+				{
+				setState(417);
+				match(ASSIGN);
+				setState(422);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,42,_ctx) ) {
+				case 1:
+					{
+					setState(418);
+					expr(0);
+					}
+					break;
+				case 2:
+					{
+					setState(419);
+					listInitializer();
+					}
+					break;
+				case 3:
+					{
+					setState(420);
+					methodCall();
+					}
+					break;
+				case 4:
+					{
+					setState(421);
+					classAssignment();
+					}
+					break;
+				}
+				}
+				}
+				setState(426); 
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			} while ( _la==ASSIGN );
 			}
 		}
 		catch (RecognitionException re) {
@@ -2919,39 +3049,39 @@ public class sophiaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(398);
+			setState(428);
 			match(NEW);
-			setState(399);
+			setState(429);
 			match(IDENTIFIER);
-			setState(400);
+			setState(430);
 			match(LPAREN);
-			setState(402);
+			setState(432);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << IDENTIFIER) | (1L << INT_LITERAL) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << THIS))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << THIS) | (1L << IDENTIFIER) | (1L << POS_INT) | (1L << ZERO) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << SUB))) != 0)) {
 				{
-				setState(401);
+				setState(431);
 				expr(0);
 				}
 			}
 
-			setState(408);
+			setState(438);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(404);
+				setState(434);
 				match(COMMA);
-				setState(405);
+				setState(435);
 				expr(0);
 				}
 				}
-				setState(410);
+				setState(440);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(411);
+			setState(441);
 			match(RPAREN);
 			}
 		}
@@ -2969,19 +3099,22 @@ public class sophiaParser extends Parser {
 	public static class ListInitializerContext extends ParserRuleContext {
 		public TerminalNode LBRACK() { return getToken(sophiaParser.LBRACK, 0); }
 		public TerminalNode RBRACK() { return getToken(sophiaParser.RBRACK, 0); }
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-		}
 		public List<ListInitializerContext> listInitializer() {
 			return getRuleContexts(ListInitializerContext.class);
 		}
 		public ListInitializerContext listInitializer(int i) {
 			return getRuleContext(ListInitializerContext.class,i);
 		}
-		public TerminalNode COMMA() { return getToken(sophiaParser.COMMA, 0); }
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
+		}
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(sophiaParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(sophiaParser.COMMA, i);
+		}
 		public ListInitializerContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3004,48 +3137,85 @@ public class sophiaParser extends Parser {
 	public final ListInitializerContext listInitializer() throws RecognitionException {
 		ListInitializerContext _localctx = new ListInitializerContext(_ctx, getState());
 		enterRule(_localctx, 78, RULE_listInitializer);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(413);
+			setState(443);
 			match(LBRACK);
-			setState(422);
+			{
+			setState(446);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
+			case LBRACK:
+				{
+				setState(444);
+				listInitializer();
+				}
+				break;
+			case THIS:
 			case IDENTIFIER:
-			case INT_LITERAL:
+			case POS_INT:
+			case ZERO:
 			case STRING_LITERAL:
 			case BOOL_LITERAL:
 			case LPAREN:
 			case NOT:
-			case THIS:
+			case INC:
+			case DEC:
+			case SUB:
 				{
-				setState(414);
+				setState(445);
 				expr(0);
-				{
-				setState(415);
-				match(COMMA);
-				setState(416);
-				expr(0);
-				}
-				}
-				break;
-			case LBRACK:
-				{
-				setState(418);
-				listInitializer();
-				{
-				setState(419);
-				match(COMMA);
-				setState(420);
-				listInitializer();
-				}
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(424);
+			setState(455);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==COMMA) {
+				{
+				{
+				setState(448);
+				match(COMMA);
+				setState(451);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case LBRACK:
+					{
+					setState(449);
+					listInitializer();
+					}
+					break;
+				case THIS:
+				case IDENTIFIER:
+				case POS_INT:
+				case ZERO:
+				case STRING_LITERAL:
+				case BOOL_LITERAL:
+				case LPAREN:
+				case NOT:
+				case INC:
+				case DEC:
+				case SUB:
+					{
+					setState(450);
+					expr(0);
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				}
+				}
+				setState(457);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			}
+			setState(458);
 			match(RBRACK);
 			}
 		}
@@ -3061,8 +3231,9 @@ public class sophiaParser extends Parser {
 	}
 
 	public static class PreExpContext extends ParserRuleContext {
-		public TerminalNode IDENTIFIER() { return getToken(sophiaParser.IDENTIFIER, 0); }
-		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
+		public LiteralContext literal() {
+			return getRuleContext(LiteralContext.class,0);
+		}
 		public TerminalNode DEC() { return getToken(sophiaParser.DEC, 0); }
 		public TerminalNode INC() { return getToken(sophiaParser.INC, 0); }
 		public PreExpContext(ParserRuleContext parent, int invokingState) {
@@ -3091,7 +3262,7 @@ public class sophiaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(426);
+			setState(460);
 			_la = _input.LA(1);
 			if ( !(_la==INC || _la==DEC) ) {
 			_errHandler.recoverInline(this);
@@ -3101,10 +3272,8 @@ public class sophiaParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(427);
-			match(IDENTIFIER);
-			setState(428);
-			match(SEMI);
+			setState(461);
+			literal();
 			}
 		}
 		catch (RecognitionException re) {
@@ -3119,8 +3288,9 @@ public class sophiaParser extends Parser {
 	}
 
 	public static class PostExpContext extends ParserRuleContext {
-		public TerminalNode IDENTIFIER() { return getToken(sophiaParser.IDENTIFIER, 0); }
-		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
+		public LiteralContext literal() {
+			return getRuleContext(LiteralContext.class,0);
+		}
 		public TerminalNode DEC() { return getToken(sophiaParser.DEC, 0); }
 		public TerminalNode INC() { return getToken(sophiaParser.INC, 0); }
 		public PostExpContext(ParserRuleContext parent, int invokingState) {
@@ -3149,9 +3319,9 @@ public class sophiaParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(430);
-			match(IDENTIFIER);
-			setState(431);
+			setState(463);
+			literal();
+			setState(464);
 			_la = _input.LA(1);
 			if ( !(_la==INC || _la==DEC) ) {
 			_errHandler.recoverInline(this);
@@ -3161,8 +3331,6 @@ public class sophiaParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(432);
-			match(SEMI);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3185,9 +3353,17 @@ public class sophiaParser extends Parser {
 		public ExprContext expr(int i) {
 			return getRuleContext(ExprContext.class,i);
 		}
+		public PreExpContext preExp() {
+			return getRuleContext(PreExpContext.class,0);
+		}
+		public PostExpContext postExp() {
+			return getRuleContext(PostExpContext.class,0);
+		}
 		public LiteralContext literal() {
 			return getRuleContext(LiteralContext.class,0);
 		}
+		public TerminalNode LBRACK() { return getToken(sophiaParser.LBRACK, 0); }
+		public TerminalNode RBRACK() { return getToken(sophiaParser.RBRACK, 0); }
 		public TerminalNode MUL() { return getToken(sophiaParser.MUL, 0); }
 		public TerminalNode DIV() { return getToken(sophiaParser.DIV, 0); }
 		public TerminalNode MOD() { return getToken(sophiaParser.MOD, 0); }
@@ -3199,6 +3375,7 @@ public class sophiaParser extends Parser {
 		public TerminalNode GT() { return getToken(sophiaParser.GT, 0); }
 		public TerminalNode EQUAL() { return getToken(sophiaParser.EQUAL, 0); }
 		public TerminalNode NOTEQUAL() { return getToken(sophiaParser.NOTEQUAL, 0); }
+		public TerminalNode ASSIGN() { return getToken(sophiaParser.ASSIGN, 0); }
 		public TerminalNode AND() { return getToken(sophiaParser.AND, 0); }
 		public TerminalNode OR() { return getToken(sophiaParser.OR, 0); }
 		public ExprContext(ParserRuleContext parent, int invokingState) {
@@ -3236,50 +3413,69 @@ public class sophiaParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(438);
+			setState(478);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case NOT:
+			switch ( getInterpreter().adaptivePredict(_input,50,_ctx) ) {
+			case 1:
 				{
-				setState(435);
+				setState(467);
 				match(NOT);
-				setState(436);
-				expr(8);
+				setState(468);
+				expr(10);
 				}
 				break;
-			case IDENTIFIER:
-			case INT_LITERAL:
-			case STRING_LITERAL:
-			case BOOL_LITERAL:
-			case LPAREN:
-			case THIS:
+			case 2:
 				{
-				setState(437);
-				literal();
+				setState(469);
+				preExp();
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
+			case 3:
+				{
+				setState(470);
+				postExp();
+				}
+				break;
+			case 4:
+				{
+				setState(471);
+				literal();
+				setState(476);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,49,_ctx) ) {
+				case 1:
+					{
+					setState(472);
+					match(LBRACK);
+					setState(473);
+					expr(0);
+					setState(474);
+					match(RBRACK);
+					}
+					break;
+				}
+				}
+				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(460);
+			setState(500);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,42,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,52,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(458);
+					setState(498);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,41,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,51,_ctx) ) {
 					case 1:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(440);
-						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(441);
+						setState(480);
+						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
+						setState(481);
 						((ExprContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << MUL) | (1L << DIV) | (1L << MOD))) != 0)) ) {
@@ -3290,17 +3486,17 @@ public class sophiaParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(442);
-						expr(8);
+						setState(482);
+						expr(10);
 						}
 						break;
 					case 2:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(443);
-						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(444);
+						setState(483);
+						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
+						setState(484);
 						((ExprContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !(_la==ADD || _la==SUB) ) {
@@ -3311,17 +3507,17 @@ public class sophiaParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(445);
-						expr(7);
+						setState(485);
+						expr(9);
 						}
 						break;
 					case 3:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(446);
-						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
-						setState(447);
+						setState(486);
+						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
+						setState(487);
 						((ExprContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
 						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GT) | (1L << LT) | (1L << LE) | (1L << GE))) != 0)) ) {
@@ -3332,20 +3528,20 @@ public class sophiaParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(448);
-						expr(6);
+						setState(488);
+						expr(8);
 						}
 						break;
 					case 4:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(449);
-						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(450);
+						setState(489);
+						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
+						setState(490);
 						((ExprContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !(_la==EQUAL || _la==NOTEQUAL) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ASSIGN) | (1L << EQUAL) | (1L << NOTEQUAL))) != 0)) ) {
 							((ExprContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {
@@ -3353,40 +3549,40 @@ public class sophiaParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(451);
-						expr(5);
+						setState(491);
+						expr(7);
 						}
 						break;
 					case 5:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(452);
-						if (!(precpred(_ctx, 3))) throw new FailedPredicateException(this, "precpred(_ctx, 3)");
-						setState(453);
+						setState(492);
+						if (!(precpred(_ctx, 5))) throw new FailedPredicateException(this, "precpred(_ctx, 5)");
+						setState(493);
 						match(AND);
-						setState(454);
-						expr(4);
+						setState(494);
+						expr(6);
 						}
 						break;
 					case 6:
 						{
 						_localctx = new ExprContext(_parentctx, _parentState);
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(455);
-						if (!(precpred(_ctx, 2))) throw new FailedPredicateException(this, "precpred(_ctx, 2)");
-						setState(456);
+						setState(495);
+						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
+						setState(496);
 						match(OR);
-						setState(457);
-						expr(3);
+						setState(497);
+						expr(5);
 						}
 						break;
 					}
 					} 
 				}
-				setState(462);
+				setState(502);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,42,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,52,_ctx);
 			}
 			}
 		}
@@ -3403,10 +3599,10 @@ public class sophiaParser extends Parser {
 
 	public static class LiteralContext extends ParserRuleContext {
 		public TerminalNode LPAREN() { return getToken(sophiaParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(sophiaParser.RPAREN, 0); }
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(sophiaParser.RPAREN, 0); }
 		public List<TerminalNode> IDENTIFIER() { return getTokens(sophiaParser.IDENTIFIER); }
 		public TerminalNode IDENTIFIER(int i) {
 			return getToken(sophiaParser.IDENTIFIER, i);
@@ -3415,7 +3611,9 @@ public class sophiaParser extends Parser {
 		public TerminalNode RBRACK() { return getToken(sophiaParser.RBRACK, 0); }
 		public TerminalNode DOT() { return getToken(sophiaParser.DOT, 0); }
 		public TerminalNode THIS() { return getToken(sophiaParser.THIS, 0); }
-		public TerminalNode INT_LITERAL() { return getToken(sophiaParser.INT_LITERAL, 0); }
+		public IntLiteralContext intLiteral() {
+			return getRuleContext(IntLiteralContext.class,0);
+		}
 		public TerminalNode BOOL_LITERAL() { return getToken(sophiaParser.BOOL_LITERAL, 0); }
 		public TerminalNode STRING_LITERAL() { return getToken(sophiaParser.STRING_LITERAL, 0); }
 		public LiteralContext(ParserRuleContext parent, int invokingState) {
@@ -3442,41 +3640,49 @@ public class sophiaParser extends Parser {
 		enterRule(_localctx, 86, RULE_literal);
 		int _la;
 		try {
-			setState(479);
+			setState(520);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,43,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,54,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(463);
+				setState(503);
 				match(LPAREN);
-				setState(464);
-				expr(0);
-				setState(465);
+				setState(505);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << THIS) | (1L << IDENTIFIER) | (1L << POS_INT) | (1L << ZERO) | (1L << STRING_LITERAL) | (1L << BOOL_LITERAL) | (1L << LPAREN) | (1L << NOT) | (1L << INC) | (1L << DEC) | (1L << SUB))) != 0)) {
+					{
+					setState(504);
+					expr(0);
+					}
+				}
+
+				setState(507);
 				match(RPAREN);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(467);
+				setState(508);
 				match(IDENTIFIER);
-				setState(468);
+				setState(509);
 				match(LBRACK);
 				{
-				setState(469);
+				setState(510);
 				expr(0);
 				}
-				setState(470);
+				setState(511);
 				match(RBRACK);
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(472);
+				setState(513);
 				_la = _input.LA(1);
-				if ( !(_la==IDENTIFIER || _la==THIS) ) {
+				if ( !(_la==THIS || _la==IDENTIFIER) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -3484,37 +3690,37 @@ public class sophiaParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(473);
+				setState(514);
 				match(DOT);
-				setState(474);
+				setState(515);
 				match(IDENTIFIER);
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(475);
-				match(INT_LITERAL);
+				setState(516);
+				intLiteral();
 				}
 				break;
 			case 5:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(476);
+				setState(517);
 				match(BOOL_LITERAL);
 				}
 				break;
 			case 6:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(477);
+				setState(518);
 				match(IDENTIFIER);
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(478);
+				setState(519);
 				match(STRING_LITERAL);
 				}
 				break;
@@ -3531,48 +3737,48 @@ public class sophiaParser extends Parser {
 		return _localctx;
 	}
 
-	public static class Print_statContext extends ParserRuleContext {
+	public static class PrintStatementContext extends ParserRuleContext {
 		public TerminalNode PRINT() { return getToken(sophiaParser.PRINT, 0); }
 		public TerminalNode LPAREN() { return getToken(sophiaParser.LPAREN, 0); }
-		public Print_bodyContext print_body() {
-			return getRuleContext(Print_bodyContext.class,0);
+		public PrintBodyContext printBody() {
+			return getRuleContext(PrintBodyContext.class,0);
 		}
 		public TerminalNode RPAREN() { return getToken(sophiaParser.RPAREN, 0); }
 		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
-		public Print_statContext(ParserRuleContext parent, int invokingState) {
+		public PrintStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_print_stat; }
+		@Override public int getRuleIndex() { return RULE_printStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).enterPrint_stat(this);
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).enterPrintStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).exitPrint_stat(this);
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).exitPrintStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof sophiaVisitor ) return ((sophiaVisitor<? extends T>)visitor).visitPrint_stat(this);
+			if ( visitor instanceof sophiaVisitor ) return ((sophiaVisitor<? extends T>)visitor).visitPrintStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Print_statContext print_stat() throws RecognitionException {
-		Print_statContext _localctx = new Print_statContext(_ctx, getState());
-		enterRule(_localctx, 88, RULE_print_stat);
+	public final PrintStatementContext printStatement() throws RecognitionException {
+		PrintStatementContext _localctx = new PrintStatementContext(_ctx, getState());
+		enterRule(_localctx, 88, RULE_printStatement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(481);
+			setState(522);
 			match(PRINT);
-			setState(482);
+			setState(523);
 			match(LPAREN);
-			setState(483);
-			print_body();
-			setState(484);
+			setState(524);
+			printBody();
+			setState(525);
 			match(RPAREN);
-			setState(485);
+			setState(526);
 			match(SEMI);
 			}
 		}
@@ -3587,37 +3793,79 @@ public class sophiaParser extends Parser {
 		return _localctx;
 	}
 
-	public static class Print_bodyContext extends ParserRuleContext {
+	public static class PrintBodyContext extends ParserRuleContext {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public Print_bodyContext(ParserRuleContext parent, int invokingState) {
+		public PrintBodyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_print_body; }
+		@Override public int getRuleIndex() { return RULE_printBody; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).enterPrint_body(this);
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).enterPrintBody(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).exitPrint_body(this);
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).exitPrintBody(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof sophiaVisitor ) return ((sophiaVisitor<? extends T>)visitor).visitPrint_body(this);
+			if ( visitor instanceof sophiaVisitor ) return ((sophiaVisitor<? extends T>)visitor).visitPrintBody(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Print_bodyContext print_body() throws RecognitionException {
-		Print_bodyContext _localctx = new Print_bodyContext(_ctx, getState());
-		enterRule(_localctx, 90, RULE_print_body);
+	public final PrintBodyContext printBody() throws RecognitionException {
+		PrintBodyContext _localctx = new PrintBodyContext(_ctx, getState());
+		enterRule(_localctx, 90, RULE_printBody);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(487);
+			setState(528);
 			expr(0);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class EmptyStatementContext extends ParserRuleContext {
+		public TerminalNode SEMI() { return getToken(sophiaParser.SEMI, 0); }
+		public EmptyStatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_emptyStatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).enterEmptyStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).exitEmptyStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof sophiaVisitor ) return ((sophiaVisitor<? extends T>)visitor).visitEmptyStatement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final EmptyStatementContext emptyStatement() throws RecognitionException {
+		EmptyStatementContext _localctx = new EmptyStatementContext(_ctx, getState());
+		enterRule(_localctx, 92, RULE_emptyStatement);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(530);
+			match(SEMI);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3654,12 +3902,80 @@ public class sophiaParser extends Parser {
 
 	public final CommentContext comment() throws RecognitionException {
 		CommentContext _localctx = new CommentContext(_ctx, getState());
-		enterRule(_localctx, 92, RULE_comment);
+		enterRule(_localctx, 94, RULE_comment);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(489);
+			setState(532);
 			match(COMMENT);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class IntLiteralContext extends ParserRuleContext {
+		public TerminalNode ZERO() { return getToken(sophiaParser.ZERO, 0); }
+		public TerminalNode POS_INT() { return getToken(sophiaParser.POS_INT, 0); }
+		public TerminalNode SUB() { return getToken(sophiaParser.SUB, 0); }
+		public IntLiteralContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_intLiteral; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).enterIntLiteral(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof sophiaListener ) ((sophiaListener)listener).exitIntLiteral(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof sophiaVisitor ) return ((sophiaVisitor<? extends T>)visitor).visitIntLiteral(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final IntLiteralContext intLiteral() throws RecognitionException {
+		IntLiteralContext _localctx = new IntLiteralContext(_ctx, getState());
+		enterRule(_localctx, 96, RULE_intLiteral);
+		try {
+			setState(538);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case ZERO:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(534);
+				match(ZERO);
+				}
+				break;
+			case POS_INT:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(535);
+				match(POS_INT);
+				}
+				break;
+			case SUB:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(536);
+				match(SUB);
+				setState(537);
+				match(POS_INT);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
 			}
 		}
 		catch (RecognitionException re) {
@@ -3683,197 +3999,220 @@ public class sophiaParser extends Parser {
 	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 7);
+			return precpred(_ctx, 9);
 		case 1:
-			return precpred(_ctx, 6);
+			return precpred(_ctx, 8);
 		case 2:
-			return precpred(_ctx, 5);
+			return precpred(_ctx, 7);
 		case 3:
-			return precpred(_ctx, 4);
+			return precpred(_ctx, 6);
 		case 4:
-			return precpred(_ctx, 3);
+			return precpred(_ctx, 5);
 		case 5:
-			return precpred(_ctx, 2);
+			return precpred(_ctx, 4);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3B\u01ee\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3B\u021f\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
 		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\4 \t \4!"+
 		"\t!\4\"\t\"\4#\t#\4$\t$\4%\t%\4&\t&\4\'\t\'\4(\t(\4)\t)\4*\t*\4+\t+\4"+
-		",\t,\4-\t-\4.\t.\4/\t/\4\60\t\60\3\2\7\2b\n\2\f\2\16\2e\13\2\3\2\3\2\3"+
-		"\3\3\3\3\4\3\4\3\4\3\4\5\4o\n\4\3\4\3\4\3\5\3\5\3\5\3\5\3\6\3\6\3\6\5"+
-		"\6z\n\6\3\7\3\7\3\7\5\7\177\n\7\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\t\3"+
-		"\t\3\t\7\t\u008c\n\t\f\t\16\t\u008f\13\t\3\n\3\n\5\n\u0093\n\n\3\13\3"+
-		"\13\3\13\3\13\7\13\u0099\n\13\f\13\16\13\u009c\13\13\3\13\3\13\3\13\3"+
-		"\f\3\f\3\f\3\f\3\f\5\f\u00a6\n\f\3\f\3\f\3\f\7\f\u00ab\n\f\f\f\16\f\u00ae"+
-		"\13\f\3\f\3\f\3\f\3\f\3\f\3\f\3\f\5\f\u00b7\n\f\3\f\3\f\3\f\7\f\u00bc"+
-		"\n\f\f\f\16\f\u00bf\13\f\3\f\3\f\5\f\u00c3\n\f\3\r\3\r\3\r\3\r\3\r\3\r"+
-		"\3\16\3\16\5\16\u00cd\n\16\3\17\3\17\3\17\3\17\3\17\5\17\u00d4\n\17\3"+
-		"\17\3\17\3\20\3\20\3\21\3\21\3\21\3\21\3\21\3\22\3\22\3\22\3\22\3\22\3"+
-		"\22\7\22\u00e5\n\22\f\22\16\22\u00e8\13\22\5\22\u00ea\n\22\3\22\3\22\3"+
-		"\22\3\22\3\23\3\23\3\23\3\23\3\23\3\23\5\23\u00f6\n\23\3\23\3\23\3\23"+
-		"\7\23\u00fb\n\23\f\23\16\23\u00fe\13\23\5\23\u0100\n\23\3\23\3\23\3\23"+
-		"\3\24\3\24\3\24\3\24\5\24\u0109\n\24\3\25\3\25\5\25\u010d\n\25\3\25\3"+
-		"\25\3\26\6\26\u0112\n\26\r\26\16\26\u0113\3\27\3\27\3\30\3\30\3\30\3\30"+
-		"\5\30\u011c\n\30\3\31\3\31\3\31\3\31\3\31\7\31\u0123\n\31\f\31\16\31\u0126"+
-		"\13\31\3\31\3\31\5\31\u012a\n\31\3\32\3\32\3\32\3\33\3\33\3\33\3\33\3"+
-		"\33\5\33\u0134\n\33\3\34\3\34\3\34\3\34\3\34\3\34\5\34\u013c\n\34\3\35"+
-		"\3\35\3\35\3\35\5\35\u0142\n\35\3\36\3\36\3\36\3\37\3\37\3\37\5\37\u014a"+
-		"\n\37\3\37\3\37\5\37\u014e\n\37\3\37\3\37\5\37\u0152\n\37\3\37\3\37\3"+
-		"\37\3 \3 \3 \7 \u015a\n \f \16 \u015d\13 \3!\3!\3!\7!\u0162\n!\f!\16!"+
-		"\u0165\13!\3\"\3\"\3\"\3\"\3\"\3\"\3\"\3\"\5\"\u016f\n\"\3\"\3\"\3\"\3"+
-		"#\3#\3$\3$\3$\3%\3%\3%\3&\3&\5&\u017e\n&\3&\3&\3\'\3\'\3\'\3\'\5\'\u0186"+
-		"\n\'\3\'\3\'\3\'\3\'\3\'\5\'\u018d\n\'\3\'\3\'\3(\3(\3(\3(\5(\u0195\n"+
-		"(\3(\3(\7(\u0199\n(\f(\16(\u019c\13(\3(\3(\3)\3)\3)\3)\3)\3)\3)\3)\3)"+
-		"\5)\u01a9\n)\3)\3)\3*\3*\3*\3*\3+\3+\3+\3+\3,\3,\3,\3,\5,\u01b9\n,\3,"+
-		"\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\7,\u01cd\n,\f,\16"+
-		",\u01d0\13,\3-\3-\3-\3-\3-\3-\3-\3-\3-\3-\3-\3-\3-\3-\3-\3-\5-\u01e2\n"+
-		"-\3.\3.\3.\3.\3.\3.\3/\3/\3\60\3\60\3\60\2\3V\61\2\4\6\b\n\f\16\20\22"+
-		"\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNPRTVXZ\\^\2\t\3\28"+
-		":\3\2 !\4\2$%))\3\2\"#\4\2\24\25\33\34\4\2\32\32\35\35\4\2\4\4,,\2\u0204"+
-		"\2c\3\2\2\2\4h\3\2\2\2\6j\3\2\2\2\br\3\2\2\2\ny\3\2\2\2\f~\3\2\2\2\16"+
-		"\u0080\3\2\2\2\20\u0088\3\2\2\2\22\u0092\3\2\2\2\24\u0094\3\2\2\2\26\u00c2"+
-		"\3\2\2\2\30\u00c4\3\2\2\2\32\u00cc\3\2\2\2\34\u00ce\3\2\2\2\36\u00d7\3"+
-		"\2\2\2 \u00d9\3\2\2\2\"\u00de\3\2\2\2$\u00ef\3\2\2\2&\u0108\3\2\2\2(\u010a"+
-		"\3\2\2\2*\u0111\3\2\2\2,\u0115\3\2\2\2.\u011b\3\2\2\2\60\u011d\3\2\2\2"+
-		"\62\u012b\3\2\2\2\64\u0133\3\2\2\2\66\u013b\3\2\2\28\u0141\3\2\2\2:\u0143"+
-		"\3\2\2\2<\u0146\3\2\2\2>\u0156\3\2\2\2@\u015e\3\2\2\2B\u0166\3\2\2\2D"+
-		"\u0173\3\2\2\2F\u0175\3\2\2\2H\u0178\3\2\2\2J\u017b\3\2\2\2L\u0185\3\2"+
-		"\2\2N\u0190\3\2\2\2P\u019f\3\2\2\2R\u01ac\3\2\2\2T\u01b0\3\2\2\2V\u01b8"+
-		"\3\2\2\2X\u01e1\3\2\2\2Z\u01e3\3\2\2\2\\\u01e9\3\2\2\2^\u01eb\3\2\2\2"+
-		"`b\5\6\4\2a`\3\2\2\2be\3\2\2\2ca\3\2\2\2cd\3\2\2\2df\3\2\2\2ec\3\2\2\2"+
-		"fg\7\2\2\3g\3\3\2\2\2hi\t\2\2\2i\5\3\2\2\2jk\7*\2\2kn\7\4\2\2lm\7+\2\2"+
-		"mo\7\4\2\2nl\3\2\2\2no\3\2\2\2op\3\2\2\2pq\5\b\5\2q\7\3\2\2\2rs\7\13\2"+
-		"\2st\5\n\6\2tu\7\f\2\2u\t\3\2\2\2vz\7\17\2\2wz\5(\25\2xz\5\f\7\2yv\3\2"+
-		"\2\2yw\3\2\2\2yx\3\2\2\2z\13\3\2\2\2{\177\5\16\b\2|\177\5\30\r\2}\177"+
-		"\5\32\16\2~{\3\2\2\2~|\3\2\2\2~}\3\2\2\2\177\r\3\2\2\2\u0080\u0081\7-"+
-		"\2\2\u0081\u0082\5\22\n\2\u0082\u0083\7\4\2\2\u0083\u0084\7\t\2\2\u0084"+
-		"\u0085\5\20\t\2\u0085\u0086\7\n\2\2\u0086\u0087\5\24\13\2\u0087\17\3\2"+
-		"\2\2\u0088\u008d\5\34\17\2\u0089\u008a\7\20\2\2\u008a\u008c\5\34\17\2"+
-		"\u008b\u0089\3\2\2\2\u008c\u008f\3\2\2\2\u008d\u008b\3\2\2\2\u008d\u008e"+
-		"\3\2\2\2\u008e\21\3\2\2\2\u008f\u008d\3\2\2\2\u0090\u0093\5\4\3\2\u0091"+
-		"\u0093\7;\2\2\u0092\u0090\3\2\2\2\u0092\u0091\3\2\2\2\u0093\23\3\2\2\2"+
-		"\u0094\u009a\7\13\2\2\u0095\u0096\5\34\17\2\u0096\u0097\7\17\2\2\u0097"+
-		"\u0099\3\2\2\2\u0098\u0095\3\2\2\2\u0099\u009c\3\2\2\2\u009a\u0098\3\2"+
-		"\2\2\u009a\u009b\3\2\2\2\u009b\u009d\3\2\2\2\u009c\u009a\3\2\2\2\u009d"+
-		"\u009e\5*\26\2\u009e\u009f\7\f\2\2\u009f\25\3\2\2\2\u00a0\u00a1\7\4\2"+
-		"\2\u00a1\u00a2\7\21\2\2\u00a2\u00a3\7\4\2\2\u00a3\u00a5\7\t\2\2\u00a4"+
-		"\u00a6\5V,\2\u00a5\u00a4\3\2\2\2\u00a5\u00a6\3\2\2\2\u00a6\u00c3\3\2\2"+
-		"\2\u00a7\u00ac\5V,\2\u00a8\u00a9\7\20\2\2\u00a9\u00ab\5V,\2\u00aa\u00a8"+
-		"\3\2\2\2\u00ab\u00ae\3\2\2\2\u00ac\u00aa\3\2\2\2\u00ac\u00ad\3\2\2\2\u00ad"+
-		"\u00af\3\2\2\2\u00ae\u00ac\3\2\2\2\u00af\u00b0\7\n\2\2\u00b0\u00c3\3\2"+
-		"\2\2\u00b1\u00b2\7,\2\2\u00b2\u00b3\7\21\2\2\u00b3\u00b4\7\4\2\2\u00b4"+
-		"\u00b6\7\t\2\2\u00b5\u00b7\5V,\2\u00b6\u00b5\3\2\2\2\u00b6\u00b7\3\2\2"+
-		"\2\u00b7\u00c3\3\2\2\2\u00b8\u00bd\5V,\2\u00b9\u00ba\7\20\2\2\u00ba\u00bc"+
-		"\5V,\2\u00bb\u00b9\3\2\2\2\u00bc\u00bf\3\2\2\2\u00bd\u00bb\3\2\2\2\u00bd"+
-		"\u00be\3\2\2\2\u00be\u00c0\3\2\2\2\u00bf\u00bd\3\2\2\2\u00c0\u00c1\7\n"+
-		"\2\2\u00c1\u00c3\3\2\2\2\u00c2\u00a0\3\2\2\2\u00c2\u00a7\3\2\2\2\u00c2"+
-		"\u00b1\3\2\2\2\u00c2\u00b8\3\2\2\2\u00c3\27\3\2\2\2\u00c4\u00c5\7-\2\2"+
-		"\u00c5\u00c6\7\4\2\2\u00c6\u00c7\7\t\2\2\u00c7\u00c8\5\20\t\2\u00c8\u00c9"+
-		"\7\n\2\2\u00c9\31\3\2\2\2\u00ca\u00cd\5\34\17\2\u00cb\u00cd\5\36\20\2"+
-		"\u00cc\u00ca\3\2\2\2\u00cc\u00cb\3\2\2\2\u00cd\33\3\2\2\2\u00ce\u00cf"+
-		"\7\4\2\2\u00cf\u00d3\7\31\2\2\u00d0\u00d4\5$\23\2\u00d1\u00d4\5\4\3\2"+
-		"\u00d2\u00d4\7\4\2\2\u00d3\u00d0\3\2\2\2\u00d3\u00d1\3\2\2\2\u00d3\u00d2"+
-		"\3\2\2\2\u00d4\u00d5\3\2\2\2\u00d5\u00d6\7\17\2\2\u00d6\35\3\2\2\2\u00d7"+
-		"\u00d8\5L\'\2\u00d8\37\3\2\2\2\u00d9\u00da\7\4\2\2\u00da\u00db\7\31\2"+
-		"\2\u00db\u00dc\5\"\22\2\u00dc\u00dd\7\17\2\2\u00dd!\3\2\2\2\u00de\u00df"+
-		"\7.\2\2\u00df\u00e9\7\25\2\2\u00e0\u00ea\7;\2\2\u00e1\u00e6\5\4\3\2\u00e2"+
-		"\u00e3\7\20\2\2\u00e3\u00e5\5\4\3\2\u00e4\u00e2\3\2\2\2\u00e5\u00e8\3"+
-		"\2\2\2\u00e6\u00e4\3\2\2\2\u00e6\u00e7\3\2\2\2\u00e7\u00ea\3\2\2\2\u00e8"+
-		"\u00e6\3\2\2\2\u00e9\u00e0\3\2\2\2\u00e9\u00e1\3\2\2\2\u00ea\u00eb\3\2"+
-		"\2\2\u00eb\u00ec\7\22\2\2\u00ec\u00ed\5\4\3\2\u00ed\u00ee\7\24\2\2\u00ee"+
-		"#\3\2\2\2\u00ef\u00f0\7<\2\2\u00f0\u00ff\7\t\2\2\u00f1\u00f2\7\5\2\2\u00f2"+
-		"\u00f5\7\3\2\2\u00f3\u00f6\5\4\3\2\u00f4\u00f6\5$\23\2\u00f5\u00f3\3\2"+
-		"\2\2\u00f5\u00f4\3\2\2\2\u00f6\u0100\3\2\2\2\u00f7\u00fc\5&\24\2\u00f8"+
-		"\u00f9\7\20\2\2\u00f9\u00fb\5&\24\2\u00fa\u00f8\3\2\2\2\u00fb\u00fe\3"+
-		"\2\2\2\u00fc\u00fa\3\2\2\2\u00fc\u00fd\3\2\2\2\u00fd\u0100\3\2\2\2\u00fe"+
-		"\u00fc\3\2\2\2\u00ff\u00f1\3\2\2\2\u00ff\u00f7\3\2\2\2\u0100\u0101\3\2"+
-		"\2\2\u0101\u0102\7\n\2\2\u0102\u0103\7\17\2\2\u0103%\3\2\2\2\u0104\u0109"+
-		"\5\34\17\2\u0105\u0109\5 \21\2\u0106\u0109\5$\23\2\u0107\u0109\5\4\3\2"+
-		"\u0108\u0104\3\2\2\2\u0108\u0105\3\2\2\2\u0108\u0106\3\2\2\2\u0108\u0107"+
-		"\3\2\2\2\u0109\'\3\2\2\2\u010a\u010c\7\13\2\2\u010b\u010d\5*\26\2\u010c"+
-		"\u010b\3\2\2\2\u010c\u010d\3\2\2\2\u010d\u010e\3\2\2\2\u010e\u010f\7\f"+
-		"\2\2\u010f)\3\2\2\2\u0110\u0112\5,\27\2\u0111\u0110\3\2\2\2\u0112\u0113"+
-		"\3\2\2\2\u0113\u0111\3\2\2\2\u0113\u0114\3\2\2\2\u0114+\3\2\2\2\u0115"+
-		"\u0116\5.\30\2\u0116-\3\2\2\2\u0117\u011c\5\60\31\2\u0118\u011c\5<\37"+
-		"\2\u0119\u011c\5B\"\2\u011a\u011c\5\66\34\2\u011b\u0117\3\2\2\2\u011b"+
-		"\u0118\3\2\2\2\u011b\u0119\3\2\2\2\u011b\u011a\3\2\2\2\u011c/\3\2\2\2"+
-		"\u011d\u011e\7\60\2\2\u011e\u0124\5\62\32\2\u011f\u0120\7\61\2\2\u0120"+
-		"\u0121\7\60\2\2\u0121\u0123\5\62\32\2\u0122\u011f\3\2\2\2\u0123\u0126"+
-		"\3\2\2\2\u0124\u0122\3\2\2\2\u0124\u0125\3\2\2\2\u0125\u0129\3\2\2\2\u0126"+
-		"\u0124\3\2\2\2\u0127\u0128\7\61\2\2\u0128\u012a\5\64\33\2\u0129\u0127"+
-		"\3\2\2\2\u0129\u012a\3\2\2\2\u012a\61\3\2\2\2\u012b\u012c\5V,\2\u012c"+
-		"\u012d\5\64\33\2\u012d\63\3\2\2\2\u012e\u0134\5.\30\2\u012f\u0130\7\13"+
-		"\2\2\u0130\u0131\5(\25\2\u0131\u0132\7\f\2\2\u0132\u0134\3\2\2\2\u0133"+
-		"\u012e\3\2\2\2\u0133\u012f\3\2\2\2\u0134\65\3\2\2\2\u0135\u013c\5(\25"+
-		"\2\u0136\u013c\5D#\2\u0137\u013c\5:\36\2\u0138\u013c\5F$\2\u0139\u013c"+
-		"\5H%\2\u013a\u013c\5J&\2\u013b\u0135\3\2\2\2\u013b\u0136\3\2\2\2\u013b"+
-		"\u0137\3\2\2\2\u013b\u0138\3\2\2\2\u013b\u0139\3\2\2\2\u013b\u013a\3\2"+
-		"\2\2\u013c\67\3\2\2\2\u013d\u0142\5L\'\2\u013e\u0142\5R*\2\u013f\u0142"+
-		"\5T+\2\u0140\u0142\5\26\f\2\u0141\u013d\3\2\2\2\u0141\u013e\3\2\2\2\u0141"+
-		"\u013f\3\2\2\2\u0141\u0140\3\2\2\2\u01429\3\2\2\2\u0143\u0144\58\35\2"+
-		"\u0144\u0145\7\17\2\2\u0145;\3\2\2\2\u0146\u0147\7\62\2\2\u0147\u0149"+
-		"\7\t\2\2\u0148\u014a\5> \2\u0149\u0148\3\2\2\2\u0149\u014a\3\2\2\2\u014a"+
-		"\u014b\3\2\2\2\u014b\u014d\7\17\2\2\u014c\u014e\5V,\2\u014d\u014c\3\2"+
-		"\2\2\u014d\u014e\3\2\2\2\u014e\u014f\3\2\2\2\u014f\u0151\7\17\2\2\u0150"+
-		"\u0152\5@!\2\u0151\u0150\3\2\2\2\u0151\u0152\3\2\2\2\u0152\u0153\3\2\2"+
-		"\2\u0153\u0154\7\n\2\2\u0154\u0155\5(\25\2\u0155=\3\2\2\2\u0156\u015b"+
-		"\5L\'\2\u0157\u0158\7\20\2\2\u0158\u015a\5L\'\2\u0159\u0157\3\2\2\2\u015a"+
-		"\u015d\3\2\2\2\u015b\u0159\3\2\2\2\u015b\u015c\3\2\2\2\u015c?\3\2\2\2"+
-		"\u015d\u015b\3\2\2\2\u015e\u0163\5L\'\2\u015f\u0160\7\20\2\2\u0160\u0162"+
-		"\5L\'\2\u0161\u015f\3\2\2\2\u0162\u0165\3\2\2\2\u0163\u0161\3\2\2\2\u0163"+
-		"\u0164\3\2\2\2\u0164A\3\2\2\2\u0165\u0163\3\2\2\2\u0166\u0167\7\63\2\2"+
-		"\u0167\u0168\7\t\2\2\u0168\u0169\7\4\2\2\u0169\u016e\7=\2\2\u016a\u016f"+
-		"\7\4\2\2\u016b\u016c\7,\2\2\u016c\u016d\7\21\2\2\u016d\u016f\7\4\2\2\u016e"+
-		"\u016a\3\2\2\2\u016e\u016b\3\2\2\2\u016f\u0170\3\2\2\2\u0170\u0171\7\n"+
-		"\2\2\u0171\u0172\5(\25\2\u0172C\3\2\2\2\u0173\u0174\7\17\2\2\u0174E\3"+
-		"\2\2\2\u0175\u0176\7\65\2\2\u0176\u0177\7\17\2\2\u0177G\3\2\2\2\u0178"+
-		"\u0179\7\64\2\2\u0179\u017a\7\17\2\2\u017aI\3\2\2\2\u017b\u017d\7/\2\2"+
-		"\u017c\u017e\5V,\2\u017d\u017c\3\2\2\2\u017d\u017e\3\2\2\2\u017e\u017f"+
-		"\3\2\2\2\u017f\u0180\7\17\2\2\u0180K\3\2\2\2\u0181\u0182\7,\2\2\u0182"+
-		"\u0183\7\21\2\2\u0183\u0186\7\4\2\2\u0184\u0186\7\4\2\2\u0185\u0181\3"+
-		"\2\2\2\u0185\u0184\3\2\2\2\u0186\u0187\3\2\2\2\u0187\u018c\7\23\2\2\u0188"+
-		"\u018d\5V,\2\u0189\u018d\5P)\2\u018a\u018d\5\26\f\2\u018b\u018d\5N(\2"+
-		"\u018c\u0188\3\2\2\2\u018c\u0189\3\2\2\2\u018c\u018a\3\2\2\2\u018c\u018b"+
-		"\3\2\2\2\u018d\u018e\3\2\2\2\u018e\u018f\7\17\2\2\u018fM\3\2\2\2\u0190"+
-		"\u0191\7?\2\2\u0191\u0192\7\4\2\2\u0192\u0194\7\t\2\2\u0193\u0195\5V,"+
-		"\2\u0194\u0193\3\2\2\2\u0194\u0195\3\2\2\2\u0195\u019a\3\2\2\2\u0196\u0197"+
-		"\7\20\2\2\u0197\u0199\5V,\2\u0198\u0196\3\2\2\2\u0199\u019c\3\2\2\2\u019a"+
-		"\u0198\3\2\2\2\u019a\u019b\3\2\2\2\u019b\u019d\3\2\2\2\u019c\u019a\3\2"+
-		"\2\2\u019d\u019e\7\n\2\2\u019eO\3\2\2\2\u019f\u01a8\7\r\2\2\u01a0\u01a1"+
-		"\5V,\2\u01a1\u01a2\7\20\2\2\u01a2\u01a3\5V,\2\u01a3\u01a9\3\2\2\2\u01a4"+
-		"\u01a5\5P)\2\u01a5\u01a6\7\20\2\2\u01a6\u01a7\5P)\2\u01a7\u01a9\3\2\2"+
-		"\2\u01a8\u01a0\3\2\2\2\u01a8\u01a4\3\2\2\2\u01a9\u01aa\3\2\2\2\u01aa\u01ab"+
-		"\7\16\2\2\u01abQ\3\2\2\2\u01ac\u01ad\t\3\2\2\u01ad\u01ae\7\4\2\2\u01ae"+
-		"\u01af\7\17\2\2\u01afS\3\2\2\2\u01b0\u01b1\7\4\2\2\u01b1\u01b2\t\3\2\2"+
-		"\u01b2\u01b3\7\17\2\2\u01b3U\3\2\2\2\u01b4\u01b5\b,\1\2\u01b5\u01b6\7"+
-		"\26\2\2\u01b6\u01b9\5V,\n\u01b7\u01b9\5X-\2\u01b8\u01b4\3\2\2\2\u01b8"+
-		"\u01b7\3\2\2\2\u01b9\u01ce\3\2\2\2\u01ba\u01bb\f\t\2\2\u01bb\u01bc\t\4"+
-		"\2\2\u01bc\u01cd\5V,\n\u01bd\u01be\f\b\2\2\u01be\u01bf\t\5\2\2\u01bf\u01cd"+
-		"\5V,\t\u01c0\u01c1\f\7\2\2\u01c1\u01c2\t\6\2\2\u01c2\u01cd\5V,\b\u01c3"+
-		"\u01c4\f\6\2\2\u01c4\u01c5\t\7\2\2\u01c5\u01cd\5V,\7\u01c6\u01c7\f\5\2"+
-		"\2\u01c7\u01c8\7\36\2\2\u01c8\u01cd\5V,\6\u01c9\u01ca\f\4\2\2\u01ca\u01cb"+
-		"\7\37\2\2\u01cb\u01cd\5V,\5\u01cc\u01ba\3\2\2\2\u01cc\u01bd\3\2\2\2\u01cc"+
-		"\u01c0\3\2\2\2\u01cc\u01c3\3\2\2\2\u01cc\u01c6\3\2\2\2\u01cc\u01c9\3\2"+
-		"\2\2\u01cd\u01d0\3\2\2\2\u01ce\u01cc\3\2\2\2\u01ce\u01cf\3\2\2\2\u01cf"+
-		"W\3\2\2\2\u01d0\u01ce\3\2\2\2\u01d1\u01d2\7\t\2\2\u01d2\u01d3\5V,\2\u01d3"+
-		"\u01d4\7\n\2\2\u01d4\u01e2\3\2\2\2\u01d5\u01d6\7\4\2\2\u01d6\u01d7\7\r"+
-		"\2\2\u01d7\u01d8\5V,\2\u01d8\u01d9\7\16\2\2\u01d9\u01e2\3\2\2\2\u01da"+
-		"\u01db\t\b\2\2\u01db\u01dc\7\21\2\2\u01dc\u01e2\7\4\2\2\u01dd\u01e2\7"+
-		"\6\2\2\u01de\u01e2\7\b\2\2\u01df\u01e2\7\4\2\2\u01e0\u01e2\7\7\2\2\u01e1"+
-		"\u01d1\3\2\2\2\u01e1\u01d5\3\2\2\2\u01e1\u01da\3\2\2\2\u01e1\u01dd\3\2"+
-		"\2\2\u01e1\u01de\3\2\2\2\u01e1\u01df\3\2\2\2\u01e1\u01e0\3\2\2\2\u01e2"+
-		"Y\3\2\2\2\u01e3\u01e4\7@\2\2\u01e4\u01e5\7\t\2\2\u01e5\u01e6\5\\/\2\u01e6"+
-		"\u01e7\7\n\2\2\u01e7\u01e8\7\17\2\2\u01e8[\3\2\2\2\u01e9\u01ea\5V,\2\u01ea"+
-		"]\3\2\2\2\u01eb\u01ec\7A\2\2\u01ec_\3\2\2\2.cny~\u008d\u0092\u009a\u00a5"+
-		"\u00ac\u00b6\u00bd\u00c2\u00cc\u00d3\u00e6\u00e9\u00f5\u00fc\u00ff\u0108"+
-		"\u010c\u0113\u011b\u0124\u0129\u0133\u013b\u0141\u0149\u014d\u0151\u015b"+
-		"\u0163\u016e\u017d\u0185\u018c\u0194\u019a\u01a8\u01b8\u01cc\u01ce\u01e1";
+		",\t,\4-\t-\4.\t.\4/\t/\4\60\t\60\4\61\t\61\4\62\t\62\3\2\3\2\7\2g\n\2"+
+		"\f\2\16\2j\13\2\3\2\3\2\3\3\3\3\3\4\3\4\3\4\3\4\5\4t\n\4\3\4\3\4\3\4\3"+
+		"\5\3\5\3\5\3\5\3\6\3\6\7\6\177\n\6\f\6\16\6\u0082\13\6\3\6\7\6\u0085\n"+
+		"\6\f\6\16\6\u0088\13\6\5\6\u008a\n\6\3\7\3\7\3\7\5\7\u008f\n\7\3\b\3\b"+
+		"\3\b\3\b\3\b\5\b\u0096\n\b\3\b\3\b\3\b\3\t\3\t\3\t\7\t\u009e\n\t\f\t\16"+
+		"\t\u00a1\13\t\3\n\3\n\5\n\u00a5\n\n\3\13\3\13\3\13\3\13\7\13\u00ab\n\13"+
+		"\f\13\16\13\u00ae\13\13\3\13\5\13\u00b1\n\13\3\13\3\13\3\f\3\f\3\f\5\f"+
+		"\u00b8\n\f\3\f\3\f\3\f\3\r\3\r\3\r\5\r\u00c0\n\r\3\r\3\r\7\r\u00c4\n\r"+
+		"\f\r\16\r\u00c7\13\r\3\r\3\r\3\16\3\16\3\16\3\16\5\16\u00cf\n\16\3\16"+
+		"\3\16\3\16\3\17\3\17\3\17\3\17\3\17\3\17\5\17\u00da\n\17\3\20\3\20\3\20"+
+		"\3\20\3\20\5\20\u00e1\n\20\3\21\3\21\3\22\3\22\3\22\3\22\3\22\3\23\3\23"+
+		"\3\23\3\23\3\23\3\23\7\23\u00f0\n\23\f\23\16\23\u00f3\13\23\5\23\u00f5"+
+		"\n\23\3\23\3\23\3\23\3\23\3\24\3\24\3\24\3\24\3\24\3\24\5\24\u0101\n\24"+
+		"\3\24\3\24\3\24\7\24\u0106\n\24\f\24\16\24\u0109\13\24\5\24\u010b\n\24"+
+		"\3\24\3\24\3\25\3\25\3\25\3\25\5\25\u0113\n\25\3\26\3\26\5\26\u0117\n"+
+		"\26\3\26\3\26\3\27\6\27\u011c\n\27\r\27\16\27\u011d\3\30\3\30\3\31\3\31"+
+		"\3\31\3\31\5\31\u0126\n\31\3\32\3\32\3\32\3\32\3\32\7\32\u012d\n\32\f"+
+		"\32\16\32\u0130\13\32\3\32\3\32\5\32\u0134\n\32\3\33\3\33\3\33\3\34\3"+
+		"\34\3\34\3\34\3\34\5\34\u013e\n\34\3\35\3\35\3\35\3\35\3\35\3\35\3\35"+
+		"\5\35\u0147\n\35\3\36\3\36\3\36\3\37\3\37\3\37\3\37\5\37\u0150\n\37\3"+
+		" \3 \3 \5 \u0155\n \3 \3 \5 \u0159\n \3 \3 \5 \u015d\n \3 \3 \3 \3!\3"+
+		"!\3!\7!\u0165\n!\f!\16!\u0168\13!\3\"\3\"\3\"\7\"\u016d\n\"\f\"\16\"\u0170"+
+		"\13\"\3#\3#\3#\3#\3#\3#\3#\5#\u0179\n#\3#\3#\3#\3#\5#\u017f\n#\3#\3#\3"+
+		"#\3$\3$\3$\3%\3%\3%\3&\3&\5&\u018c\n&\3&\3&\3\'\3\'\3\'\3\'\3\'\3\'\5"+
+		"\'\u0196\n\'\3\'\5\'\u0199\n\'\3\'\3\'\3\'\3\'\7\'\u019f\n\'\f\'\16\'"+
+		"\u01a2\13\'\3\'\3\'\3\'\3\'\3\'\5\'\u01a9\n\'\6\'\u01ab\n\'\r\'\16\'\u01ac"+
+		"\3(\3(\3(\3(\5(\u01b3\n(\3(\3(\7(\u01b7\n(\f(\16(\u01ba\13(\3(\3(\3)\3"+
+		")\3)\5)\u01c1\n)\3)\3)\3)\5)\u01c6\n)\7)\u01c8\n)\f)\16)\u01cb\13)\3)"+
+		"\3)\3*\3*\3*\3+\3+\3+\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\5,\u01df\n,\5,\u01e1"+
+		"\n,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\3,\7,\u01f5\n,"+
+		"\f,\16,\u01f8\13,\3-\3-\5-\u01fc\n-\3-\3-\3-\3-\3-\3-\3-\3-\3-\3-\3-\3"+
+		"-\3-\5-\u020b\n-\3.\3.\3.\3.\3.\3.\3/\3/\3\60\3\60\3\61\3\61\3\62\3\62"+
+		"\3\62\3\62\5\62\u021d\n\62\3\62\2\3V\63\2\4\6\b\n\f\16\20\22\24\26\30"+
+		"\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNPRTVXZ\\^`b\2\t\3\2\22\24\3"+
+		"\2\678\4\2;<@@\3\29:\4\2+,\62\63\5\2**\61\61\64\64\4\2\6\6\33\33\2\u0244"+
+		"\2d\3\2\2\2\4m\3\2\2\2\6o\3\2\2\2\bx\3\2\2\2\n\u0089\3\2\2\2\f\u008e\3"+
+		"\2\2\2\16\u0090\3\2\2\2\20\u009a\3\2\2\2\22\u00a4\3\2\2\2\24\u00a6\3\2"+
+		"\2\2\26\u00b7\3\2\2\2\30\u00bc\3\2\2\2\32\u00ca\3\2\2\2\34\u00d9\3\2\2"+
+		"\2\36\u00db\3\2\2\2 \u00e2\3\2\2\2\"\u00e4\3\2\2\2$\u00e9\3\2\2\2&\u00fa"+
+		"\3\2\2\2(\u0112\3\2\2\2*\u0114\3\2\2\2,\u011b\3\2\2\2.\u011f\3\2\2\2\60"+
+		"\u0125\3\2\2\2\62\u0127\3\2\2\2\64\u0135\3\2\2\2\66\u013d\3\2\2\28\u0146"+
+		"\3\2\2\2:\u0148\3\2\2\2<\u014f\3\2\2\2>\u0151\3\2\2\2@\u0161\3\2\2\2B"+
+		"\u0169\3\2\2\2D\u0171\3\2\2\2F\u0183\3\2\2\2H\u0186\3\2\2\2J\u0189\3\2"+
+		"\2\2L\u0198\3\2\2\2N\u01ae\3\2\2\2P\u01bd\3\2\2\2R\u01ce\3\2\2\2T\u01d1"+
+		"\3\2\2\2V\u01e0\3\2\2\2X\u020a\3\2\2\2Z\u020c\3\2\2\2\\\u0212\3\2\2\2"+
+		"^\u0214\3\2\2\2`\u0216\3\2\2\2b\u021c\3\2\2\2dh\b\2\1\2eg\5\6\4\2fe\3"+
+		"\2\2\2gj\3\2\2\2hf\3\2\2\2hi\3\2\2\2ik\3\2\2\2jh\3\2\2\2kl\7\2\2\3l\3"+
+		"\3\2\2\2mn\t\2\2\2n\5\3\2\2\2op\7\4\2\2ps\7\33\2\2qr\7\5\2\2rt\7\33\2"+
+		"\2sq\3\2\2\2st\3\2\2\2tu\3\2\2\2uv\b\4\1\2vw\5\b\5\2w\7\3\2\2\2xy\7\""+
+		"\2\2yz\5\n\6\2z{\7#\2\2{\t\3\2\2\2|\u008a\7&\2\2}\177\5*\26\2~}\3\2\2"+
+		"\2\177\u0082\3\2\2\2\u0080~\3\2\2\2\u0080\u0081\3\2\2\2\u0081\u008a\3"+
+		"\2\2\2\u0082\u0080\3\2\2\2\u0083\u0085\5\f\7\2\u0084\u0083\3\2\2\2\u0085"+
+		"\u0088\3\2\2\2\u0086\u0084\3\2\2\2\u0086\u0087\3\2\2\2\u0087\u008a\3\2"+
+		"\2\2\u0088\u0086\3\2\2\2\u0089|\3\2\2\2\u0089\u0080\3\2\2\2\u0089\u0086"+
+		"\3\2\2\2\u008a\13\3\2\2\2\u008b\u008f\5\16\b\2\u008c\u008f\5\32\16\2\u008d"+
+		"\u008f\5\34\17\2\u008e\u008b\3\2\2\2\u008e\u008c\3\2\2\2\u008e\u008d\3"+
+		"\2\2\2\u008f\r\3\2\2\2\u0090\u0091\7\7\2\2\u0091\u0092\5\22\n\2\u0092"+
+		"\u0093\7\33\2\2\u0093\u0095\7 \2\2\u0094\u0096\5\20\t\2\u0095\u0094\3"+
+		"\2\2\2\u0095\u0096\3\2\2\2\u0096\u0097\3\2\2\2\u0097\u0098\7!\2\2\u0098"+
+		"\u0099\5\24\13\2\u0099\17\3\2\2\2\u009a\u009f\5\36\20\2\u009b\u009c\7"+
+		"\'\2\2\u009c\u009e\5\36\20\2\u009d\u009b\3\2\2\2\u009e\u00a1\3\2\2\2\u009f"+
+		"\u009d\3\2\2\2\u009f\u00a0\3\2\2\2\u00a0\21\3\2\2\2\u00a1\u009f\3\2\2"+
+		"\2\u00a2\u00a5\5\4\3\2\u00a3\u00a5\7\25\2\2\u00a4\u00a2\3\2\2\2\u00a4"+
+		"\u00a3\3\2\2\2\u00a5\23\3\2\2\2\u00a6\u00b0\7\"\2\2\u00a7\u00a8\5\36\20"+
+		"\2\u00a8\u00a9\7&\2\2\u00a9\u00ab\3\2\2\2\u00aa\u00a7\3\2\2\2\u00ab\u00ae"+
+		"\3\2\2\2\u00ac\u00aa\3\2\2\2\u00ac\u00ad\3\2\2\2\u00ad\u00af\3\2\2\2\u00ae"+
+		"\u00ac\3\2\2\2\u00af\u00b1\5,\27\2\u00b0\u00ac\3\2\2\2\u00b0\u00b1\3\2"+
+		"\2\2\u00b1\u00b2\3\2\2\2\u00b2\u00b3\7#\2\2\u00b3\25\3\2\2\2\u00b4\u00b8"+
+		"\7\33\2\2\u00b5\u00b8\7\6\2\2\u00b6\u00b8\5\30\r\2\u00b7\u00b4\3\2\2\2"+
+		"\u00b7\u00b5\3\2\2\2\u00b7\u00b6\3\2\2\2\u00b8\u00b9\3\2\2\2\u00b9\u00ba"+
+		"\7(\2\2\u00ba\u00bb\5\30\r\2\u00bb\27\3\2\2\2\u00bc\u00bd\7\33\2\2\u00bd"+
+		"\u00bf\7 \2\2\u00be\u00c0\5V,\2\u00bf\u00be\3\2\2\2\u00bf\u00c0\3\2\2"+
+		"\2\u00c0\u00c5\3\2\2\2\u00c1\u00c2\7\'\2\2\u00c2\u00c4\5V,\2\u00c3\u00c1"+
+		"\3\2\2\2\u00c4\u00c7\3\2\2\2\u00c5\u00c3\3\2\2\2\u00c5\u00c6\3\2\2\2\u00c6"+
+		"\u00c8\3\2\2\2\u00c7\u00c5\3\2\2\2\u00c8\u00c9\7!\2\2\u00c9\31\3\2\2\2"+
+		"\u00ca\u00cb\7\7\2\2\u00cb\u00cc\7\33\2\2\u00cc\u00ce\7 \2\2\u00cd\u00cf"+
+		"\5\20\t\2\u00ce\u00cd\3\2\2\2\u00ce\u00cf\3\2\2\2\u00cf\u00d0\3\2\2\2"+
+		"\u00d0\u00d1\7!\2\2\u00d1\u00d2\5\24\13\2\u00d2\33\3\2\2\2\u00d3\u00d4"+
+		"\5\36\20\2\u00d4\u00d5\7&\2\2\u00d5\u00da\3\2\2\2\u00d6\u00d7\5 \21\2"+
+		"\u00d7\u00d8\7&\2\2\u00d8\u00da\3\2\2\2\u00d9\u00d3\3\2\2\2\u00d9\u00d6"+
+		"\3\2\2\2\u00da\35\3\2\2\2\u00db\u00dc\7\33\2\2\u00dc\u00e0\7\60\2\2\u00dd"+
+		"\u00e1\5&\24\2\u00de\u00e1\5\4\3\2\u00df\u00e1\7\33\2\2\u00e0\u00dd\3"+
+		"\2\2\2\u00e0\u00de\3\2\2\2\u00e0\u00df\3\2\2\2\u00e1\37\3\2\2\2\u00e2"+
+		"\u00e3\5L\'\2\u00e3!\3\2\2\2\u00e4\u00e5\7\33\2\2\u00e5\u00e6\7\60\2\2"+
+		"\u00e6\u00e7\5$\23\2\u00e7\u00e8\7&\2\2\u00e8#\3\2\2\2\u00e9\u00ea\7\b"+
+		"\2\2\u00ea\u00f4\7,\2\2\u00eb\u00f5\7\25\2\2\u00ec\u00f1\5\4\3\2\u00ed"+
+		"\u00ee\7\'\2\2\u00ee\u00f0\5\4\3\2\u00ef\u00ed\3\2\2\2\u00f0\u00f3\3\2"+
+		"\2\2\u00f1\u00ef\3\2\2\2\u00f1\u00f2\3\2\2\2\u00f2\u00f5\3\2\2\2\u00f3"+
+		"\u00f1\3\2\2\2\u00f4\u00eb\3\2\2\2\u00f4\u00ec\3\2\2\2\u00f5\u00f6\3\2"+
+		"\2\2\u00f6\u00f7\7)\2\2\u00f7\u00f8\5\4\3\2\u00f8\u00f9\7+\2\2\u00f9%"+
+		"\3\2\2\2\u00fa\u00fb\7\26\2\2\u00fb\u010a\7 \2\2\u00fc\u00fd\7\34\2\2"+
+		"\u00fd\u0100\7\3\2\2\u00fe\u0101\5\4\3\2\u00ff\u0101\5&\24\2\u0100\u00fe"+
+		"\3\2\2\2\u0100\u00ff\3\2\2\2\u0101\u010b\3\2\2\2\u0102\u0107\5(\25\2\u0103"+
+		"\u0104\7\'\2\2\u0104\u0106\5(\25\2\u0105\u0103\3\2\2\2\u0106\u0109\3\2"+
+		"\2\2\u0107\u0105\3\2\2\2\u0107\u0108\3\2\2\2\u0108\u010b\3\2\2\2\u0109"+
+		"\u0107\3\2\2\2\u010a\u00fc\3\2\2\2\u010a\u0102\3\2\2\2\u010b\u010c\3\2"+
+		"\2\2\u010c\u010d\7!\2\2\u010d\'\3\2\2\2\u010e\u0113\5\36\20\2\u010f\u0113"+
+		"\5\"\22\2\u0110\u0113\5&\24\2\u0111\u0113\5\4\3\2\u0112\u010e\3\2\2\2"+
+		"\u0112\u010f\3\2\2\2\u0112\u0110\3\2\2\2\u0112\u0111\3\2\2\2\u0113)\3"+
+		"\2\2\2\u0114\u0116\7\"\2\2\u0115\u0117\5,\27\2\u0116\u0115\3\2\2\2\u0116"+
+		"\u0117\3\2\2\2\u0117\u0118\3\2\2\2\u0118\u0119\7#\2\2\u0119+\3\2\2\2\u011a"+
+		"\u011c\5.\30\2\u011b\u011a\3\2\2\2\u011c\u011d\3\2\2\2\u011d\u011b\3\2"+
+		"\2\2\u011d\u011e\3\2\2\2\u011e-\3\2\2\2\u011f\u0120\5\60\31\2\u0120/\3"+
+		"\2\2\2\u0121\u0126\5\62\32\2\u0122\u0126\5> \2\u0123\u0126\5D#\2\u0124"+
+		"\u0126\58\35\2\u0125\u0121\3\2\2\2\u0125\u0122\3\2\2\2\u0125\u0123\3\2"+
+		"\2\2\u0125\u0124\3\2\2\2\u0126\61\3\2\2\2\u0127\u0128\7\n\2\2\u0128\u012e"+
+		"\5\64\33\2\u0129\u012a\7\13\2\2\u012a\u012b\7\n\2\2\u012b\u012d\5\64\33"+
+		"\2\u012c\u0129\3\2\2\2\u012d\u0130\3\2\2\2\u012e\u012c\3\2\2\2\u012e\u012f"+
+		"\3\2\2\2\u012f\u0133\3\2\2\2\u0130\u012e\3\2\2\2\u0131\u0132\7\13\2\2"+
+		"\u0132\u0134\5\66\34\2\u0133\u0131\3\2\2\2\u0133\u0134\3\2\2\2\u0134\63"+
+		"\3\2\2\2\u0135\u0136\5V,\2\u0136\u0137\5\66\34\2\u0137\65\3\2\2\2\u0138"+
+		"\u013e\5\60\31\2\u0139\u013a\7\"\2\2\u013a\u013b\5*\26\2\u013b\u013c\7"+
+		"#\2\2\u013c\u013e\3\2\2\2\u013d\u0138\3\2\2\2\u013d\u0139\3\2\2\2\u013e"+
+		"\67\3\2\2\2\u013f\u0147\5*\26\2\u0140\u0147\5^\60\2\u0141\u0147\5:\36"+
+		"\2\u0142\u0147\5F$\2\u0143\u0147\5H%\2\u0144\u0147\5J&\2\u0145\u0147\5"+
+		"Z.\2\u0146\u013f\3\2\2\2\u0146\u0140\3\2\2\2\u0146\u0141\3\2\2\2\u0146"+
+		"\u0142\3\2\2\2\u0146\u0143\3\2\2\2\u0146\u0144\3\2\2\2\u0146\u0145\3\2"+
+		"\2\2\u01479\3\2\2\2\u0148\u0149\5<\37\2\u0149\u014a\7&\2\2\u014a;\3\2"+
+		"\2\2\u014b\u0150\5L\'\2\u014c\u0150\5R*\2\u014d\u0150\5T+\2\u014e\u0150"+
+		"\5\26\f\2\u014f\u014b\3\2\2\2\u014f\u014c\3\2\2\2\u014f\u014d\3\2\2\2"+
+		"\u014f\u014e\3\2\2\2\u0150=\3\2\2\2\u0151\u0152\7\f\2\2\u0152\u0154\7"+
+		" \2\2\u0153\u0155\5@!\2\u0154\u0153\3\2\2\2\u0154\u0155\3\2\2\2\u0155"+
+		"\u0156\3\2\2\2\u0156\u0158\7&\2\2\u0157\u0159\5V,\2\u0158\u0157\3\2\2"+
+		"\2\u0158\u0159\3\2\2\2\u0159\u015a\3\2\2\2\u015a\u015c\7&\2\2\u015b\u015d"+
+		"\5B\"\2\u015c\u015b\3\2\2\2\u015c\u015d\3\2\2\2\u015d\u015e\3\2\2\2\u015e"+
+		"\u015f\7!\2\2\u015f\u0160\5\66\34\2\u0160?\3\2\2\2\u0161\u0166\5L\'\2"+
+		"\u0162\u0163\7\'\2\2\u0163\u0165\5L\'\2\u0164\u0162\3\2\2\2\u0165\u0168"+
+		"\3\2\2\2\u0166\u0164\3\2\2\2\u0166\u0167\3\2\2\2\u0167A\3\2\2\2\u0168"+
+		"\u0166\3\2\2\2\u0169\u016e\5L\'\2\u016a\u016b\7\'\2\2\u016b\u016d\5L\'"+
+		"\2\u016c\u016a\3\2\2\2\u016d\u0170\3\2\2\2\u016e\u016c\3\2\2\2\u016e\u016f"+
+		"\3\2\2\2\u016fC\3\2\2\2\u0170\u016e\3\2\2\2\u0171\u0172\7\r\2\2\u0172"+
+		"\u0173\7 \2\2\u0173\u0174\7\33\2\2\u0174\u017e\7\27\2\2\u0175\u0178\7"+
+		"\33\2\2\u0176\u0177\7(\2\2\u0177\u0179\7\33\2\2\u0178\u0176\3\2\2\2\u0178"+
+		"\u0179\3\2\2\2\u0179\u017f\3\2\2\2\u017a\u017b\7\6\2\2\u017b\u017c\7("+
+		"\2\2\u017c\u017f\7\33\2\2\u017d\u017f\5V,\2\u017e\u0175\3\2\2\2\u017e"+
+		"\u017a\3\2\2\2\u017e\u017d\3\2\2\2\u017f\u0180\3\2\2\2\u0180\u0181\7!"+
+		"\2\2\u0181\u0182\5\66\34\2\u0182E\3\2\2\2\u0183\u0184\7\17\2\2\u0184\u0185"+
+		"\7&\2\2\u0185G\3\2\2\2\u0186\u0187\7\16\2\2\u0187\u0188\7&\2\2\u0188I"+
+		"\3\2\2\2\u0189\u018b\7\t\2\2\u018a\u018c\5V,\2\u018b\u018a\3\2\2\2\u018b"+
+		"\u018c\3\2\2\2\u018c\u018d\3\2\2\2\u018d\u018e\7&\2\2\u018eK\3\2\2\2\u018f"+
+		"\u0190\7\6\2\2\u0190\u0191\7(\2\2\u0191\u0199\7\33\2\2\u0192\u0195\7\33"+
+		"\2\2\u0193\u0194\7(\2\2\u0194\u0196\7\33\2\2\u0195\u0193\3\2\2\2\u0195"+
+		"\u0196\3\2\2\2\u0196\u0199\3\2\2\2\u0197\u0199\5V,\2\u0198\u018f\3\2\2"+
+		"\2\u0198\u0192\3\2\2\2\u0198\u0197\3\2\2\2\u0199\u01a0\3\2\2\2\u019a\u019b"+
+		"\7$\2\2\u019b\u019c\5V,\2\u019c\u019d\7%\2\2\u019d\u019f\3\2\2\2\u019e"+
+		"\u019a\3\2\2\2\u019f\u01a2\3\2\2\2\u01a0\u019e\3\2\2\2\u01a0\u01a1\3\2"+
+		"\2\2\u01a1\u01aa\3\2\2\2\u01a2\u01a0\3\2\2\2\u01a3\u01a8\7*\2\2\u01a4"+
+		"\u01a9\5V,\2\u01a5\u01a9\5P)\2\u01a6\u01a9\5\26\f\2\u01a7\u01a9\5N(\2"+
+		"\u01a8\u01a4\3\2\2\2\u01a8\u01a5\3\2\2\2\u01a8\u01a6\3\2\2\2\u01a8\u01a7"+
+		"\3\2\2\2\u01a9\u01ab\3\2\2\2\u01aa\u01a3\3\2\2\2\u01ab\u01ac\3\2\2\2\u01ac"+
+		"\u01aa\3\2\2\2\u01ac\u01ad\3\2\2\2\u01adM\3\2\2\2\u01ae\u01af\7\31\2\2"+
+		"\u01af\u01b0\7\33\2\2\u01b0\u01b2\7 \2\2\u01b1\u01b3\5V,\2\u01b2\u01b1"+
+		"\3\2\2\2\u01b2\u01b3\3\2\2\2\u01b3\u01b8\3\2\2\2\u01b4\u01b5\7\'\2\2\u01b5"+
+		"\u01b7\5V,\2\u01b6\u01b4\3\2\2\2\u01b7\u01ba\3\2\2\2\u01b8\u01b6\3\2\2"+
+		"\2\u01b8\u01b9\3\2\2\2\u01b9\u01bb\3\2\2\2\u01ba\u01b8\3\2\2\2\u01bb\u01bc"+
+		"\7!\2\2\u01bcO\3\2\2\2\u01bd\u01c0\7$\2\2\u01be\u01c1\5P)\2\u01bf\u01c1"+
+		"\5V,\2\u01c0\u01be\3\2\2\2\u01c0\u01bf\3\2\2\2\u01c1\u01c9\3\2\2\2\u01c2"+
+		"\u01c5\7\'\2\2\u01c3\u01c6\5P)\2\u01c4\u01c6\5V,\2\u01c5\u01c3\3\2\2\2"+
+		"\u01c5\u01c4\3\2\2\2\u01c6\u01c8\3\2\2\2\u01c7\u01c2\3\2\2\2\u01c8\u01cb"+
+		"\3\2\2\2\u01c9\u01c7\3\2\2\2\u01c9\u01ca\3\2\2\2\u01ca\u01cc\3\2\2\2\u01cb"+
+		"\u01c9\3\2\2\2\u01cc\u01cd\7%\2\2\u01cdQ\3\2\2\2\u01ce\u01cf\t\3\2\2\u01cf"+
+		"\u01d0\5X-\2\u01d0S\3\2\2\2\u01d1\u01d2\5X-\2\u01d2\u01d3\t\3\2\2\u01d3"+
+		"U\3\2\2\2\u01d4\u01d5\b,\1\2\u01d5\u01d6\7-\2\2\u01d6\u01e1\5V,\f\u01d7"+
+		"\u01e1\5R*\2\u01d8\u01e1\5T+\2\u01d9\u01de\5X-\2\u01da\u01db\7$\2\2\u01db"+
+		"\u01dc\5V,\2\u01dc\u01dd\7%\2\2\u01dd\u01df\3\2\2\2\u01de\u01da\3\2\2"+
+		"\2\u01de\u01df\3\2\2\2\u01df\u01e1\3\2\2\2\u01e0\u01d4\3\2\2\2\u01e0\u01d7"+
+		"\3\2\2\2\u01e0\u01d8\3\2\2\2\u01e0\u01d9\3\2\2\2\u01e1\u01f6\3\2\2\2\u01e2"+
+		"\u01e3\f\13\2\2\u01e3\u01e4\t\4\2\2\u01e4\u01f5\5V,\f\u01e5\u01e6\f\n"+
+		"\2\2\u01e6\u01e7\t\5\2\2\u01e7\u01f5\5V,\13\u01e8\u01e9\f\t\2\2\u01e9"+
+		"\u01ea\t\6\2\2\u01ea\u01f5\5V,\n\u01eb\u01ec\f\b\2\2\u01ec\u01ed\t\7\2"+
+		"\2\u01ed\u01f5\5V,\t\u01ee\u01ef\f\7\2\2\u01ef\u01f0\7\65\2\2\u01f0\u01f5"+
+		"\5V,\b\u01f1\u01f2\f\6\2\2\u01f2\u01f3\7\66\2\2\u01f3\u01f5\5V,\7\u01f4"+
+		"\u01e2\3\2\2\2\u01f4\u01e5\3\2\2\2\u01f4\u01e8\3\2\2\2\u01f4\u01eb\3\2"+
+		"\2\2\u01f4\u01ee\3\2\2\2\u01f4\u01f1\3\2\2\2\u01f5\u01f8\3\2\2\2\u01f6"+
+		"\u01f4\3\2\2\2\u01f6\u01f7\3\2\2\2\u01f7W\3\2\2\2\u01f8\u01f6\3\2\2\2"+
+		"\u01f9\u01fb\7 \2\2\u01fa\u01fc\5V,\2\u01fb\u01fa\3\2\2\2\u01fb\u01fc"+
+		"\3\2\2\2\u01fc\u01fd\3\2\2\2\u01fd\u020b\7!\2\2\u01fe\u01ff\7\33\2\2\u01ff"+
+		"\u0200\7$\2\2\u0200\u0201\5V,\2\u0201\u0202\7%\2\2\u0202\u020b\3\2\2\2"+
+		"\u0203\u0204\t\b\2\2\u0204\u0205\7(\2\2\u0205\u020b\7\33\2\2\u0206\u020b"+
+		"\5b\62\2\u0207\u020b\7\37\2\2\u0208\u020b\7\33\2\2\u0209\u020b\7\36\2"+
+		"\2\u020a\u01f9\3\2\2\2\u020a\u01fe\3\2\2\2\u020a\u0203\3\2\2\2\u020a\u0206"+
+		"\3\2\2\2\u020a\u0207\3\2\2\2\u020a\u0208\3\2\2\2\u020a\u0209\3\2\2\2\u020b"+
+		"Y\3\2\2\2\u020c\u020d\7\32\2\2\u020d\u020e\7 \2\2\u020e\u020f\5\\/\2\u020f"+
+		"\u0210\7!\2\2\u0210\u0211\7&\2\2\u0211[\3\2\2\2\u0212\u0213\5V,\2\u0213"+
+		"]\3\2\2\2\u0214\u0215\7&\2\2\u0215_\3\2\2\2\u0216\u0217\7A\2\2\u0217a"+
+		"\3\2\2\2\u0218\u021d\7\35\2\2\u0219\u021d\7\34\2\2\u021a\u021b\7:\2\2"+
+		"\u021b\u021d\7\34\2\2\u021c\u0218\3\2\2\2\u021c\u0219\3\2\2\2\u021c\u021a"+
+		"\3\2\2\2\u021dc\3\2\2\2:hs\u0080\u0086\u0089\u008e\u0095\u009f\u00a4\u00ac"+
+		"\u00b0\u00b7\u00bf\u00c5\u00ce\u00d9\u00e0\u00f1\u00f4\u0100\u0107\u010a"+
+		"\u0112\u0116\u011d\u0125\u012e\u0133\u013d\u0146\u014f\u0154\u0158\u015c"+
+		"\u0166\u016e\u0178\u017e\u018b\u0195\u0198\u01a0\u01a8\u01ac\u01b2\u01b8"+
+		"\u01c0\u01c5\u01c9\u01de\u01e0\u01f4\u01f6\u01fb\u020a\u021c";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

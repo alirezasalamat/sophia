@@ -77,11 +77,13 @@ grammar sophia;
 
     assignment : leftHand (ASSIGN (expr | listInitializer | classAssignment)+)+ ;
 
-    leftHand : ((THIS | expr) (DOT afterDot)* | expr) ;
+    leftHand : ((THIS | expr) (DOT expr)* | expr) ;
 
     index : (LBRACK expr RBRACK)* ;
 
-    afterDot : (methodCallBody | (IDENTIFIER | THIS)) index? ;
+    //afterDot : (methodCallBody | (IDENTIFIER | THIS)) index? ;
+
+    //dot : DOT afterDot;
 
     classAssignment : NEW IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
 
@@ -93,7 +95,6 @@ grammar sophia;
 
 
     expr :
-         methodCallBody
         | expr DOT expr
         | NOT expr
         | expr op=(MUL | DIV | MOD) expr
@@ -105,11 +106,12 @@ grammar sophia;
         | preExp
         | postExp
         | literal index?
-        | afterDot
+       //| afterDot
         ;
 
     literal :
          LPAREN expr? RPAREN
+         | methodCallBody
          | IDENTIFIER
          | intLiteral
          | BOOL_LITERAL

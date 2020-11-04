@@ -118,6 +118,16 @@ public interface sophiaListener extends ParseTreeListener {
 	 */
 	void exitMethodCall(sophiaParser.MethodCallContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link sophiaParser#methodCallBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodCallBody(sophiaParser.MethodCallBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#methodCallBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodCallBody(sophiaParser.MethodCallBodyContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link sophiaParser#constructorDeclaration}.
 	 * @param ctx the parse tree
 	 */
@@ -278,16 +288,6 @@ public interface sophiaListener extends ParseTreeListener {
 	 */
 	void exitStatementWithoutTrailingSubstatement(sophiaParser.StatementWithoutTrailingSubstatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link sophiaParser#statementExp}.
-	 * @param ctx the parse tree
-	 */
-	void enterStatementExp(sophiaParser.StatementExpContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link sophiaParser#statementExp}.
-	 * @param ctx the parse tree
-	 */
-	void exitStatementExp(sophiaParser.StatementExpContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link sophiaParser#expStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -297,6 +297,16 @@ public interface sophiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpStatement(sophiaParser.ExpStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#statementExp}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementExp(sophiaParser.StatementExpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#statementExp}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementExp(sophiaParser.StatementExpContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link sophiaParser#forStatement}.
 	 * @param ctx the parse tree
@@ -337,16 +347,6 @@ public interface sophiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitForeachStatement(sophiaParser.ForeachStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link sophiaParser#emptyStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterEmptyStatement(sophiaParser.EmptyStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link sophiaParser#emptyStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitEmptyStatement(sophiaParser.EmptyStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link sophiaParser#breakStatement}.
 	 * @param ctx the parse tree
@@ -448,25 +448,35 @@ public interface sophiaListener extends ParseTreeListener {
 	 */
 	void exitLiteral(sophiaParser.LiteralContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link sophiaParser#print_stat}.
+	 * Enter a parse tree produced by {@link sophiaParser#printStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrint_stat(sophiaParser.Print_statContext ctx);
+	void enterPrintStatement(sophiaParser.PrintStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link sophiaParser#print_stat}.
+	 * Exit a parse tree produced by {@link sophiaParser#printStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrint_stat(sophiaParser.Print_statContext ctx);
+	void exitPrintStatement(sophiaParser.PrintStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link sophiaParser#print_body}.
+	 * Enter a parse tree produced by {@link sophiaParser#printBody}.
 	 * @param ctx the parse tree
 	 */
-	void enterPrint_body(sophiaParser.Print_bodyContext ctx);
+	void enterPrintBody(sophiaParser.PrintBodyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link sophiaParser#print_body}.
+	 * Exit a parse tree produced by {@link sophiaParser#printBody}.
 	 * @param ctx the parse tree
 	 */
-	void exitPrint_body(sophiaParser.Print_bodyContext ctx);
+	void exitPrintBody(sophiaParser.PrintBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#emptyStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEmptyStatement(sophiaParser.EmptyStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#emptyStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEmptyStatement(sophiaParser.EmptyStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link sophiaParser#comment}.
 	 * @param ctx the parse tree
@@ -477,4 +487,14 @@ public interface sophiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitComment(sophiaParser.CommentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link sophiaParser#intLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntLiteral(sophiaParser.IntLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#intLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntLiteral(sophiaParser.IntLiteralContext ctx);
 }

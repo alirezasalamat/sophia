@@ -148,6 +148,18 @@ public class sophiaBaseListener implements sophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMethodCallBody(sophiaParser.MethodCallBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethodCallBody(sophiaParser.MethodCallBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterConstructorDeclaration(sophiaParser.ConstructorDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -340,18 +352,6 @@ public class sophiaBaseListener implements sophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStatementExp(sophiaParser.StatementExpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStatementExp(sophiaParser.StatementExpContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterExpStatement(sophiaParser.ExpStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -359,6 +359,18 @@ public class sophiaBaseListener implements sophiaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpStatement(sophiaParser.ExpStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatementExp(sophiaParser.StatementExpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatementExp(sophiaParser.StatementExpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -407,18 +419,6 @@ public class sophiaBaseListener implements sophiaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitForeachStatement(sophiaParser.ForeachStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterEmptyStatement(sophiaParser.EmptyStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitEmptyStatement(sophiaParser.EmptyStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -544,25 +544,37 @@ public class sophiaBaseListener implements sophiaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPrint_stat(sophiaParser.Print_statContext ctx) { }
+	@Override public void enterPrintStatement(sophiaParser.PrintStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPrint_stat(sophiaParser.Print_statContext ctx) { }
+	@Override public void exitPrintStatement(sophiaParser.PrintStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPrint_body(sophiaParser.Print_bodyContext ctx) { }
+	@Override public void enterPrintBody(sophiaParser.PrintBodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPrint_body(sophiaParser.Print_bodyContext ctx) { }
+	@Override public void exitPrintBody(sophiaParser.PrintBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEmptyStatement(sophiaParser.EmptyStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEmptyStatement(sophiaParser.EmptyStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -575,6 +587,18 @@ public class sophiaBaseListener implements sophiaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitComment(sophiaParser.CommentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIntLiteral(sophiaParser.IntLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIntLiteral(sophiaParser.IntLiteralContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

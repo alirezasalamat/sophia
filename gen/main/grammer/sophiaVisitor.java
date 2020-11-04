@@ -77,6 +77,12 @@ public interface sophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMethodCall(sophiaParser.MethodCallContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link sophiaParser#methodCallBody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMethodCallBody(sophiaParser.MethodCallBodyContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link sophiaParser#constructorDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -173,17 +179,17 @@ public interface sophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatementWithoutTrailingSubstatement(sophiaParser.StatementWithoutTrailingSubstatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link sophiaParser#statementExp}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStatementExp(sophiaParser.StatementExpContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link sophiaParser#expStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitExpStatement(sophiaParser.ExpStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link sophiaParser#statementExp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementExp(sophiaParser.StatementExpContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link sophiaParser#forStatement}.
 	 * @param ctx the parse tree
@@ -208,12 +214,6 @@ public interface sophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitForeachStatement(sophiaParser.ForeachStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link sophiaParser#emptyStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitEmptyStatement(sophiaParser.EmptyStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link sophiaParser#breakStatement}.
 	 * @param ctx the parse tree
@@ -275,21 +275,33 @@ public interface sophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLiteral(sophiaParser.LiteralContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link sophiaParser#print_stat}.
+	 * Visit a parse tree produced by {@link sophiaParser#printStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPrint_stat(sophiaParser.Print_statContext ctx);
+	T visitPrintStatement(sophiaParser.PrintStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link sophiaParser#print_body}.
+	 * Visit a parse tree produced by {@link sophiaParser#printBody}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPrint_body(sophiaParser.Print_bodyContext ctx);
+	T visitPrintBody(sophiaParser.PrintBodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link sophiaParser#emptyStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEmptyStatement(sophiaParser.EmptyStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link sophiaParser#comment}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitComment(sophiaParser.CommentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link sophiaParser#intLiteral}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntLiteral(sophiaParser.IntLiteralContext ctx);
 }

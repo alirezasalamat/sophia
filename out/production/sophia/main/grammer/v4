@@ -1,33 +1,32 @@
-grammar sophia;
+grammar Sophia;
 
-    sophia :{System.out.println("hello");} classDeclaration*  EOF ;
+    blockStatements : blockStatement+ ;
+
     type : INT | STRING | BOOL ;
 
-    classDeclaration : CLASS id = IDENTIFIER (EXTENDS IDENTIFIER)? {System.out.println("kir"+ $id.text);} classBody ;
+    classDeclaration : CLASS IDENTIFIER (EXTENDS IDENTIFIER)?  classBody ;
 
     classBody : LBRACE classBodyDeclaration RBRACE ;
 
-    classBodyDeclaration : SEMI | block* | memberDeclaration*  ;
+    classBodyDeclaration : SEMI | block | memberDeclaration ;
 
     memberDeclaration : methodDeclaration | constructorDeclaration | fieldDeclaration ;
 
-    methodDeclaration : DEF methodType IDENTIFIER LPAREN methodArguements? RPAREN methodBody ;
+    methodDeclaration : DEF methodType IDENTIFIER LPAREN methodArguements RPAREN methodBody ;
 
-    methodArguements : variableDeclaration (COMMA variableDeclaration)* ;
+    methodArguements : variableDeclaration (COMMA variableDeclaration   )* ;
 
     methodType : type | VOID ;
 
-    methodBody : LBRACE ((variableDeclaration SEMI)* blockStatements)? RBRACE;
+    methodBody : block;
 
-    methodCall : (IDENTIFIER | THIS | methodCallBody) DOT methodCallBody ;
+    methodCall : IDENTIFIER DOT IDENTIFIER '(' expr? | expr (COMMA expr)* ')' | THIS DOT IDENTIFIER '(' expr? | expr (COMMA expr)*')' ;
 
-    methodCallBody : IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
+    constructorDeclaration : DEF IDENTIFIER LPAREN methodArguements RPAREN ;
 
-    constructorDeclaration : DEF IDENTIFIER LPAREN methodArguements? RPAREN methodBody ;
+    fieldDeclaration : variableDeclaration | variableInitializer ;
 
-    fieldDeclaration : variableDeclaration SEMI | variableInitializer SEMI;
-
-    variableDeclaration : IDENTIFIER COLON (listDeclaration | type | IDENTIFIER);
+    variableDeclaration : IDENTIFIER COLON (listDeclaration | type | IDENTIFIER) SEMI;
 
     variableInitializer : assignment ;
 
@@ -35,15 +34,14 @@ grammar sophia;
 
     funcPointerDeclarationBody : FUNC '<' (VOID | (type (COMMA type)*)) ARROW type '>';
 
-    listDeclaration : LIST LPAREN (( POS_INT '#' (type | listDeclaration)) | (listBody (COMMA listBody)* )) RPAREN;
+    listDeclaration : LIST LPAREN (( POS_INT '#' (type | listDeclaration)) | (listBody (COMMA listBody)* )) RPAREN SEMI;
 
     listBody : variableDeclaration | funcPointerDeclaration | listDeclaration | type ;
 
     block : LBRACE blockStatements? RBRACE ;
 
-    blockStatements : blockStatement+ ;
 
-    blockStatement : statement ;
+    blockStatement : VariableDeclaration | classDeclaration | statement ;
 
     statement : ifStatement | forStatement | foreachStatement | statementWithoutTrailingSubstatement ;
 
@@ -54,20 +52,21 @@ grammar sophia;
     statBlock : statement | LBRACE block RBRACE ;
 
     statementWithoutTrailingSubstatement : block | emptyStatement | expStatement
-                                            | breakStatement | continueStatement | returnStatement | printStatement;
-
-    expStatement : statementExp SEMI ;
+                                            | breakStatement | continueStatement | returnStatement ;
 
     statementExp : assignment | preExp | postExp | methodCall ;
 
-    forStatement : FOR LPAREN initialStatement? SEMI expr? SEMI updateStatement? RPAREN statBlock;
+    expStatement : statementExp SEMI ;
 
-    initialStatement : assignment (COMMA assignment)* ;
+    forStatement : FOR LPAREN initialStatement? SEMI expr? SEMI updateStatement? RPAREN block;
 
-    updateStatement :  assignment (COMMA assignment)* ;
+    initialStatement : statementExp (COMMA statementExp)* ;
 
-    foreachStatement : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER(DOT IDENTIFIER)? | THIS DOT IDENTIFIER | expr) RPAREN statBlock ;
+    updateStatement : statementExp (COMMA statementExp)* ;
 
+    foreachStatement : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER | THIS DOT IDENTIFIER) RPAREN block ;
+
+    emptyStatement : SEMI ;
 
     breakStatement : BREAK SEMI ;
 
@@ -75,52 +74,40 @@ grammar sophia;
 
     returnStatement : RETURN expr? SEMI ;
 
-    assignment : leftHand (ASSIGN (expr | listInitializer | classAssignment)+)+ ;
+    assignment : (THIS DOT IDENTIFIER | IDENTIFIER) ASSIGN (expr | listInitializer | methodCall | classAssignment) SEMI ;
 
-    leftHand : ((THIS | expr) (DOT afterDot)* | expr) ;
+    classAssignment : NEW IDENTIFIER LPAREN expr (COMMA expr)* RPAREN;
 
-    index : (LBRACK expr RBRACK)* ;
+    listInitializer : LBRACK (expr (COMMA expr) | listInitializer (COMMA listInitializer)) RBRACK ;
 
-    afterDot : (methodCallBody | (IDENTIFIER | THIS)) index? ;
+    preExp : (DEC | INC) IDENTIFIER SEMI ;
 
-    classAssignment : NEW IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
-
-    listInitializer : LBRACK ((listInitializer | expr) (COMMA (listInitializer | expr))*) RBRACK ;
-
-    preExp : (DEC | INC) literal ;
-
-    postExp : literal (DEC | INC) ;
-
+    postExp : IDENTIFIER (DEC | INC) SEMI ;
 
     expr :
-         methodCallBody
-        | expr DOT expr
-        | NOT expr
+         NOT expr
         | expr op=(MUL | DIV | MOD) expr
         | expr op=(ADD | SUB) expr
         | expr op=(LE | GE | LT | GT) expr
-        | expr op=(EQUAL | NOTEQUAL | ASSIGN) expr
+        | expr op=(EQUAL | NOTEQUAL) expr
         | expr AND expr
         | expr OR expr
-        | preExp
-        | postExp
-        | literal index?
-        | afterDot
+        | literal
         ;
 
     literal :
-         LPAREN expr? RPAREN
-         | IDENTIFIER
-         | intLiteral
+         LPAREN expr RPAREN
+         | IDENTIFIER LBRACK (expr) RBRACK
+         | (THIS | IDENTIFIER) DOT IDENTIFIER
+         | INT_LITERAL
          | BOOL_LITERAL
+         | IDENTIFIER
          | STRING_LITERAL
          ;
 
-    printStatement : PRINT LPAREN printBody RPAREN SEMI;
+    print_stat : PRINT LPAREN print_body RPAREN SEMI;
 
-    printBody : expr;
-
-    emptyStatement : SEMI ;
+    print_body : expr;
 
     comment : COMMENT ;
 
@@ -131,47 +118,21 @@ grammar sophia;
     sentence : value ( calc_operator value )+;
     calc_operator : ADD | SUB | MUL | DIV | BITAND | BITOR | CARET | MOD ;
 // -------------------------------------------------------------------------------
-
-AmirAli Raygan, [03.11.20 22:13]
-initial_stat : IDENTIFIER ASSIGN value | '';
+    initial_stat : IDENTIFIER ASSIGN value | '';
     condition_stat : value compare_operator value | IDENTIFIER | '';
     update_stat : IDENTIFIER  one_var_operation | IDENTIFIER ASSIGN value;
     one_var_operation : INC | DEC;
     foreach_stat : FOREACH LPAREN IDENTIFIER IN (IDENTIFIER | IDENTIFIER DOT IDENTIFIER) RPAREN block;
 */
-    CLASS : 'class' ;
-    EXTENDS : 'extends' ;
-    THIS : 'this' ;
-    DEF : 'def' ;
-    FUNC : 'func' ;
-    RETURN : 'return' ;
-    IF : 'if' ;
-    ELSE : 'else' ;
-    FOR : 'for' ;
-    FOREACH : 'foreach' ;
-    CONTINUE : 'continue' ;
-    BREAK : 'break' ;
-    FALSE : 'false' ;
-    TRUE : 'true' ;
-    INT : 'int' ;
-    STRING : 'string' ;
-    BOOL : 'bool' ;
-    VOID : 'void' ;
-    LIST : 'list' ;
-    IN : 'in' ;
-    NULL : 'null' ;
-    NEW : 'new' ;
-    PRINT : 'print' ;
 
     IDENTIFIER
         : ('_' | [A-Z] | [a-z])+ ('_' | [a-z] | [A-Z] | [0-9])*
         ;
 
-    intLiteral : ZERO | POS_INT | SUB POS_INT ;
     POS_INT : [1-9][0-9]* ;
-    ZERO : '0' ;
+    INT_LITERAL : '0' | POS_INT ;
     STRING_LITERAL : '"' ~('"')+ '"';
-    BOOL_LITERAL : FALSE | TRUE;
+    BOOL_LITERAL : 'false' | 'true';
 
     // separators
     LPAREN:             '(';
@@ -213,6 +174,29 @@ initial_stat : IDENTIFIER ASSIGN value | '';
 
 
     // keywords
+    CLASS : 'class' ;
+    EXTENDS : 'extends' ;
+    THIS : 'this' ;
+    DEF : 'def' ;
+    FUNC : 'func' ;
+    RETURN : 'return' ;
+    IF : 'if' ;
+    ELSE : 'else' ;
+    FOR : 'for' ;
+    FOREACH : 'foreach' ;
+    CONTINUE : 'continue' ;
+    BREAK : 'break' ;
+    FALSE : 'false' ;
+    TRUE : 'true' ;
+    INT : 'int' ;
+    STRING : 'string' ;
+    BOOL : 'bool' ;
+    VOID : 'void' ;
+    LIST : 'list' ;
+    IN : 'in' ;
+    NULL : 'null' ;
+    NEW : 'new' ;
+    PRINT : 'print' ;
 
 
 
