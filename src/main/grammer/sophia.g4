@@ -19,7 +19,7 @@ grammar sophia;
 
     methodBody : LBRACE ((variableDeclaration SEMI)* blockStatements)? RBRACE;
 
-    methodCall : (IDENTIFIER | THIS | methodCallBody) DOT methodCallBody ;
+    methodCall : ((IDENTIFIER | THIS | methodCallBody) DOT)? methodCallBody ;
 
     methodCallBody : IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
 
@@ -95,6 +95,8 @@ grammar sophia;
     expr :
          methodCallBody
         | expr DOT expr
+        | postExp
+        | preExp
         | NOT expr
         | expr op=(MUL | DIV | MOD) expr
         | expr op=(ADD | SUB) expr
@@ -102,8 +104,6 @@ grammar sophia;
         | expr op=(EQUAL | NOTEQUAL | ASSIGN) expr
         | expr AND expr
         | expr OR expr
-        | preExp
-        | postExp
         | literal index?
         | afterDot
         ;
