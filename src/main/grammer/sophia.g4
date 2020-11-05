@@ -8,7 +8,7 @@ grammar sophia;
            if ($bb.text == null){
                System.out.println("ClassDec:"+$aa.text);
            } else {
-               System.out.println("ClassDec:"+$aa.text+", "+$bb.text);
+               System.out.println("ClassDec:"+$aa.text+","+$bb.text);
            }
        }
     classBody;
@@ -62,13 +62,13 @@ grammar sophia;
 
     blockStatement : statement ;
 
-    statement : statementWithoutTrailingSubstatement | ifStatement | forStatement | foreachStatement ;
+    statement : statementWithoutSubstatement | ifStatement | forStatement | foreachStatement ;
 
     ifStatement : IF
             {
                 System.out.println("Conditional:if");
             }
-            condition_block (ELSE IF bb=condition_block {
+            conditionBlock (ELSE IF bb=conditionBlock {
                 System.out.println("Conditional:else");
                 System.out.println("Conditional:if");
             })* (ELSE cc=statBlock
@@ -77,11 +77,11 @@ grammar sophia;
             })?
             ;
 
-    condition_block : expr statBlock ;
+    conditionBlock : exprBody statBlock ;
 
     statBlock : statement | LBRACE block RBRACE ;
 
-    statementWithoutTrailingSubstatement : block | emptyStatement | expStatement
+    statementWithoutSubstatement : block | emptyStatement | expStatement
                                             | breakStatement | continueStatement | returnStatement | printStatement;
 
     expStatement : statementExp SEMI ;
@@ -92,7 +92,7 @@ grammar sophia;
                 {
                         System.out.println("Loop:for");
                 }
-                LPAREN initialStatement? SEMI expr? SEMI updateStatement? RPAREN statBlock;
+                LPAREN initialStatement? SEMI exprBody? SEMI updateStatement? RPAREN statBlock;
 
     initialStatement : assignment (COMMA assignment)* ;
 
@@ -102,7 +102,7 @@ grammar sophia;
                     {
                             System.out.println("Loop:foreach");
                     }
-                    (IDENTIFIER(DOT IDENTIFIER)? | THIS DOT IDENTIFIER | expr) RPAREN statBlock;
+                    (IDENTIFIER(DOT IDENTIFIER)? | THIS DOT IDENTIFIER | exprBody) RPAREN statBlock;
 
 
     breakStatement : BREAK SEMI
@@ -121,7 +121,7 @@ grammar sophia;
         {
                 System.out.println("Return");
         }
-        expr? SEMI;
+        exprBody? SEMI;
 
     expressionName
         	:   IDENTIFIER
@@ -129,204 +129,166 @@ grammar sophia;
         	;
 
     primary
-    	:	(	primaryNoNewArray_lfno_primary
+    	:	(	primary6
     		|	classAssignment
     		)
-    		(	primaryNoNewArray_lf_primary
+    		(	primary5
     		)*
     	;
 
-    primaryNoNewArray_lf_arrayAccess
-    	:
-    	;
-
-    primaryNoNewArray_lfno_arrayAccess
+    primary4
     	:	literal
     	|	THIS
     	|	LPAREN expression RPAREN
     	|	classAssignment
-    	|	fieldAccess
+    	|	fieldCall
     	|	methodCall
     	|   returnFuncPointer
     	;
 
-    primaryNoNewArray_lf_primary
-    	:
-    		fieldAccess_lf_primary
-    	|	arrayAccess_lf_primary
+    primary5
+    	:	fieldCallPrimary
+    	|	aarrayCallPrimary
     	|	methodCall2
     	|   returnFuncPointer
-
     	;
 
-    primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary
-    	:
-    	;
 
-    primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary
-    	:
-    		fieldAccess_lf_primary
+    primary3
+    	:	fieldCallPrimary
     	|	methodCall2
     	|   returnFuncPointer
-
     	;
 
-    primaryNoNewArray_lfno_primary
+    primary6
     	:	literal
     	|	THIS
     	|	LPAREN expression RPAREN
     	|	classAssignment
-    	|	arrayAccess_lfno_primary
+    	|	arrayCallNoPrimary
     	|	methodCall2
-
-
     	;
 
-    primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary
-    	:
-    	;
-
-    primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary
+    primary2
     	:	literal
-
-
     	|	THIS
-
     	|	LPAREN expression RPAREN
     	|	classAssignment
     	|	methodCall2
     	;
 
-    fieldAccess
+    fieldCall
     	:	primary DOT IDENTIFIER
     	;
 
-    fieldAccess_lf_primary
+    fieldCallPrimary
     	:	DOT IDENTIFIER
     	;
 
-    arrayAccess
+    arrayCall
     	:	(	expressionName LBRACK expression RBRACK
-    		|	primaryNoNewArray_lfno_arrayAccess LBRACK expression RBRACK
+    		|	primary4 LBRACK expression RBRACK
     		)
-    		(	primaryNoNewArray_lf_arrayAccess LBRACK expression RBRACK
+    		( LBRACK expression RBRACK
     		)*
     	;
 
-    arrayAccess_lf_primary
-    	:	(	primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary LBRACK expression RBRACK
+    aarrayCallPrimary
+    	:	(	primary3 LBRACK expression RBRACK
     		)
-    		(	primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary LBRACK expression RBRACK
+    		(	LBRACK expression RBRACK
     		)*
     	;
 
-    arrayAccess_lfno_primary
+    arrayCallNoPrimary
     	:	(	expressionName LBRACK expression RBRACK
-    		|	primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary LBRACK expression RBRACK
+    		|	primary2 LBRACK expression RBRACK
     		)
-    		(	primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary LBRACK expression RBRACK
+    		(	LBRACK expression RBRACK
     		)*
     	;
 
-    returnFuncPointer : LPAREN ( empty | expr (COMMA expr)* ) RPAREN;
+    returnFuncPointer : LPAREN ( empty | exprBody (COMMA exprBody)* ) RPAREN;
 
     methodCall : ((IDENTIFIER | primary | expressionName) DOT)? methodCallBody;
 
     methodCall2 : ((IDENTIFIER | expressionName) DOT)? methodCallBody ;
 
-    methodCallBody : IDENTIFIER LPAREN ( empty | expr (COMMA expr)* ) RPAREN ;
+    methodCallBody : IDENTIFIER LPAREN ( empty | exprBody (COMMA exprBody)* ) RPAREN ;
 
     empty: ;
 
     expression
-    	:	expr
+    	:	exprBody
     	|   assignment
     	;
 
-    assignment : leftHandSide ASSIGN (expr | assignment)
+    assignment : leftSide ASSIGN (exprBody | assignment)
                     {
                         System.out.println("Operator:=");
-                    }
-      ;
+                    };
 
-
-
-    leftHandSide
+    leftSide
      	:
         expressionName
-     	|	fieldAccess
-     	|	arrayAccess
-     	| expr
+     	|	fieldCall
+     	|	arrayCall
+     	| exprBody
      	;
 
-    classAssignment : NEW IDENTIFIER LPAREN ( empty | expr (COMMA expr)* ) RPAREN ;
+    classAssignment : NEW IDENTIFIER LPAREN ( empty | exprBody (COMMA exprBody)* ) RPAREN ;
 
-    listInitializer : LBRACK ((listInitializer | expr) (COMMA (listInitializer | expr))*)? RBRACK ;
+    listInitializer : LBRACK ((listInitializer | exprBody) (COMMA (listInitializer | exprBody))*)? RBRACK ;
 
-    expr
+    exprBody
 	:	conditionalOrExpression | listInitializer
 	;
 
     conditionalOrExpression
 	:	conditionalAndExpression
-	|	conditionalOrExpression op = OR conditionalAndExpression
+	|	conditionalOrExpression OR conditionalAndExpression
         {
-            if ($op.text != null){
-                System.out.println("Operator:"+$op.text);
-            }
+            System.out.println("Operator:||");
         }
 	;
 
     conditionalAndExpression
 	:	equalityExpression
-	|	conditionalAndExpression op = AND equalityExpression
+	|	conditionalAndExpression AND equalityExpression
         {
-            if ($op.text != null){
-                System.out.println("Operator:"+$op.text);
-            }
+            System.out.println("Operator:&&");
         }
 	;
-
 
     equalityExpression
-	:	relationalExpression
-	|	equalityExpression op = (EQUAL | NOTEQUAL) relationalExpression
+	:	relationExpression
+	|	equalityExpression op = (EQUAL | NOTEQUAL) relationExpression
         {
-            if ($op.text != null){
-                System.out.println("Operator:"+$op.text);
-            }
+            System.out.println("Operator:"+$op.text);
         }
 	;
 
-    relationalExpression
-	:	additiveExpression
-	|	relationalExpression op=(LE | GE | LT | GT) additiveExpression
+    relationExpression
+	:	addExpression
+	|	relationExpression  op=(LE | GE | LT | GT) addExpression
         {
-            if ($op.text != null){
-                System.out.println("Operator:"+$op.text);
-            }
+            System.out.println("Operator:"+$op.text);
         }
 	;
 
-
-
-    additiveExpression
-	:	multiplicativeExpression
-	|	additiveExpression op = (ADD | SUB) multiplicativeExpression
+    addExpression
+	:	multipleExpression
+	|	addExpression  op = (ADD | SUB) multipleExpression
                 {
-                    if ($op.text != null){
-                        System.out.println("Operator:"+$op.text);
-                    }
+                    System.out.println("Operator:"+$op.text);
                 }
 	;
 
-    multiplicativeExpression
+    multipleExpression
 	:	unaryExpression
-    |	multiplicativeExpression op = (MUL | DIV | MOD) unaryExpression
+    |	multipleExpression  op = (MUL | DIV | MOD) unaryExpression
     {
-        if ($op.text != null){
-            System.out.println("Operator:"+$op.text);
-        }
+        System.out.println("Operator:"+$op.text);
     }
 	;
 
@@ -340,40 +302,48 @@ grammar sophia;
 
     preIncrementExpression
     	:	INC unaryExpression
+    	        {
+                    System.out.println("Operator:++");
+                }
     	;
 
     preDecrementExpression
     	:	DEC unaryExpression
+    	        {
+                    System.out.println("Operator:--");
+                }
     	;
 
     unaryExpressionNotPlusMinus
     	:	postfixExpression
     	|	NOT unaryExpression
+    	        {
+                    System.out.println("Operator:!");
+                }
     	;
 
     postfixExpression
     	:	(	primary
     		|	expressionName
     		)
-    		(	postIncrementExpression_lf_postfixExpression
-    		|	postDecrementExpression_lf_postfixExpression
+    		(	postIncExpressionPostfix
+    		|	postDecExpressionPostfix
     		)*
     	;
 
-    postIncrementExpression
-    	:	postfixExpression '++'
-    	;
 
-    postIncrementExpression_lf_postfixExpression
+    postIncExpressionPostfix
     	:	INC
+    	        {
+                    System.out.println("Operator:++");
+                }
     	;
 
-    postDecrementExpression
-    	:	postfixExpression '--'
-    	;
-
-    postDecrementExpression_lf_postfixExpression
+    postDecExpressionPostfix
     	:	DEC
+    	        {
+                    System.out.println("Operator:--");
+                }
     	;
 
     literal :
@@ -389,7 +359,7 @@ grammar sophia;
                     }
                     ;
 
-    printBody : expr;
+    printBody : exprBody ;
 
     emptyStatement : SEMI ;
 
