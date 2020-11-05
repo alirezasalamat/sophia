@@ -64,11 +64,11 @@ grammar sophia;
 
     statement : statementWithoutTrailingSubstatement | ifStatement | forStatement | foreachStatement ;
 
-    ifStatement : IF condition_block
+    ifStatement : IF
             {
                 System.out.println("Conditional:if");
             }
-            (ELSE IF bb=condition_block {
+            condition_block (ELSE IF bb=condition_block {
                 System.out.println("Conditional:else");
                 System.out.println("Conditional:if");
             })* (ELSE cc=statBlock
@@ -86,7 +86,7 @@ grammar sophia;
 
     expStatement : statementExp SEMI ;
 
-    statementExp :  assignment | methodCall { System.out.println("MethodCall");} | preExp | postExp  ;
+    statementExp :  assignment | methodCall { System.out.println("MethodCall");}  ;
 
     forStatement : FOR
                 {
@@ -124,8 +124,7 @@ grammar sophia;
         expr? SEMI;
 
     expressionName
-        	:
-        	    IDENTIFIER
+        	:   IDENTIFIER
         	|	expressionName DOT IDENTIFIER
         	;
 
@@ -229,20 +228,22 @@ grammar sophia;
     		)*
     	;
 
-    returnFuncPointer : LPAREN expr? (COMMA expr)* RPAREN;
+    returnFuncPointer : LPAREN ( empty | expr (COMMA expr)* ) RPAREN;
 
     methodCall : ((IDENTIFIER | primary | expressionName) DOT)? methodCallBody;
 
     methodCall2 : ((IDENTIFIER | expressionName) DOT)? methodCallBody ;
 
-    methodCallBody : IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
+    methodCallBody : IDENTIFIER LPAREN ( empty | expr (COMMA expr)* ) RPAREN ;
+
+    empty: ;
 
     expression
     	:	expr
     	|   assignment
     	;
 
-    assignment : leftHandSide ASSIGN expr
+    assignment : leftHandSide ASSIGN (expr | assignment)
                     {
                         System.out.println("Operator:=");
                     }
@@ -255,15 +256,12 @@ grammar sophia;
         expressionName
      	|	fieldAccess
      	|	arrayAccess
+     	| expr
      	;
 
-    classAssignment : NEW IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
+    classAssignment : NEW IDENTIFIER LPAREN ( empty | expr (COMMA expr)* ) RPAREN ;
 
     listInitializer : LBRACK ((listInitializer | expr) (COMMA (listInitializer | expr))*) RBRACK ;
-
-    preExp : (DEC | INC) literal ;
-
-    postExp : literal (DEC | INC) ;
 
     expr
 	:	conditionalOrExpression | listInitializer
@@ -397,6 +395,7 @@ grammar sophia;
 
     comment : COMMENT ;
 
+    BOOL_LITERAL : FALSE | TRUE;
     // keywords
     CLASS : 'class' ;
     EXTENDS : 'extends' ;
@@ -430,7 +429,6 @@ grammar sophia;
     POS_INT : [1-9][0-9]* ;
     ZERO : '0' ;
     STRING_LITERAL : '"' ~('"')+ '"';
-    BOOL_LITERAL : FALSE | TRUE;
 
     // separators
     LPAREN:             '(';
@@ -450,8 +448,6 @@ grammar sophia;
     GT: '>';
     LT: '<';
     NOT: '!';
-    TILDE: '~';
-    QUESTION: '?';
     COLON: ':';
     EQUAL: '==';
     LE: '<=';
@@ -465,9 +461,6 @@ grammar sophia;
     SUB: '-';
     MUL: '*';
     DIV: '/';
-    BITAND: '&';
-    BITOR: '|';
-    CARET: '^';
     MOD: '%';
 
     COMMENT
