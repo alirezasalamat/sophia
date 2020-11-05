@@ -52,7 +52,7 @@ grammar sophia;
 
     funcPointerDeclarationBody : FUNC '<' (VOID | (type (COMMA type)*)) ARROW type '>';
 
-    listDeclaration : LIST LPAREN (( POS_INT '#' (type | listDeclaration)) | (listBody (COMMA listBody)* )) RPAREN;
+    listDeclaration : LIST LPAREN (( POS_INT '#' (type | listDeclaration)) | (listBody (COMMA listBody)* ))? RPAREN;
 
     listBody : listvariableDeclaration | listDeclaration | type ;
 
@@ -261,7 +261,7 @@ grammar sophia;
 
     classAssignment : NEW IDENTIFIER LPAREN ( empty | expr (COMMA expr)* ) RPAREN ;
 
-    listInitializer : LBRACK ((listInitializer | expr) (COMMA (listInitializer | expr))*) RBRACK ;
+    listInitializer : LBRACK ((listInitializer | expr) (COMMA (listInitializer | expr))*)? RBRACK ;
 
     expr
 	:	conditionalOrExpression | listInitializer
