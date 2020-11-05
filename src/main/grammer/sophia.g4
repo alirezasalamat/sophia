@@ -65,18 +65,18 @@ grammar sophia;
 
     statement : statementWithoutTrailingSubstatement | ifStatement | forStatement | foreachStatement ;
 
-    ifStatement : IF
+    ifStatement : IF condition_block
             {
                 System.out.println("Conditional:if");
             }
             (ELSE IF bb=condition_block {
-                System.out.println("Conditional:if");
                 System.out.println("Conditional:else");
+                System.out.println("Conditional:if");
             })* (ELSE cc=statBlock
             {
                 System.out.println("Conditional:else");
             })?
-            condition_block;
+            ;
 
     condition_block : expr statBlock ;
 
@@ -87,7 +87,7 @@ grammar sophia;
 
     expStatement : statementExp SEMI ;
 
-    statementExp :  assignment | methodCall | preExp | postExp  ;
+    statementExp :  assignment | methodCall { System.out.println("MethodCall");} | preExp | postExp  ;
 
     forStatement : FOR
                 {
@@ -138,27 +138,18 @@ grammar sophia;
     		)*
     	;
 
-    primaryNoNewArray
-    	:	literal
-    	|	'this'
-    	|	'(' expression ')'
-    	|	classAssignment
-    	|	fieldAccess
-    	|	arrayAccess
-    	|	methodCall
-    	;
-
     primaryNoNewArray_lf_arrayAccess
     	:
     	;
 
     primaryNoNewArray_lfno_arrayAccess
     	:	literal
-    	|	'this'
-    	|	'(' expression ')'
+    	|	THIS
+    	|	LPAREN expression RPAREN
     	|	classAssignment
     	|	fieldAccess
     	|	methodCall
+    	|   returnFuncPointer
     	;
 
     primaryNoNewArray_lf_primary
@@ -178,16 +169,18 @@ grammar sophia;
     	:
     		fieldAccess_lf_primary
     	|	methodCall2
+    	|   returnFuncPointer
 
     	;
 
     primaryNoNewArray_lfno_primary
     	:	literal
-    	|	'this'
-    	|	'(' expression ')'
+    	|	THIS
+    	|	LPAREN expression RPAREN
     	|	classAssignment
     	|	arrayAccess_lfno_primary
     	|	methodCall2
+
 
     	;
 
@@ -199,73 +192,62 @@ grammar sophia;
     	:	literal
 
 
-    	|	'this'
+    	|	THIS
 
-    	|	'(' expression ')'
+    	|	LPAREN expression RPAREN
     	|	classAssignment
     	|	methodCall2
     	;
 
     fieldAccess
-    	:	primary '.' IDENTIFIER
-
+    	:	primary DOT IDENTIFIER
     	;
 
     fieldAccess_lf_primary
-    	:	'.' IDENTIFIER
+    	:	DOT IDENTIFIER
     	;
 
-
-
     arrayAccess
-    	:	(	expressionName '[' expression ']'
-    		|	primaryNoNewArray_lfno_arrayAccess '[' expression ']'
+    	:	(	expressionName LBRACK expression RBRACK
+    		|	primaryNoNewArray_lfno_arrayAccess LBRACK expression RBRACK
     		)
-    		(	primaryNoNewArray_lf_arrayAccess '[' expression ']'
+    		(	primaryNoNewArray_lf_arrayAccess LBRACK expression RBRACK
     		)*
     	;
 
     arrayAccess_lf_primary
-    	:	(	primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary '[' expression ']'
+    	:	(	primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary LBRACK expression RBRACK
     		)
-    		(	primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary '[' expression ']'
+    		(	primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary LBRACK expression RBRACK
     		)*
     	;
 
     arrayAccess_lfno_primary
-    	:	(	expressionName '[' expression ']'
-    		|	primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary '[' expression ']'
+    	:	(	expressionName LBRACK expression RBRACK
+    		|	primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary LBRACK expression RBRACK
     		)
-    		(	primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary '[' expression ']'
+    		(	primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary LBRACK expression RBRACK
     		)*
     	;
 
-    returnFuncPointer : LPAREN expr? (COMMA expr)* RPAREN  primary*;
+    returnFuncPointer : LPAREN expr? (COMMA expr)* RPAREN;
 
-    methodCall : ((IDENTIFIER | primary | expressionName) DOT)? methodCallBody
-                {
-                        System.out.println("MethodCall");
-                }
-                ;
+    methodCall : ((IDENTIFIER | primary | expressionName) DOT)? methodCallBody;
 
-   methodCall2 : ((IDENTIFIER | expressionName) DOT)? methodCallBody
-                   {
-                           System.out.println("MethodCall");
-                   }
-                   ;
+    methodCall2 : ((IDENTIFIER | expressionName) DOT)? methodCallBody ;
 
     methodCallBody : IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
 
     expression
     	:	expr
-    	| assignment
+    	|   assignment
     	;
 
-
-
-
-
-     assignment : leftHandSide ASSIGN expr ;
+    assignment : leftHandSide ASSIGN expr
+                    {
+                        System.out.println("Operator:=");
+                    }
+      ;
 
 
 
@@ -276,12 +258,6 @@ grammar sophia;
      	|	arrayAccess
      	;
 
-
-
-
-
-   // afterDot : (methodCallBody | (IDENTIFIER | THIS)) index ;
-
     classAssignment : NEW IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
 
     listInitializer : LBRACK ((listInitializer | expr) (COMMA (listInitializer | expr))*) RBRACK ;
@@ -290,89 +266,92 @@ grammar sophia;
 
     postExp : literal (DEC | INC) ;
 
-expr
+    expr
 	:	conditionalOrExpression | listInitializer
 	;
 
-conditionalOrExpression
+    conditionalOrExpression
 	:	conditionalAndExpression
-	|	conditionalOrExpression '||' conditionalAndExpression
+	|	conditionalOrExpression op = OR conditionalAndExpression
+        {
+            if ($op.text != null){
+                System.out.println("Operator:"+$op.text);
+            }
+        }
 	;
 
-conditionalAndExpression
-	:	inclusiveOrExpression
-	|	conditionalAndExpression '&&' inclusiveOrExpression
-	;
-
-inclusiveOrExpression
-	:	exclusiveOrExpression
-	|	inclusiveOrExpression '|' exclusiveOrExpression
-	;
-
-exclusiveOrExpression
-	:	andExpression
-	|	exclusiveOrExpression '^' andExpression
-	;
-
-andExpression
+    conditionalAndExpression
 	:	equalityExpression
-	|	andExpression '&' equalityExpression
+	|	conditionalAndExpression op = AND equalityExpression
+        {
+            if ($op.text != null){
+                System.out.println("Operator:"+$op.text);
+            }
+        }
 	;
 
-equalityExpression
+
+    equalityExpression
 	:	relationalExpression
-	|	equalityExpression '==' relationalExpression
-	|	equalityExpression '!=' relationalExpression
+	|	equalityExpression op = (EQUAL | NOTEQUAL) relationalExpression
+        {
+            if ($op.text != null){
+                System.out.println("Operator:"+$op.text);
+            }
+        }
 	;
 
-relationalExpression
-	:	shiftExpression
-	|	relationalExpression '<' shiftExpression
-	|	relationalExpression '>' shiftExpression
-	|	relationalExpression '<=' shiftExpression
-	|	relationalExpression '>=' shiftExpression
-	;
-
-shiftExpression
+    relationalExpression
 	:	additiveExpression
-	|	shiftExpression '<' '<' additiveExpression
-	|	shiftExpression '>' '>' additiveExpression
-	|	shiftExpression '>' '>' '>' additiveExpression
+	|	relationalExpression op=(LE | GE | LT | GT) additiveExpression
+        {
+            if ($op.text != null){
+                System.out.println("Operator:"+$op.text);
+            }
+        }
 	;
 
-additiveExpression
+
+
+    additiveExpression
 	:	multiplicativeExpression
-	|	additiveExpression '+' multiplicativeExpression
-	|	additiveExpression '-' multiplicativeExpression
+	|	additiveExpression op = (ADD | SUB) multiplicativeExpression
+                {
+                    if ($op.text != null){
+                        System.out.println("Operator:"+$op.text);
+                    }
+                }
 	;
 
-multiplicativeExpression
+    multiplicativeExpression
 	:	unaryExpression
-	|	multiplicativeExpression '*' unaryExpression
-	|	multiplicativeExpression '/' unaryExpression
-	|	multiplicativeExpression '%' unaryExpression
+    |	multiplicativeExpression op = (MUL | DIV | MOD) unaryExpression
+    {
+        if ($op.text != null){
+            System.out.println("Operator:"+$op.text);
+        }
+    }
 	;
 
 	unaryExpression
     	:	preIncrementExpression
     	|	preDecrementExpression
-    	|	'+' unaryExpression
-    	|	'-' unaryExpression
+    	|	ADD unaryExpression
+    	|	SUB unaryExpression
     	|	unaryExpressionNotPlusMinus
     	;
 
     preIncrementExpression
-    	:	'++' unaryExpression
+    	:	INC unaryExpression
     	;
 
     preDecrementExpression
-    	:	'--' unaryExpression
+    	:	DEC unaryExpression
     	;
 
     unaryExpressionNotPlusMinus
     	:	postfixExpression
-    	|	'~' unaryExpression
-    	|	'!' unaryExpression
+    	|	NOT unaryExpression
     	;
 
     postfixExpression
@@ -389,7 +368,7 @@ multiplicativeExpression
     	;
 
     postIncrementExpression_lf_postfixExpression
-    	:	'++'
+    	:	INC
     	;
 
     postDecrementExpression
@@ -397,7 +376,7 @@ multiplicativeExpression
     	;
 
     postDecrementExpression_lf_postfixExpression
-    	:	'--'
+    	:	DEC
     	;
 
     literal :
@@ -419,6 +398,7 @@ multiplicativeExpression
 
     comment : COMMENT ;
 
+    // keywords
     CLASS : 'class' ;
     EXTENDS : 'extends' ;
     THIS : 'this' ;
@@ -490,11 +470,6 @@ multiplicativeExpression
     BITOR: '|';
     CARET: '^';
     MOD: '%';
-
-
-    // keywords
-
-
 
     COMMENT
         : '//' .*? '\n' -> skip

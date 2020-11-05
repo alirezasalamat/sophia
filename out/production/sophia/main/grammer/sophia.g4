@@ -70,8 +70,8 @@ grammar sophia;
                 System.out.println("Conditional:if");
             }
             (ELSE IF bb=condition_block {
-                System.out.println("Conditional:if");
                 System.out.println("Conditional:else");
+                System.out.println("Conditional:if");
             })* (ELSE cc=statBlock
             {
                 System.out.println("Conditional:else");
@@ -87,7 +87,9 @@ grammar sophia;
 
     expStatement : statementExp SEMI ;
 
-    statementExp :  assignment | methodCall | preExp | postExp  ;
+    statementExp :  assignment | methodCall { System.out.println("MethodCall");} | preExp | postExp  ;
+
+
 
     forStatement : FOR
                 {
@@ -166,6 +168,7 @@ grammar sophia;
     		fieldAccess_lf_primary
     	|	arrayAccess_lf_primary
     	|	methodCall2
+    	|   returnFuncPointer
 
     	;
 
@@ -238,30 +241,29 @@ grammar sophia;
     		(	primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary '[' expression ']'
     		)*
     	;
-    methodCall : ((IDENTIFIER | primary | expressionName) DOT)? methodCallBody
-                {
-                        System.out.println("MethodCall");
-                }
-                ;
 
-   methodCall2 : ((IDENTIFIER | expressionName) DOT)? methodCallBody
-                   {
-                           System.out.println("MethodCall");
-                   }
-                   ;
+    returnFuncPointer : LPAREN expr? (COMMA expr)* RPAREN  primary*;
+
+    methodCall : ((IDENTIFIER | primary | expressionName) DOT)? methodCallBody;
+
+    methodCall2 : ((IDENTIFIER | expressionName) DOT)? methodCallBody ;
 
     methodCallBody : IDENTIFIER LPAREN expr? (COMMA expr)* RPAREN ;
 
     expression
     	:	expr
-    	| assignment
+    	|   assignment
     	;
 
 
 
 
 
-     assignment : leftHandSide ASSIGN expr ;
+     assignment : leftHandSide ASSIGN expr
+                    {
+                        System.out.println("Operator:=");
+                    }
+      ;
 
 
 
@@ -292,83 +294,86 @@ expr
 
 conditionalOrExpression
 	:	conditionalAndExpression
-	|	conditionalOrExpression '||' conditionalAndExpression
+	|	conditionalOrExpression op = OR conditionalAndExpression
+        {
+            if ($op.text != null){
+                System.out.println("Operator:"+$op.text);
+            }
+        }
 	;
 
 conditionalAndExpression
-	:	inclusiveOrExpression
-	|	conditionalAndExpression '&&' inclusiveOrExpression
-	;
-
-inclusiveOrExpression
-	:	exclusiveOrExpression
-	|	inclusiveOrExpression '|' exclusiveOrExpression
-	;
-
-exclusiveOrExpression
-	:	andExpression
-	|	exclusiveOrExpression '^' andExpression
-	;
-
-andExpression
 	:	equalityExpression
-	|	andExpression '&' equalityExpression
+	|	conditionalAndExpression op = AND equalityExpression
+        {
+            if ($op.text != null){
+                System.out.println("Operator:"+$op.text);
+            }
+        }
 	;
+
 
 equalityExpression
 	:	relationalExpression
-	|	equalityExpression '==' relationalExpression
-	|	equalityExpression '!=' relationalExpression
+	|	equalityExpression op = (EQUAL | NOTEQUAL) relationalExpression
+        {
+            if ($op.text != null){
+                System.out.println("Operator:"+$op.text);
+            }
+        }
 	;
 
 relationalExpression
-	:	shiftExpression
-	|	relationalExpression '<' shiftExpression
-	|	relationalExpression '>' shiftExpression
-	|	relationalExpression '<=' shiftExpression
-	|	relationalExpression '>=' shiftExpression
+	:	additiveExpression
+	|	relationalExpression op=(LE | GE | LT | GT) additiveExpression
+        {
+            if ($op.text != null){
+                System.out.println("Operator:"+$op.text);
+            }
+        }
 	;
 
-shiftExpression
-	:	additiveExpression
-	|	shiftExpression '<' '<' additiveExpression
-	|	shiftExpression '>' '>' additiveExpression
-	|	shiftExpression '>' '>' '>' additiveExpression
-	;
+
 
 additiveExpression
 	:	multiplicativeExpression
-	|	additiveExpression '+' multiplicativeExpression
-	|	additiveExpression '-' multiplicativeExpression
+	|	additiveExpression op = (ADD | SUB) multiplicativeExpression
+                {
+                    if ($op.text != null){
+                        System.out.println("Operator:"+$op.text);
+                    }
+                }
 	;
 
 multiplicativeExpression
 	:	unaryExpression
-	|	multiplicativeExpression '*' unaryExpression
-	|	multiplicativeExpression '/' unaryExpression
-	|	multiplicativeExpression '%' unaryExpression
+    |	multiplicativeExpression op = (MUL | DIV | MOD) unaryExpression
+    {
+        if ($op.text != null){
+            System.out.println("Operator:"+$op.text);
+        }
+    }
 	;
 
 	unaryExpression
     	:	preIncrementExpression
     	|	preDecrementExpression
-    	|	'+' unaryExpression
-    	|	'-' unaryExpression
+    	|	ADD unaryExpression
+    	|	SUB unaryExpression
     	|	unaryExpressionNotPlusMinus
     	;
 
     preIncrementExpression
-    	:	'++' unaryExpression
+    	:	INC unaryExpression
     	;
 
     preDecrementExpression
-    	:	'--' unaryExpression
+    	:	DEC unaryExpression
     	;
 
     unaryExpressionNotPlusMinus
     	:	postfixExpression
-    	|	'~' unaryExpression
-    	|	'!' unaryExpression
+    	|	NOT unaryExpression
     	;
 
     postfixExpression
@@ -385,7 +390,7 @@ multiplicativeExpression
     	;
 
     postIncrementExpression_lf_postfixExpression
-    	:	'++'
+    	:	INC
     	;
 
     postDecrementExpression
@@ -393,46 +398,8 @@ multiplicativeExpression
     	;
 
     postDecrementExpression_lf_postfixExpression
-    	:	'--'
+    	:	DEC
     	;
-   /* expr :
-            // methodCallBody
-            //| expr DOT expr
-             postExp
-            | preExp
-            | NOT expr
-            | expr op=(MUL | DIV | MOD) expr
-                    {
-                        if ($op.text != null){
-                            System.out.println("Operator:"+$op.text);
-                        }
-                    }
-            | expr op=(ADD | SUB) expr
-                    {
-                        if ($op.text != null){
-                            System.out.println("Operator:"+$op.text);
-                        }
-                    }
-            | expr op=(LE | GE | LT | GT) expr
-                    {
-                        if ($op.text != null){
-                            System.out.println("Operator:"+$op.text);
-                        }
-                    }
-            | expr op=(EQUAL | NOTEQUAL) expr
-                    {
-                        if ($op.text != null){
-                            System.out.println("Operator:"+$op.text);
-                        }
-                    }
-            | expr AND expr
-            | expr OR expr
-            | IDENTIFIER
-
-
-           // | afterDot
-            ;*/
-
 
     literal :
 

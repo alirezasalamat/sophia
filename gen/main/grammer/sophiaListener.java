@@ -518,6 +518,16 @@ public interface sophiaListener extends ParseTreeListener {
 	 */
 	void exitArrayAccess_lfno_primary(sophiaParser.ArrayAccess_lfno_primaryContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link sophiaParser#returnFuncPointer}.
+	 * @param ctx the parse tree
+	 */
+	void enterReturnFuncPointer(sophiaParser.ReturnFuncPointerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link sophiaParser#returnFuncPointer}.
+	 * @param ctx the parse tree
+	 */
+	void exitReturnFuncPointer(sophiaParser.ReturnFuncPointerContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link sophiaParser#methodCall}.
 	 * @param ctx the parse tree
 	 */
@@ -648,36 +658,6 @@ public interface sophiaListener extends ParseTreeListener {
 	 */
 	void exitConditionalAndExpression(sophiaParser.ConditionalAndExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link sophiaParser#inclusiveOrExpression}.
-	 * @param ctx the parse tree
-	 */
-	void enterInclusiveOrExpression(sophiaParser.InclusiveOrExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link sophiaParser#inclusiveOrExpression}.
-	 * @param ctx the parse tree
-	 */
-	void exitInclusiveOrExpression(sophiaParser.InclusiveOrExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link sophiaParser#exclusiveOrExpression}.
-	 * @param ctx the parse tree
-	 */
-	void enterExclusiveOrExpression(sophiaParser.ExclusiveOrExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link sophiaParser#exclusiveOrExpression}.
-	 * @param ctx the parse tree
-	 */
-	void exitExclusiveOrExpression(sophiaParser.ExclusiveOrExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link sophiaParser#andExpression}.
-	 * @param ctx the parse tree
-	 */
-	void enterAndExpression(sophiaParser.AndExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link sophiaParser#andExpression}.
-	 * @param ctx the parse tree
-	 */
-	void exitAndExpression(sophiaParser.AndExpressionContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link sophiaParser#equalityExpression}.
 	 * @param ctx the parse tree
 	 */
@@ -697,16 +677,6 @@ public interface sophiaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRelationalExpression(sophiaParser.RelationalExpressionContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link sophiaParser#shiftExpression}.
-	 * @param ctx the parse tree
-	 */
-	void enterShiftExpression(sophiaParser.ShiftExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link sophiaParser#shiftExpression}.
-	 * @param ctx the parse tree
-	 */
-	void exitShiftExpression(sophiaParser.ShiftExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link sophiaParser#additiveExpression}.
 	 * @param ctx the parse tree

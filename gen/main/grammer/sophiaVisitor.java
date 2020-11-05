@@ -317,6 +317,12 @@ public interface sophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArrayAccess_lfno_primary(sophiaParser.ArrayAccess_lfno_primaryContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link sophiaParser#returnFuncPointer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReturnFuncPointer(sophiaParser.ReturnFuncPointerContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link sophiaParser#methodCall}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -395,24 +401,6 @@ public interface sophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConditionalAndExpression(sophiaParser.ConditionalAndExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link sophiaParser#inclusiveOrExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInclusiveOrExpression(sophiaParser.InclusiveOrExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link sophiaParser#exclusiveOrExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExclusiveOrExpression(sophiaParser.ExclusiveOrExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link sophiaParser#andExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAndExpression(sophiaParser.AndExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link sophiaParser#equalityExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -424,12 +412,6 @@ public interface sophiaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRelationalExpression(sophiaParser.RelationalExpressionContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link sophiaParser#shiftExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitShiftExpression(sophiaParser.ShiftExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link sophiaParser#additiveExpression}.
 	 * @param ctx the parse tree
