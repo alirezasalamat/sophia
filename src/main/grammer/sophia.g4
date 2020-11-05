@@ -31,7 +31,6 @@ grammar sophia;
 
     methodBody : LBRACE ((variableDeclaration SEMI)* blockStatements?)? RBRACE;
 
-
     constructorDeclaration : DEF aa=IDENTIFIER LPAREN
             {
                     System.out.println("ConstructorDec:"+$aa.text);
